@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Nov 2019 pada 12.52
--- Versi server: 10.1.38-MariaDB
--- Versi PHP: 7.3.2
+-- Waktu pembuatan: 27 Sep 2021 pada 06.08
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.1.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -39,6 +38,13 @@ CREATE TABLE `tbl_disposisi` (
   `id_user` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tbl_disposisi`
+--
+
+INSERT INTO `tbl_disposisi` (`id_disposisi`, `tujuan`, `isi_disposisi`, `sifat`, `batas_waktu`, `catatan`, `id_surat`, `id_user`) VALUES
+(1, 'seketaris', 'besok rapat', 'Penting', '2021-09-28', 'rapat bkd', 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -64,7 +70,7 @@ CREATE TABLE `tbl_instansi` (
 --
 
 INSERT INTO `tbl_instansi` (`id_instansi`, `institusi`, `nama`, `status`, `alamat`, `kepsek`, `nip`, `website`, `email`, `logo`, `id_user`) VALUES
-(1, 'Dinas Pendidikan dan Kebudaayaan', 'SMAN 1 NAGRAK', 'Terakreditasi A', 'Jl Siliwangi No. 102 ', 'Irfan Suhendar', '08923457032', 'https://sman1nagrak.sch.id', 'info@smarak.com', 'envelope-png-5a37445633d950.8239343715135714142124.png', 1);
+(1, 'Badan Kepegawaian Kabupaten Bondowoso', 'BKD BONDOWOSO', 'BADAN KEPEGAWAIAN DAERAH BONDOWOSO', 'Jl.KH Ashari No 123 Bondowoso', 'Bupati Bondowoso', '08923457032', 'https://sman1nagrak.sch.id', 'info@smarak.com', 'envelope-png-5a37445633d950.8239343715135714142124.png', 1);
 
 -- --------------------------------------------------------
 
@@ -155,7 +161,8 @@ CREATE TABLE `tbl_surat_masuk` (
 --
 
 INSERT INTO `tbl_surat_masuk` (`id_surat`, `no_agenda`, `no_surat`, `asal_surat`, `isi`, `kode`, `indeks`, `tgl_surat`, `tgl_diterima`, `file`, `keterangan`, `id_user`) VALUES
-(1, 1, '2019/IX/S-12', 'CV. Air Mail', 'lorem', '01', '132', '2019-11-01', '2019-11-22', '5271-Surat Edaran.pdf', 'Edaran', 1);
+(1, 1, '2019/IX/S-12', 'CV. Air Mail', 'lorem', '01', '132', '2019-11-01', '2019-11-22', '5271-Surat Edaran.pdf', 'Edaran', 1),
+(2, 2, '123456789', 'Jember', 'besok rapat di bkd', '01', 'bsdsdkb', '2021-09-27', '2021-09-27', '', 'bfjfd', 1);
 
 -- --------------------------------------------------------
 
@@ -234,7 +241,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `tbl_disposisi`
 --
 ALTER TABLE `tbl_disposisi`
-  MODIFY `id_disposisi` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_disposisi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_klasifikasi`
@@ -252,7 +259,7 @@ ALTER TABLE `tbl_surat_keluar`
 -- AUTO_INCREMENT untuk tabel `tbl_surat_masuk`
 --
 ALTER TABLE `tbl_surat_masuk`
-  MODIFY `id_surat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_surat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`
