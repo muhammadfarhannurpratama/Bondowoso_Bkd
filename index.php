@@ -38,7 +38,7 @@ include "koneksi/ceksession.php";
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">ARSIP SURAT <span class="logo-dec">PemKot Bondowoso</span></a>
+                <a class="navbar-brand" href="#">ARSIP SURAT <span class="logo-dec">BKD Bondowoso</span></a>
               </div>
               <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
@@ -71,7 +71,7 @@ include "koneksi/ceksession.php";
                   <img src="img/logobondowoso.png" width="172" height="186" alt="" />
                 </div>
                 <h3 class="bnr-sub-title">SISTEM INFORMASI PENGARSIPAN SURAT</h3>
-                <h3 class="bnr-sub-title"><span class="logo-dec">PEMERINTAH KOTA BONDOWOSO</span></h3>
+                <h3 class="bnr-sub-title"><span class="logo-dec">BADAN KEPEGAWAIAN DAERAH BONDOWOSO</span></h3>
               </div>
             </div>
           </div>
