@@ -129,8 +129,8 @@ include "koneksi/ceksession.php";
             <figure>
               <img src="img/rifki.jpg" class="img-responsive">
               <figcaption>
-                <h2>RIFKI</h2>
-                <p>"ILMU KOMPUTER UNMUL"</p>
+                <h2>TEAM DEVELOPMENT</h2>
+                <p>"TEKNIK INFORMATIKA POLITEKNIK NEGERI JEMBER"</p>
                 <p>"Never put off till tomorrow what you can do today"</p>
               </figcaption>
             </figure>
@@ -153,28 +153,28 @@ include "koneksi/ceksession.php";
                     <img src="img/Grafikartes-Flat-Retro-Modern-Maps.ico" class="img-responsive">
                     <p>Talent wins games, but teamwork and intelligence win championships. </p>
                   </blockquote>
-                  <small>Michael Jordan</small>
+                  <small>Ahmad Dandi Irawan</small>
                 </li>
                 <li>
                   <blockquote>
                     <img src="img/Grafikartes-Flat-Retro-Modern-Maps.ico" class="img-responsive">
                     <p>Alone we can do so little, together we can do so much.</p>
                   </blockquote>
-                  <small>Helen Keller</small>
+                  <small>Azizah Wina Sriwinarsih</small>
                 </li>
                 <li>
                   <blockquote>
                     <img src="img/Grafikartes-Flat-Retro-Modern-Maps.ico" class="img-responsive">
                     <p>None of us is as smart as all of us.</p>
                   </blockquote>
-                  <small>Ken Blanchard</small>
+                  <small>Muhammad Farhan Nur Pratama</small>
                 </li>
                 <li>
                   <blockquote>
                     <img src="img/Grafikartes-Flat-Retro-Modern-Maps.ico" class="img-responsive">
                     <p>Coming together is a beginning. Keeping together is progress. Working together is success.</p>
                   </blockquote>
-                  <small>Henry Ford</small>
+                  <small>Fauziyatur Rohma</small>
                 </li>
               </ul>
             </div>
@@ -189,7 +189,7 @@ include "koneksi/ceksession.php";
     <footer id="footer">
       <div class="container">
         <div class="row text-center">
-          <p>&copy; ILMU KOMPUTER UNMUL. All Rights Reserved.</p>
+          <p>&copy; TEKNIK INFORMATIKA - POLITEKNIK NEGERI JEMBER.</p>
           <div class="credits">
             <!-- 
                 All the links in the footer should remain intact. 
