@@ -1,318 +1,213 @@
 <?php
-    ob_start();
-    session_start();
-
-    //cek session
-    if(isset($_SESSION['admin'])){
-        header("Location: ./admin.php");
-        die();
-    }
-
-    require_once 'include/config.php';
-    require_once 'include/functions.php';
-    $config = conn($host, $username, $password, $database);
+session_start();
+include "koneksi/ceksession.php";
 ?>
-<!--
-
-Name        : Aplikasi Sederhana Manajemen Surat Menyurat
-Version     : v1.0.0
-Description : Aplikasi untuk mencatat data surat masuk dan keluar secara digital.
-Date        : 2016
-Developer   : M. Rudianto
-Phone/WA    : 0852-3290-4156
-Email       : rudi@masrud.com
-Website     : https://masrud.com
-
--->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Arsip Surat Kota Samarinda</title>
+    <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+    
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300|Raleway:300,400,900,700italic,700,300,600">
+    <link rel="stylesheet" type="text/css" href="css/jquery.bxslider.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="shortcut icon" href="img/icon.ico">
 
-<!-- Head START -->
-<head>
+  </head>
+  <body>
 
-    <title>Login - Pengelolaan Surat</title>
-
-    <!-- Meta START -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <?php
-        $query = mysqli_query($config, "SELECT logo from tbl_instansi");
-        list($logo) = mysqli_fetch_array($query);
-        echo '<link rel="shortcut icon" href="upload/'.$logo.'">';
-    ?>
-    <!-- Meta END -->
-
-    <!--[if lt IE 9]>
-    <script src="../asset/js/html5shiv.min.js"></script>
-    <![endif]-->
-
-    <!-- Global style START -->
-    <link type="text/css" rel="stylesheet" href="asset/css/materialize.css">
-    <style type="text/css">
-        body {
-            background: #fff;
-        }
-        .bg::before {
-            content: '';
-            background-image: url('./asset/img/bckg.jpeg');
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-            position: absolute;
-            z-index: -1;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            opacity: 0.15;
-            filter:alpha(opacity=15);
-            height:100%;
-            width:100%;
-        }
-        @media only screen and (min-width: 993px) {
-            .container {
-                width: 60%!important;
-            }
-        }
-        .container {
-            max-width: 100%;
-            margin-top: 2.5rem;
-        }
-        #logo {
-            display: block;
-            margin: -20px auto -5px;
-        }
-        img {
-            /* border-radius: 50%; */
-            margin: 0 auto;
-            width: 100px;
-            height: 100px;
-        }
-        #login {
-            margin-top: -2%;
-        }
-        #smk {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        .batas {
-            border-bottom: 1px dotted #444;
-            margin: 0 auto;
-            width: 90%;
-        }
-        #title {
-            margin: 5px 0 35px;
-        }
-        .btn-large {
-            font-size: 1.25rem;
-            margin: 0;
-        }
-        #alert-message {
-            border-radius: 3px;
-            color: #f44336 ;
-            font-size: 1.15rem;
-            margin: 15px 15px -15px;
-        }
-        .error {
-            padding: 10px;
-        }
-        .upss {
-            font-size: 1.2rem;
-            margin-left: 20px;
-        }
-        .pace {
-            -webkit-pointer-events: none;
-            pointer-events: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            -webkit-transform: translate3d(0, -50px, 0);
-            -ms-transform: translate3d(0, -50px, 0);
-            transform: translate3d(0, -50px, 0);
-            -webkit-transition: -webkit-transform .5s ease-out;
-            -ms-transition: -webkit-transform .5s ease-out;
-            transition: transform .5s ease-out;
-        }
-        .pace.pace-active {
-            -webkit-transform: translate3d(0, 0, 0);
-            -ms-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-        }
-        .pace .pace-progress {
-            display: block;
-            position: fixed;
-            z-index: 2000;
-            top: 0;
-            right: 100%;
-            width: 100%;
-            height: 3px;
-            background: #2196f3;
-            pointer-events: none;
-        }
-        noscript {
-            color: #42a5f5;
-        }
-       .input-field label {
-            font-size: 1.2rem;
-        }
-        .input-field label.active {
-            font-size: 1rem;
-        }
-    </style>
-    <!-- Global style END -->
-
-</head>
-<!-- Head END -->
-
-<!-- Body START -->
-<body class="blue-grey lighten-3 bg">
-
-    <!-- Container START -->
-    <div class="container">
-
-        <!-- Row START -->
-        <div class="row">
-
-            <!-- Col START -->
-            <div class="col s12 m6 offset-m3 offset-m3">
-
-                <!-- Box START -->
-                <div class="card-panel z-depth-2" id="login">
-
-                    <!-- Row Form START -->
-                    <div class="row">
-
-                    <?php
-                        $query = mysqli_query($config, "SELECT * FROM tbl_instansi");
-                        while($data = mysqli_fetch_array($query)){
-                    ?>
-                    <!-- Logo and title START -->
-                    <div class="col s12">
-                        <div class="card-content">
-                            <h5 class="center" id="title">Pengelolaan Surat | <b>PS</b></h5>
-                            <?php echo '<img id="logo" src="upload/'.$data['logo'].'">';?>
-                            <h5 class="center">
-                            Badan Kepegawaian Daerah<br>
-                            Bondowoso
-                            </h5>
-                           <!-- <div class="batas"></div>-->
-                        </div>
-                    </div>
-                    <!-- Logo and title END -->
-                    <?php
-                        }
-                    ?>
-
-                    <?php
-                        if(isset($_REQUEST['submit'])){
-
-                            //validasi form kosong
-                            if($_REQUEST['username'] == "" || $_REQUEST['password'] == ""){
-                                echo '<div class="upss red-text"><i class="material-icons">error_outline</i> <strong>ERROR!</strong> Username dan Password wajib diisi.
-                                <a class="btn-large waves-effect waves-light blue-grey col s11" href="" style="margin: 20px 0 0 5px;"><i class="material-icons md-24">arrow_back</i> Kembali ke login form</a></div>';
-                            } else {
-
-                                $username = trim(htmlspecialchars(mysqli_real_escape_string($config, $_REQUEST['username'])));
-                                $password = trim(htmlspecialchars(mysqli_real_escape_string($config, $_REQUEST['password'])));
-
-                                $query = mysqli_query($config, "SELECT id_user, username, nama, nip, admin FROM tbl_user WHERE username=BINARY'$username' AND password=MD5('$password')");
-
-                                if(mysqli_num_rows($query) > 0){
-                                    list($id_user, $username, $nama, $nip, $admin) = mysqli_fetch_array($query);
-
-                                    //buat session
-                                    $_SESSION['id_user'] = $id_user;
-                                    $_SESSION['username'] = $username;
-                                    $_SESSION['nama'] = $nama;
-                                    $_SESSION['nip'] = $nip;
-                                    $_SESSION['admin'] = $admin;
-
-                                    header("Location: ./admin.php");
-                                    die();
-                                } else {
-
-                                    //session error
-                                    $_SESSION['errLog'] = '<center>Username & Password tidak ditemukan!</center>';
-                                    header("Location: ./");
-                                    die();
-                                }
-                            }
-                        } else {
-                    ?>
-
-                    <!-- Form START -->
-                    <form class="col s12 m12 offset-4 offset-4" method="POST" action="" >
-                        <div class="row">
-                            <?php
-                                if(isset($_SESSION['errLog'])){
-                                    $errLog = $_SESSION['errLog'];
-                                    echo '<div id="alert-message" class="error red lighten-5"><div class="center"><i class="material-icons">error_outline</i> <strong>LOGIN GAGAL!</strong></div>
-                                    '.$errLog.'</div>';
-                                    unset($_SESSION['errLog']);
-                                }
-                                if(isset($_SESSION['err'])){
-                                    $err = $_SESSION['err'];
-                                    echo '<div id="alert-message" class="error red lighten-5"><div class="center"><i class="material-icons">error_outline</i> <strong>ERROR!</strong></div>
-                                    '.$err.'</div>';
-                                    unset($_SESSION['err']);
-                                }
-                            ?>
-                        </div>
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix md-prefix">account_circle</i>
-                            <input id="username" type="text" class="validate" name="username" required>
-                            <label for="username">Nama pengguna</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix md-prefix">lock</i>
-                            <input id="password" type="password" class="validate" name="password" required">
-                            <label for="password">Kata sandi</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <button type="submit" class="btn-large waves-effect waves-light blue-grey col s12" name="submit">MASUK</button>
-                        </div>
-                    </form>
-                    <!-- Form END -->
-                    <?php
-                        }
-                    ?>
-                    </div>
-                    <!-- Row Form START -->
-
-                </div>
-                <!-- Box END-->
-
+    <div class="loader"></div>
+    <div id="myDiv">
+    <!--HEADER-->
+    <div class="header">
+      <div class="bg-color">
+        <header id="main-header">
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">ARSIP SURAT <span class="logo-dec">PemKot Samarinda</span></a>
             </div>
-            <!-- Col END -->
-
+            <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="#main-header">Beranda</a></li>
+                <li class=""><a href="#feature">Tentang</a></li>
+                <li class=""><a href="#portfolio">Pengembang</a></li>
+                <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="" alt="">Masuk
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="admin/login"><i class="fa fa-sign-out pull-right"></i> Admin</a></li> 
+                    <li><a href="bagian/login"><i class="fa fa-sign-out pull-right"></i> Bagian</a></li>
+                  </ul>
+                </li>
+              </ul>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        </header>
+        <div class="wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="banner-info text-center wow fadeIn delay-05s">
+              <h2 class="bnr-sub-title"></h2>
+              <div class="logo">
+		            <img src="img/samarinda.png" alt="" />
+	            </div>
+              <h3 class="bnr-sub-title">SISTEM INFORMASI PENGARSIPAN SURAT</h3>
+                <h3 class="bnr-sub-title"><span class="logo-dec">PEMERINTAH KOTA SAMARINDA</span></h3>
+            </div>
+          </div>
         </div>
-        <!-- Row END -->
-
+        </div>
+      </div>
     </div>
-    <!-- Container END -->
-
-    <!-- Javascript START -->
-    <script type="text/javascript" src="asset/js/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="asset/js/materialize.min.js"></script>
-    <script type="text/javascript" src="asset/js/bootstrap.min.js"></script>
-    <script data-pace-options='{ "ajax": false }' src='./asset/js/pace.min.js'></script>
-
-    <!-- Jquery auto hide untuk menampilkan pesan error -->
-    <script type="text/javascript">
-        $("#alert-message").alert().delay(3000).slideUp('slow');
-    </script>
-    <!-- Javascript END -->
-
-    <noscript>
-        <meta http-equiv="refresh" content="0;URL='/enable-javascript.html'" />
-    </noscript>
-
-</body>
-<!-- Body END -->
-
+    <!--/ HEADER-->
+    <!---->
+    <section id="feature" class="section-padding wow fadeIn delay-05s">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h2 class="service-title pad-bt15">Tentang</h2>
+            <p class="sub-title pad-bt15">Website ini berguna untuk pengarsipan Surat Masuk dan Surat Keluar di Pemerintah Kota Samarinda</p><p>Surat diarsipkan dalam format PDF lalu disesuaikan nomor urutnya.</p>
+            <hr class="bottom-line">
+            <p class="sub-title pad-bt15">Pengarsipan Surat itu<strong> PENTING</strong></p>
+            <hr class="bottom-line">
+          </div>
+        <div class="col-md-4">
+        </div>
+          <div class="col-md-2 col-sm-6 col-xs-12">
+            <div class="wrap-item text-center">
+              <div class="item-img">
+                <img src="img/inbox.png">
+              </div>
+              <h3 class="pad-bt15">Surat Masuk</h3>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-xs-12">
+            <div class="wrap-item text-center">
+              <div class="item-img">
+                <img src="img/outbox.png">
+              </div>
+              <h3 class="pad-bt15">Surat Keluar</h3>
+            </div>
+          </div>
+        <div class="col-md-4">
+        </div>
+        </div>
+      </div>
+    </section>
+    <!---->
+    <!---->
+    <section id="portfolio" class="section-padding wow fadeInUp delay-05s">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h2 class="service-title pad-bt15">Pengembang</h2>
+            <p class="sub-title pad-bt15">"The difference between success and failure is a great team"</p>
+            <hr class="bottom-line">
+          </div>
+          <div class="col-md-3"></div>
+          <div class="col-md-6 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
+            <figure>
+              <img src="img/rifki.jpg" class="img-responsive">
+              <figcaption>
+                  <h2>RIFKI</h2>
+                  <p>"ILMU KOMPUTER UNMUL"</p>
+                  <p>"Never put off till tomorrow what you can do today"</p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="col-md-3"></div>
+        </div>
+        <hr class="bottom-line">
+      </div>
+    </section>
+    <!---->
+    <!---->
+    <section id="testimonial" class="wow fadeInUp delay-05s">
+      <div class="bg-testicolor">
+        <div class="container section-padding">
+        <div class="row">
+          <div class="testimonial-item">
+            <ul class="bxslider">
+              <li>
+                <blockquote>
+                  <img src="img/Grafikartes-Flat-Retro-Modern-Maps.ico" class="img-responsive">
+                  <p>Talent wins games, but teamwork and intelligence win championships. </p>
+                </blockquote>
+                <small>Michael Jordan</small>
+              </li>
+              <li>
+                <blockquote>
+                  <img src="img/Grafikartes-Flat-Retro-Modern-Maps.ico" class="img-responsive">
+                  <p>Alone we can do so little, together we can do so much.</p>
+                </blockquote>
+                <small>Helen Keller</small>
+              </li>
+              <li>
+                <blockquote>
+                  <img src="img/Grafikartes-Flat-Retro-Modern-Maps.ico" class="img-responsive">
+                  <p>None of us is as smart as all of us.</p>
+                </blockquote>
+                <small>Ken Blanchard</small>
+              </li>
+              <li>
+                <blockquote>
+                  <img src="img/Grafikartes-Flat-Retro-Modern-Maps.ico" class="img-responsive">
+                  <p>Coming together is a beginning. Keeping together is progress. Working together is success.</p>
+                </blockquote>
+                <small>Henry Ford</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <footer id="footer">
+      <div class="container">
+        <div class="row text-center">
+          <p>&copy; ILMU KOMPUTER UNMUL. All Rights Reserved.</p>
+          <div class="credits">
+            <!-- 
+                All the links in the footer should remain intact. 
+                You can delete the links only if you purchased the pro version.
+                Licensing information: https://bootstrapmade.com/license/
+                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Baker
+            -->
+            Designed  by <a href="https://bootstrapmade.com/">Bootstrap Themes</a>
+        </div>
+        </div>
+      </div>
+    </footer>
+    <!---->
+  </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/wow.js"></script>
+    <script src="js/jquery.bxslider.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="contactform/contactform.js"></script>
+    
+  </body>
 </html>

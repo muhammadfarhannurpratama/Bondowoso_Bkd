@@ -1,23 +1,17 @@
-# Aplikasi sederhana manajemen surat dengan PHP MySQLi
+# arsipsurat
+Website Pengarsipan Surat dengan PHP Native
 
-Aplikasi ini untuk mengelola pencatatan surat masuk dan surat keluar (disposisi). Dilengkapi beberapa fitur, antara lain :
+Cara menjalankan project ini :
+1. Copy Folder ini pada folder htdocs
+2. Buat Database dengan nama db_surat, kemudian import database yang ada pada folder project ini
+3. Akses project ini dengan localhost/arsipsurat
+4. Pastikan XAMPP anda sudah running
 
-- Cetak disposisi surat masuk
-- Cetak agenda surat masuk dan keluar berdasarkan tanggal tertentu
-- Upload lampiran file surat, baik file scan/gambar(.JPG, .PNG) serta file dokumen (.DOC, .DOCX dan .PDF)
-- Fitur galeri file lampiran yang diupload
-- Upload kode klasifikasi surat format *.CSV (file excel)
-- Multilevel user
-- Fitur backup dan restore database
 
-Sebelum menggunakan aplikasi ini silakan atur konfigurasi database terlebih dahulu. Caranya,
-
-- Buka folder **include** lalu edit file **config.php** lalu sesuaikan `username`, `password` dan `database` dengan yang Anda gunakan.
-
-Untuk tampilan terbaik, gunakan browser Google Chrome versi terbaru.
-
-Inspired by Nur Akhwam.
-
----
-
-Ini adalah source code dari postingan https://masrud.com/post/aplikasi-manajemen-surat-php-mysqli
+![01 Halaman Home](https://github.com/RifkiCS29/arsipsurat/blob/master/img/screenshots/Dashoboard.png)
+![02 Halaman Admin: Surat Keluar](https://github.com/RifkiCS29/arsipsurat/blob/master/img/screenshots/admin%20surat%20keluar.png)
+![03 Halaman Admin: Surat Masuk](https://github.com/RifkiCS29/arsipsurat/blob/master/img/screenshots/admin%20surat%20masuk.png)
+![04 Halaman Admin: Tambah Bagian](https://github.com/RifkiCS29/arsipsurat/blob/master/img/screenshots/admin%20tambah%20bagian.png)
+![05 Halaman Bagian: Ambil Nomor Surat](https://github.com/RifkiCS29/arsipsurat/blob/master/img/screenshots/bagian%20ambil%20nomor%20surat.png)
+![06 Halaman Bagian: Surat Kelua](https://github.com/RifkiCS29/arsipsurat/blob/master/img/screenshots/bagian%20surat%20keluar.png)
+![07 Halaman Bagian: Surat Masuk](https://github.com/RifkiCS29/arsipsurat/blob/master/img/screenshots/bagian%20surat%20masuk.png)
