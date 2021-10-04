@@ -127,7 +127,7 @@ include "koneksi/ceksession.php";
           <div class="col-md-3"></div>
           <div class="col-md-6 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
             <figure>
-              <img src="img/rifki.jpg" class="img-responsive">
+              <img src="img/teamdev.jpeg" class="img-responsive">
               <figcaption>
                 <h2>TEAM DEVELOPMENT</h2>
                 <p>"TEKNIK INFORMATIKA POLITEKNIK NEGERI JEMBER"</p>

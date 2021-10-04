@@ -54,8 +54,8 @@ include "ceksessionn.php";
 
             <div class="separator">
               <div>
-                <h2><i class="fa fa-institution"></i> PEMKOT BONDOWOSO</h2>
-                <p>©2017 ILMU KOMPUTER UNMUL</p>
+                <h2><i class="fa fa-institution"></i> BKD BONDOWOSO</h2>
+                <p>©2018 POLITEKNIK NEGERI JEMBER</p>
               </div>
             </div>
           </form>
