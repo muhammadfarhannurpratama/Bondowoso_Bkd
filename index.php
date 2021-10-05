@@ -18,7 +18,7 @@ include "koneksi/ceksession.php";
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/animate.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="shortcut icon" href="img/icon.ico">
+  <link rel="shortcut icon" href="img/icons.ico">
 
 </head>
 
@@ -153,28 +153,28 @@ include "koneksi/ceksession.php";
                     <img src="img/Grafikartes-Flat-Retro-Modern-Maps.ico" class="img-responsive">
                     <p>Talent wins games, but teamwork and intelligence win championships. </p>
                   </blockquote>
-                  <small>Ahmad Dandi Irawan</small>
+                  <small>Fauziyatur Rohma</small>
                 </li>
                 <li>
                   <blockquote>
                     <img src="img/Grafikartes-Flat-Retro-Modern-Maps.ico" class="img-responsive">
                     <p>Alone we can do so little, together we can do so much.</p>
                   </blockquote>
-                  <small>Azizah Wina Sriwinarsih</small>
+                  <small>Muhammad Farhan Nur Pratama</small>
                 </li>
                 <li>
                   <blockquote>
                     <img src="img/Grafikartes-Flat-Retro-Modern-Maps.ico" class="img-responsive">
                     <p>None of us is as smart as all of us.</p>
                   </blockquote>
-                  <small>Muhammad Farhan Nur Pratama</small>
+                  <small>Ahmad Dandi Irawan </small>
                 </li>
                 <li>
                   <blockquote>
                     <img src="img/Grafikartes-Flat-Retro-Modern-Maps.ico" class="img-responsive">
                     <p>Coming together is a beginning. Keeping together is progress. Working together is success.</p>
                   </blockquote>
-                  <small>Fauziyatur Rohma</small>
+                  <small>Azizah Wina Sriwinarsih</small>
                 </li>
               </ul>
             </div>
