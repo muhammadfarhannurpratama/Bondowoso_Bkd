@@ -53,8 +53,8 @@
 
               <div class="separator">
                 <div>
-                  <h2><i class="fa fa-institution"></i> PEMKOT SAMARINDA</h2>
-                  <p>©2017 ILMU KOMPUTER UNMUL</p>
+                  <h2><i class="fa fa-institution"></i> BKD BONDOWOSO</h2>
+                  <p>©2021 POLITEKNIK NEGERI BONDOWOSO</p>
                 </div>
               </div>
             </form>
