@@ -88,7 +88,7 @@ class Bagian extends Auth_Controller {
 				$data['error'] = 'file gambar terlalu besar';
 			}
 			$nama_baru = $thnNow.'-'.$nomorurut_suratmasuk . $ext_file;
-			$path = $_SERVER['DOCUMENT_ROOT'].'/suratBKD/assets/backend/surat_masuk/'.$nama_baru;
+			$path = $_SERVER['DOCUMENT_ROOT'].'/E-Surat_BKD_Bondowoso/assets/backend/surat_masuk/'.$nama_baru;
 			move_uploaded_file($tmp_file, $path);
 
 					$tanggal_entry  = date("Y-m-d H:i:s");
@@ -180,7 +180,7 @@ class Bagian extends Auth_Controller {
 						$data['error'] = 'file gambar terlalu besar';
 					}
 					$nama_baru = $thnNow.'-'.$nomorurut_suratmasuk . $ext_file;
-					$path = $_SERVER['DOCUMENT_ROOT'].'/suratBKD/assets/backend/surat_masuk/'.$nama_baru;
+					$path = $_SERVER['DOCUMENT_ROOT'].'/E-Surat_BKD_Bondowoso/assets/backend/surat_masuk/'.$nama_baru;
 					move_uploaded_file($tmp_file, $path);
 
 				$SM_edit['file_suratmasuk'] = $nama_baru;
@@ -344,7 +344,7 @@ class Bagian extends Auth_Controller {
 				$data['error'] = 'file dokumen terlalu besar';
 			}
 			$namaSK_baru = $thnNow.'-'.$ambilnomor . $ext_file;
-			$path = $_SERVER['DOCUMENT_ROOT'].'/suratBKD/assets/backend/surat_keluar/'.$namaSK_baru;
+			$path = $_SERVER['DOCUMENT_ROOT'].'/E-Surat_BKD_Bondowoso/assets/backend/surat_keluar/'.$namaSK_baru;
 			move_uploaded_file($tmp_file, $path);
 
 					$tanggal_entry  = date("Y-m-d H:i:s");
@@ -448,7 +448,7 @@ class Bagian extends Auth_Controller {
 						$data['error'] = 'file dokeumen terlalu besar';
 					}
 					$nama = $thnNow.'-'.$ambilnomor . $ext_fileSK;
-					$pathSK = $_SERVER['DOCUMENT_ROOT'].'/suratBKD/assets/backend/surat_keluar/'.$nama;
+					$pathSK = $_SERVER['DOCUMENT_ROOT'].'/E-Surat_BKD_Bondowoso/assets/backend/surat_keluar/'.$nama;
 					move_uploaded_file($tmp_fileSK, $pathSK);
 
 				$SK_edit['file_suratkeluar'] = $nama;
