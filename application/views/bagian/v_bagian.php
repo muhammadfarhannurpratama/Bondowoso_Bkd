@@ -29,7 +29,6 @@
                     <h2>Data ><small> Bagian</small> </h2>
                     <div class="clearfix"></div>
                   </div>
-                  <a href="<?= base_url('bagian/bagian_tambah')?>"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Bagian</button></a>
                   <div class="x_content">
                   <div class="x_content">
                     <table id="datatable" class="table table-striped table-bordered">
@@ -56,8 +55,6 @@
                             <td><?= $bagian->no_hp_bagian ?></td>
                             <td style="text-align:center;">
                               <a href="<?= base_url('bagian/detailBagian/'.$bagian->id_bagian) ?>"><button type="button" title="Detail Bagian" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
-                              <a href="<?= base_url('bagian/editBagian/'.$bagian->id_bagian) ?>"><button type="button" title="Edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button></a>
-                              <a onclick="return konfirmasi()" href="<?= base_url('bagian/hapusBagian/'.$bagian->id_bagian) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
                               </td>
                         </tr>
                       <?php endforeach;?>
