@@ -54,7 +54,7 @@
             <div class="separator">
               <div>
                 <h2><i class="fa fa-institution"></i> PEMKOT BONDOWOSO</h2>
-                <p>©2021 Gabut Koding</p>
+                <p>©2021 </p>
               </div>
             </div>
           </form>
