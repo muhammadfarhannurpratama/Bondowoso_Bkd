@@ -291,6 +291,7 @@ class Bagian extends Auth_Controller {
 	{	
 		$data['title'] = 'Data Surat Keluar';
 		$data['surat_keluar'] = $this->bagian->tampil_suratkeluar()->result();	
+		
 		$this->load->view('bagian/v_SK', $data);
 	}
 
@@ -522,7 +523,7 @@ class Bagian extends Auth_Controller {
 	}
 
 	//tutup surat keluar
-
+/*
 	// data Bagian
 	public function bagian ()
 	{
@@ -701,4 +702,5 @@ class Bagian extends Auth_Controller {
 		}
 	}
 	// tutup bagian
+	*/
 }
