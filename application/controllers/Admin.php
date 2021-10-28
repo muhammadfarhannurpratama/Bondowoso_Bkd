@@ -627,8 +627,8 @@ class Admin extends Auth_Controller {
 			
 			//delete file
 			$bagian = $this->admin->bagian_by_id($this->input->post('nim'));
-			if(file_exists('assets/backend/bagian/'.$bagian->gambar) && $bagian->gambar != 'default.jpg')
-				unlink('assets/backend/bagian/'.$bagian->gambar);
+			if(file_exists('assets/backend/images/bagian/'.$bagian->gambar) && $bagian->gambar != 'default.jpg')
+				unlink('assets/backend/images/bagian/'.$bagian->gambar);
 
 			$data_edit['gambar'] = $upload;
 		}else{
@@ -654,7 +654,7 @@ class Admin extends Auth_Controller {
 		$username = $this->input->post('username_admin_bagian');
 		$nama_file_lengkap 		= $_FILES['gambar']['name'];
 		$ext_file		= substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
-		$config['upload_path']          = 'assets/backend/bagian';
+		$config['upload_path']          = 'assets/backend/images/bagian';
         $config['allowed_types']        = 'gif|jpg|png';
         $config['max_size']             = 2048; //set max size allowed in Kilobyte
         $config['max_width']            = 10000; // set max width image allowed
@@ -679,8 +679,8 @@ class Admin extends Auth_Controller {
 		
 		$data = array('id_bagian' => $bagianlist->id_bagian);
 		
-		if (file_exists('assets/backend/bagian/'.$bagianlist->gambar) && $bagianlist->gambar && $bagianlist->gambar!="default.jpg") {
-			unlink('assets/backend/bagian/'.$bagianlist->gambar);
+		if (file_exists('assets/backend/images/bagian/'.$bagianlist->gambar) && $bagianlist->gambar && $bagianlist->gambar!="default.jpg") {
+			unlink('assets/backend/images/bagian/'.$bagianlist->gambar);
 		}
 
 		$hapusbagian = $this->admin->bagian_hapus($data['id_bagian']);
@@ -701,4 +701,87 @@ class Admin extends Auth_Controller {
 		}
 	}
 	// tutup bagian
+
+
+//profile
+public function profil() {
+	$data['title'] = 'Data Profile';
+	
+	$data['profil'] = $this->admin->tampil_profil();
+	
+	$this->load->view('admin/profile', $data);
+}
+
+public function editprofil() {
+	$data['title'] = 'Edit Data';
+	
+	$data['profil'] = $this->admin->tampil_profil();
+	
+	$this->load->view('admin/editprofile', $data);
+}
+
+public function proses_editprofile() {
+	$id_admin = $this->input->post('id_admin');
+	$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+	$data_edit =array(
+		'nama_admin' => $this->input->post('nama_admin'),
+		'username_admin' => $this->input->post('username_admin'),
+		'password' => $password
+	);
+
+
+	if(!empty($_FILES['gambar']['name'])){
+		$upload = $this->_do_uploadmin();
+		
+		//delete file
+		$datamin = $this->admin->admin_by_id($this->input->post('id_admin'));
+		if(file_exists('assets/backend/images/admin/'.$datamin->gambar) && $datamin->gambar != 'default.jpg')
+			unlink('assets/backend/images/admin/'.$datamin->gambar);
+
+		$data_edit['gambar'] = $upload;
+		$d = $upload;
+	}else{
+		$data_edit['gambar'] = $this->input->post('file_lama');
+		$d = $this->input->post('file_lama');
+	}
+
+	$_SESSION['gambar'] = $d;
+	$result = $this->admin->profile_edit($data_edit, $id_admin);
+	if ($result > 0) {
+		
+		$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
+			Data profil berhasil diubah.
+			<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
+			</button></div>');
+		redirect("admin/profil");
+	} else {
+		$data['error'] = 'Data profil Gagal diubah';
+	}
+}
+
+private function _do_uploadmin()
+{
+	$username = $this->input->post('username_admin');
+	$nama_file_lengkap 		= $_FILES['gambar']['name'];
+	$ext_file		= substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
+	$config['upload_path']          = 'assets/backend/images/admin';
+	$config['allowed_types']        = 'gif|jpg|png';
+	$config['max_size']             = 2048; //set max size allowed in Kilobyte
+	$config['max_width']            = 10000; // set max width image allowed
+	$config['max_height']           = 10000; // set max height allowed
+	$config['file_name']            =  $username. $ext_file; //just milisecond timestamp fot unique session_name()
+
+	$this->load->library('upload', $config);
+
+	if(!$this->upload->do_upload('gambar')) //upload and validate
+	{
+		$data['title'] = 'edit Data Surat profile';
+		$data['error'] = $this->upload->display_errors();
+		$this->load->view('admin/profile', $data);
+	}
+	return $this->upload->data('file_name');
+}
+
+
+//tutup profile
 }

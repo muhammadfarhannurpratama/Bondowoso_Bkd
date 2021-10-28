@@ -220,4 +220,23 @@ class M_admin extends CI_Model {
 		return $this->db->affected_rows();
 	}
 	// tutup bagian
+	function tampil_profil() {
+		$this->db->from('tb_admin');
+		$this->db->where('nama_admin',$this->userdata['nama']);
+		$query = $this->db->get();
+
+		return $query->row();
+	}
+
+	function admin_by_id($id) {
+		$this->db->from('tb_admin');
+		$this->db->where('id_admin',$id);
+		$query = $this->db->get();
+
+		return $query->row();
+	}
+
+	function profile_edit($data, $id_admin) {
+		return $this->db->update('tb_admin', $data, array('id_admin' => $id_admin));
+	}
 }

@@ -7,7 +7,7 @@ class M_bagian extends CI_Model {
 		$sql="select * from ".$table."";
 		return $this->db->query($sql)->num_rows();
 	}
-
+	
 	//suratmasuk
 
 	public function rulesSM()
@@ -63,9 +63,14 @@ class M_bagian extends CI_Model {
 
 
 	function tampil_suratmasuk(){
-		return $this->db->get('tb_suratmasuk');
-	}
+        $this->db->from('tb_suratmasuk');
+        $this->db->where('disposisi1', $this->userdata['nama']);
+        $this->db->or_where('disposisi2', $this->userdata['nama']);
+        $this->db->or_where('disposisi3', $this->userdata['nama']);
+		$query = $this->db->get();
 
+		return $query;
+	}
 	function nomorSM() {
 	
 		$query=$this->db->query('SELECT * FROM tb_suratmasuk ORDER BY nomorurut_suratmasuk DESC LIMIT 1');
