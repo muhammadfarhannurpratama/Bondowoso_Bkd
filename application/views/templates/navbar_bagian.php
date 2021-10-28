@@ -12,7 +12,7 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.php"><i class="fa fa-user pull-right"></i> Profil</a></li>
+                  <li><a href="<?= base_url($this->userdata['jenis'].'/profil')?>"><i class="fa fa-user pull-right"></i> Profil</a></li>
                     <li><a href="<?= base_url('frontend/logout')?>"><i class="fa fa-sign-out pull-right" onclick="return confirm ('Apakah Anda Akan Keluar.?');"></i> Keluar</a></li>
                   </ul>
                 </li>
