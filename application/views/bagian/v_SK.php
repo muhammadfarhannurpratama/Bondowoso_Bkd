@@ -57,7 +57,7 @@
                             ?>
                           </select>
                         </div>
-                  <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> Unduh Laporan Surat Keluar</button></a>
+              <!--    <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> Unduh Laporan Surat Keluar</button></a> -->
                   </form>
                   <div class="x_content">
                   <div class="x_content">

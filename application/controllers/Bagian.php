@@ -284,6 +284,375 @@ class Bagian extends Auth_Controller {
 		
 		return $nomorbaru;
 	}
+	
+	public function detailSM($id) {
+		$data['detail_SM'] = $this->bagian->SM_by_id($id);
+		$data['title'] = 'Detail data Surat Masuk';
+
+		$this->load->view('bagian/v_SMdetail', $data);
+	}
+
+	public function unduhDisposisiSM($id) {
+		include APPPATH.'third_party/PHPExcel/Classes/PHPExcel.php';
+		date_default_timezone_set("Asia/Jakarta");
+
+		$excelku = new PHPExcel();
+
+		// Set properties
+		$excelku->getProperties()->setCreator("Gabut Koding")
+								->setLastModifiedBy("Gabut Koding");
+		//ambil data
+		$dataDisSM = $this->admin->SM_by_id($id);
+
+		$tgl_surat = $dataDisSM->tanggalsurat_suratmasuk;
+        $tgl_surat = date('d/m/Y', strtotime($tgl_surat));
+        $tgl_masuk = $dataDisSM->tanggalmasuk_suratmasuk;
+        $tgl_masuk = date('d/m/Y', strtotime($tgl_masuk));
+                            
+        $tahun = $dataDisSM->tanggalmasuk_suratmasuk;
+        $tahun =  date('Y', strtotime($tahun));
+        $nama_file = $tahun.'-'.$dataDisSM->nomorurut_suratmasuk.'-disposisi';
+        $bulan = $dataDisSM->tanggalmasuk_suratmasuk;
+		$bulan = date('m',strtotime($bulan));
+		if ($bulan == '01') {
+			$bulan = "JANUARI";
+		  } elseif ($bulan == '02') {
+			$bulan = "FEBRUARI";
+		  } elseif ($bulan == '03') {
+			$bulan = "MARET";
+		  } elseif ($bulan == '04') {
+			$bulan = "APRIL";
+		  } elseif ($bulan == '05') {
+			$bulan = "MEI";
+		  } elseif ($bulan == '06') {
+			$bulan = "JUNI";
+		  } elseif ($bulan == '07') {
+			$bulan = "JULI";
+		  } elseif ($bulan == '08') {
+			$bulan = "AGUSTUS";
+		  } elseif ($bulan == '09') {
+			$bulan = "SEPTEMBER";
+		  } elseif ($bulan == '10') {
+			$bulan = "OKTOBER";
+		  } elseif ($bulan == '11') {
+			$bulan = "NOVEMBER";
+		  } elseif ($bulan == '12') {
+			$bulan = "DESEMBER";
+		  }
+		//Mengeset Syle nya
+		$headerStylenya = new PHPExcel_Style();
+		$bodyStylenya   = new PHPExcel_Style();
+
+		$headerStylenya->applyFromArray(
+			array('fill' 	=> array(
+				'type'    => PHPExcel_Style_Fill::FILL_SOLID,
+				'color'   => array('argb' => 'FFEEEEEE')),
+				'borders' => array('bottom'=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
+								'right'		=> array('style' => PHPExcel_Style_Border::BORDER_MEDIUM),
+								'left'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+								'top'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+				)
+			));
+			
+		$bodyStylenya->applyFromArray(
+			array('fill' 	=> array(
+				'type'	=> PHPExcel_Style_Fill::FILL_SOLID,
+				'color'	=> array('argb' => 'FFFFFFFF')),
+				'borders' => array(
+								'bottom'	=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
+								'right'		=> array('style' => PHPExcel_Style_Border::BORDER_MEDIUM),
+								'left'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+								'top'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+				)
+			));
+
+
+			// Set page orientation and size
+			$excelku->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_PORTRAIT);
+			$excelku->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEGAL);
+			$excelku->getActiveSheet()->getPageMargins()->setTop(0.175);
+			$excelku->getActiveSheet()->getPageMargins()->setRight(1.574);
+			$excelku->getActiveSheet()->getPageMargins()->setLeft(0.787);
+			$excelku->getActiveSheet()->getPageMargins()->setBottom(0.748);
+		
+		
+		// Set lebar kolom
+
+			$excelku->getActiveSheet()->getColumnDimension('A')->setWidth(4.5);
+			$excelku->getActiveSheet()->getColumnDimension('B')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('C')->setWidth(4.35);
+			$excelku->getActiveSheet()->getColumnDimension('D')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('E')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('F')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('G')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('H')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('I')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('J')->setWidth(1);
+			$excelku->getActiveSheet()->getColumnDimension('K')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('L')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('M')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('N')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('O')->setWidth(1.8);
+			$excelku->getActiveSheet()->getColumnDimension('P')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('Q')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('R')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('S')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('T')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('U')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('V')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('W')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('X')->setWidth(3.2);
+			$excelku->getActiveSheet()->getColumnDimension('Y')->setWidth(3.2);
+			// TINGGI BARIS
+			$excelku->getActiveSheet()->getRowDimension(1)->setRowHeight(33);
+			$excelku->getActiveSheet()->getRowDimension(2)->setRowHeight(30);
+			$excelku->getActiveSheet()->getRowDimension(3)->setRowHeight(17.25);
+			$excelku->getActiveSheet()->getRowDimension(4)->setRowHeight(17.25);
+			$excelku->getActiveSheet()->getRowDimension(5)->setRowHeight(17.25);
+			$excelku->getActiveSheet()->getRowDimension(6)->setRowHeight(17.25);
+			$excelku->getActiveSheet()->getRowDimension(7)->setRowHeight(12);
+			$excelku->getActiveSheet()->getRowDimension(8)->setRowHeight(17.25);
+			$excelku->getActiveSheet()->getRowDimension(9)->setRowHeight(11.25);
+			$excelku->getActiveSheet()->getRowDimension(10)->setRowHeight(15.75);
+			$excelku->getActiveSheet()->getRowDimension(11)->setRowHeight(15.75);
+			$excelku->getActiveSheet()->getRowDimension(12)->setRowHeight(14.25);
+			$excelku->getActiveSheet()->getRowDimension(13)->setRowHeight(17.25);
+			$excelku->getActiveSheet()->getStyle('D3:V6')->getAlignment()->setWrapText(true);
+
+			
+			
+		// Mergecell, menyatukan beberapa kolom
+		$excelku->getActiveSheet()->mergeCells('N1:R1');
+		$excelku->getActiveSheet()->mergeCells('U1:X1');
+		$excelku->getActiveSheet()->mergeCells('D3:V6');
+		$excelku->getActiveSheet()->getStyle('D3:V6')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+		$excelku->getActiveSheet()->getStyle('D3:V6')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$excelku->getActiveSheet()->mergeCells('B8:X8');
+		$excelku->getActiveSheet()->mergeCells('D11:H11');
+		$excelku->getActiveSheet()->mergeCells('K11:T11');
+		$excelku->getActiveSheet()->mergeCells('B13:H13');
+		$excelku->getActiveSheet()->mergeCells('M13:S13');
+		$excelku->getActiveSheet()->mergeCells('S1:T1');
+		$excelku->getActiveSheet()->getStyle('A1:Y13')->getFont()->setName('Calibri');
+		$excelku->getActiveSheet()->getStyle('A1:Y13')->getFont()->setSize(13);
+		$excelku->getActiveSheet()->getStyle('A1:Y13')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);   
+		
+		// Buat Kolom judul tabel
+		$SI = $excelku->setActiveSheetIndex(0);
+		$SI->setCellValue('N1',$dataDisSM->kode_suratmasuk);
+		$SI->setCellValue('U1',$dataDisSM->nomorurut_suratmasuk);
+		$SI->setCellValue('S1',$bulan);
+		$SI->setCellValue('D3',$dataDisSM->perihal_suratmasuk);
+		$SI->setCellValue('B8',$dataDisSM->pengirim);
+		$SI->setCellValue('D11',$tgl_surat);
+		$SI->setCellValue('B13',$dataDisSM->disposisi1);
+		$SI->setCellValue('K11',$dataDisSM->nomor_suratmasuk);
+		$SI->setCellValue('M13',$tgl_masuk);
+		//Memberi nama sheet
+		$excelku->getActiveSheet()->setTitle('DataDisposisi');
+
+		$excelku->setActiveSheetIndex(0);
+
+		// untuk excel 2007 atau yang berekstensi .xlsx
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment;filename="'.$nama_file.'".xlsx');
+		header('Cache-Control: max-age=0');
+		
+		$objWriter = PHPExcel_IOFactory::createWriter($excelku, 'Excel2007');
+		$objWriter->save('php://output');
+		exit;
+	}
+
+	public function downloadlap_SM()
+	{
+		include APPPATH.'third_party/PHPExcel/Classes/PHPExcel.php';
+		date_default_timezone_set("Asia/Jakarta");
+
+		$excelku = new PHPExcel();
+
+		// Set properties
+		$excelku->getProperties()->setCreator("Gabut Koding")
+								->setLastModifiedBy("Gabut Koding");
+		//ambil data
+		$bulan = $this->input->post('bulan');
+		$tahun = $this->input->post('tahun');
+		$dataSM = $this->admin->download_lapSM($bulan, $tahun)->result();
+		if ($bulan == '01') {
+			$bulan = "JANUARI";
+		  } elseif ($bulan == '02') {
+			$bulan = "FEBRUARI";
+		  } elseif ($bulan == '03') {
+			$bulan = "MARET";
+		  } elseif ($bulan == '04') {
+			$bulan = "APRIL";
+		  } elseif ($bulan == '05') {
+			$bulan = "MEI";
+		  } elseif ($bulan == '06') {
+			$bulan = "JUNI";
+		  } elseif ($bulan == '07') {
+			$bulan = "JULI";
+		  } elseif ($bulan == '08') {
+			$bulan = "AGUSTUS";
+		  } elseif ($bulan == '09') {
+			$bulan = "SEPTEMBER";
+		  } elseif ($bulan == '10') {
+			$bulan = "OKTOBER";
+		  } elseif ($bulan == '11') {
+			$bulan = "NOVEMBER";
+		  } elseif ($bulan == '12') {
+			$bulan = "DESEMBER";
+		  }
+		$nama_file = 'Surat Masuk-'.$bulan.'-'.$tahun;
+		// Mergecell, menyatukan beberapa kolom
+		$excelku->getActiveSheet()->mergeCells('A2:H2');
+		$excelku->getActiveSheet()->setCellValue('A2', "PEMERINTAH KOTA BONDOWOSO");
+		$excelku->getActiveSheet()->mergeCells('A3:H3');
+		$excelku->getActiveSheet()->setCellValue('A3', "BADAN KEPEGAWAIAN DAERAH KOTA BONDOWOSO");
+		$excelku->getActiveSheet()->mergeCells('A4:H4');
+		$excelku->getActiveSheet()->setCellValue('A4', "BAGIAN TATA USAHA");
+		$excelku->getActiveSheet()->mergeCells('A5:H5');
+		$excelku->getActiveSheet()->setCellValue('A5', "Jl. KH Ashari No.123 Kademangan, Kec. Bondowoso, Kabupaten Bondowoso, Jawa Timur 68217");
+		$excelku->getActiveSheet()->mergeCells('A6:H6');
+		$excelku->getActiveSheet()->setCellValue('A6', "DATA SURAT MASUK BULAN $bulan TAHUN $tahun");
+		$excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setName('Arial');
+		$excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setSize(14);
+		$excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setBold(true);
+		$excelku->getActiveSheet()->getStyle('A2:H6')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$excelku->getActiveSheet()->mergeCells('A8:A9');
+		$excelku->getActiveSheet()->setCellValue('A8', "NO");
+		$excelku->getActiveSheet()->mergeCells('B8:B9');
+		$excelku->getActiveSheet()->setCellValue('B8', "NO URUT");
+		$excelku->getActiveSheet()->mergeCells('C8:F8');
+		$excelku->getActiveSheet()->setCellValue('C8', "SURAT MASUK");
+		$excelku->getActiveSheet()->getStyle('C8:F8')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+		$excelku->getActiveSheet()->mergeCells('G8:G9');
+		$excelku->getActiveSheet()->setCellValue('G8', "TANGGAL MASUK");
+		$excelku->getActiveSheet()->mergeCells('H8:H9');
+		$excelku->getActiveSheet()->setCellValue('H8', "KODE SURAT");
+		$excelku->getActiveSheet()->mergeCells('I8:N8');
+		$excelku->getActiveSheet()->setCellValue('I8', "DISPOSISI");
+		$excelku->getActiveSheet()->getStyle('A8:N9')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+		$excelku->getActiveSheet()->getStyle('A8:N9')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$excelku->getActiveSheet()->getStyle('A8:N9')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+		
+		// Buat Kolom judul tabel
+		$SI = $excelku->setActiveSheetIndex(0);
+		$SI->setCellValue('C9', "ALAMAT PENGIRIM");
+		$SI->setCellValue('D9', "NOMOR SURAT");
+		$SI->setCellValue('E9', "TANGGAL SURAT");
+		$SI->setCellValue('F9', "PERIHAL");
+		$SI->setCellValue('I9', "I");
+		$SI->setCellValue('J9', "TGL I");
+		$SI->setCellValue('K9', "II");
+		$SI->setCellValue('L9', "TGL II");
+		$SI->setCellValue('M9', "III");
+		$SI->setCellValue('N9', "TGL III");
+
+
+		//Mengeset Syle nya
+		$headerStylenya = new PHPExcel_Style();
+		$bodyStylenya   = new PHPExcel_Style();
+
+		$headerStylenya->applyFromArray(
+		array('fill' 	=> array(
+				'type'    => PHPExcel_Style_Fill::FILL_SOLID,
+				'color'   => array('argb' => 'FFEEEEEE')),
+				'borders' => array('bottom'=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
+							'right'		=> array('style' => PHPExcel_Style_Border::BORDER_MEDIUM),
+							'left'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+							'top'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+				)
+		));
+		
+		$bodyStylenya->applyFromArray(
+		array('fill' 	=> array(
+				'type'	=> PHPExcel_Style_Fill::FILL_SOLID,
+				'color'	=> array('argb' => 'FFFFFFFF')),
+				'borders' => array(
+							'bottom'	=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
+							'right'		=> array('style' => PHPExcel_Style_Border::BORDER_MEDIUM),
+							'left'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+							'top'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+				)
+		));
+		
+		$excelku->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+		$excelku->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEGAL);
+		$excelku->getActiveSheet()->getPageMargins()->setTop(0.75);
+		$excelku->getActiveSheet()->getPageMargins()->setRight(0.7);
+		$excelku->getActiveSheet()->getPageMargins()->setLeft(0.7);
+		$excelku->getActiveSheet()->getPageMargins()->setBottom(0.75);
+		$excelku->getActiveSheet()->getPageSetup()->setFitToWidth(1);
+		$excelku->getActiveSheet()->getPageSetup()->setFitToHeight(0);
+
+
+		$baris  = 10; //Ini untuk dimulai baris datanya, karena di baris 3 itu digunakan untuk header tabel
+		$no     = 1;
+
+		foreach ($dataSM as $SM ) {
+
+		$SI->setCellValue("A".$baris,$no++); //mengisi data untuk nomor urut
+		$SI->setCellValue("B".$baris,$SM->nomorurut_suratmasuk); 
+		$SI->setCellValue("C".$baris,$SM->pengirim); 
+		$SI->setCellValue("D".$baris,$SM->nomor_suratmasuk); 
+		$SI->setCellValue("E".$baris,$SM->tanggalsurat_suratmasuk); 
+		$SI->setCellValue("F".$baris,$SM->perihal_suratmasuk); 
+		$SI->setCellValue("G".$baris,$SM->tanggalmasuk_suratmasuk); 
+		$SI->setCellValue("H".$baris,$SM->kode_suratmasuk); 
+		$SI->setCellValue("I".$baris,$SM->disposisi1); 
+		$SI->setCellValue("J".$baris,$SM->tanggal_disposisi1); 
+		$SI->setCellValue("K".$baris,$SM->disposisi2); 
+		$SI->setCellValue("L".$baris,$SM->tanggal_disposisi2); 
+		$SI->setCellValue("M".$baris,$SM->disposisi3); 
+		$SI->setCellValue("N".$baris,$SM->tanggal_disposisi3); 
+		$baris++; //looping untuk barisnya
+		
+		// Set lebar kolom
+
+		$excelku->getActiveSheet()->getColumnDimension('A')->setWidth(8.14);
+		$excelku->getActiveSheet()->getColumnDimension('B')->setWidth(13);
+		$excelku->getActiveSheet()->getColumnDimension('C')->setWidth(29);
+		$excelku->getActiveSheet()->getColumnDimension('D')->setWidth(30);
+		$excelku->getActiveSheet()->getColumnDimension('E')->setWidth(16);
+		$excelku->getActiveSheet()->getColumnDimension('F')->setWidth(39);
+		$excelku->getActiveSheet()->getColumnDimension('G')->setWidth(28);
+		$excelku->getActiveSheet()->getColumnDimension('H')->setWidth(18);
+		$excelku->getActiveSheet()->getColumnDimension('I')->setWidth(21);
+		$excelku->getActiveSheet()->getColumnDimension('J')->setWidth(21);
+		$excelku->getActiveSheet()->getColumnDimension('K')->setWidth(21);
+		$excelku->getActiveSheet()->getColumnDimension('L')->setWidth(21);
+		$excelku->getActiveSheet()->getColumnDimension('M')->setWidth(21);
+		$excelku->getActiveSheet()->getColumnDimension('N')->setWidth(21);
+		$excelku->getActiveSheet()->getStyle('A10:N'.$baris.'')->getFont()->setName('Calibri');
+		$excelku->getActiveSheet()->getStyle('A10:N'.$baris.'')->getFont()->setSize(11);
+		$excelku->getActiveSheet()->getRowDimension($baris)->setRowHeight(-1); 
+		$excelku->getActiveSheet()->getStyle('C10:C'.$baris.'')->getAlignment()->setWrapText(true); // wraptext
+		$excelku->getActiveSheet()->getStyle('F10:F'.$baris.'')->getAlignment()->setWrapText(true);
+		$excelku->getActiveSheet()->getStyle('A10:B'.$baris.'')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$excelku->getActiveSheet()->getStyle('D10:E'.$baris.'')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$excelku->getActiveSheet()->getStyle('G10:N'.$baris.'')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$excelku->getActiveSheet()->getStyle('A10:N'.$baris.'')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+		$excelku->getActiveSheet()->getStyle('A10:N'.$baris.'')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+		
+		
+		
+		}
+
+		//Memberi nama sheet
+		$excelku->getActiveSheet()->setTitle('DataSuratKeluar');
+
+		$excelku->setActiveSheetIndex(0);
+
+		// untuk excel 2007 atau yang berekstensi .xlsx
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment;filename="'.$nama_file.'".xlsx');
+		header('Cache-Control: max-age=0');
+
+		$objWriter = PHPExcel_IOFactory::createWriter($excelku, 'Excel2007');
+		$objWriter->save('php://output');
+		exit;
+	}
+
 	// tutup surat masuk
 
 	// surat keluar
@@ -493,6 +862,9 @@ class Bagian extends Auth_Controller {
 			}
 	}
 
+
+
+	
 	public function hapusSK($id)
 	{
 		$SKlist = $this->bagian->SK_by_id($id);
@@ -520,6 +892,164 @@ class Bagian extends Auth_Controller {
 				'<div class="alert alert-danger" role="alert">Data Gagal Diubah!</div>'
 				);
 		}
+	}
+	public function detailSK($id) {
+		$data['detail_SK'] = $this->bagian->SK_by_id($id);
+		$data['title'] = 'Detail data Surat Keluar';
+
+		$this->load->view('bagian/v_SKdetail', $data);
+	}
+
+	public function downloadlap_SK()
+	{
+		include APPPATH.'third_party/PHPExcel/Classes/PHPExcel.php';
+		date_default_timezone_set("Asia/Jakarta");
+
+		$excelku = new PHPExcel();
+
+		// Set properties
+		$excelku->getProperties()->setCreator("Gabut Koding")
+								->setLastModifiedBy("Gabut Koding");
+		//ambil data
+		$bulan = $this->input->post('bulan');
+		$tahun = $this->input->post('tahun');
+		$dataSK = $this->admin->download_lapSK($bulan, $tahun)->result();
+		if ($bulan == '01') {
+			$bulan = "JANUARI";
+		  } elseif ($bulan == '02') {
+			$bulan = "FEBRUARI";
+		  } elseif ($bulan == '03') {
+			$bulan = "MARET";
+		  } elseif ($bulan == '04') {
+			$bulan = "APRIL";
+		  } elseif ($bulan == '05') {
+			$bulan = "MEI";
+		  } elseif ($bulan == '06') {
+			$bulan = "JUNI";
+		  } elseif ($bulan == '07') {
+			$bulan = "JULI";
+		  } elseif ($bulan == '08') {
+			$bulan = "AGUSTUS";
+		  } elseif ($bulan == '09') {
+			$bulan = "SEPTEMBER";
+		  } elseif ($bulan == '10') {
+			$bulan = "OKTOBER";
+		  } elseif ($bulan == '11') {
+			$bulan = "NOVEMBER";
+		  } elseif ($bulan == '12') {
+			$bulan = "DESEMBER";
+		  }
+		$nama_file = 'Surat Keluar-'.$bulan.'-'.$tahun;
+		// Mergecell, menyatukan beberapa kolom
+		$excelku->getActiveSheet()->mergeCells('A2:H2');
+		$excelku->getActiveSheet()->setCellValue('A2', "PEMERINTAH KOTA BONDOWOSO");
+		$excelku->getActiveSheet()->mergeCells('A3:H3');
+		$excelku->getActiveSheet()->setCellValue('A3', "BADAN KEPEGAWAIAN DAERAH KOTA BONDOWOSO");
+		$excelku->getActiveSheet()->mergeCells('A4:H4');
+		$excelku->getActiveSheet()->setCellValue('A4', "BAGIAN TATA USAHA");
+		$excelku->getActiveSheet()->mergeCells('A5:H5');
+		$excelku->getActiveSheet()->setCellValue('A5', "Jl. KH Ashari No.123 Kademangan, Kec. Bondowoso, Kabupaten Bondowoso, Jawa Timur 68217");
+		$excelku->getActiveSheet()->mergeCells('A6:H6');
+		$excelku->getActiveSheet()->setCellValue('A6', "DATA SURAT KELUAR BULAN $bulan TAHUN $tahun");
+		$excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setName('Arial');
+		$excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setSize(14);
+		$excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setBold(true);
+		$excelku->getActiveSheet()->getStyle('A2:H6')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$excelku->getActiveSheet()->getStyle('A8:H8')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$excelku->getActiveSheet()->getStyle('A8:H8')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+
+
+		// Buat Kolom judul tabel
+		$SI = $excelku->setActiveSheetIndex(0);
+		$SI->setCellValue('A8', "No");
+		$SI->setCellValue('B8', "NOMOR SURAT");
+		$SI->setCellValue('C8', "TANGGAL KELUAR");
+		$SI->setCellValue('D8', "KODE SURAT");
+		$SI->setCellValue('E8', "NAMA BAGIAN");
+		$SI->setCellValue('F8', "TANGGAL SURAT");
+		$SI->setCellValue('G8', "KEPADA");
+		$SI->setCellValue('H8', "PERIHAL");
+
+		//Mengeset Syle nya
+		$headerStylenya = new PHPExcel_Style();
+		$bodyStylenya   = new PHPExcel_Style();
+
+		$headerStylenya->applyFromArray(
+			array('fill' 	=> array(
+				'type'    => PHPExcel_Style_Fill::FILL_SOLID,
+				'color'   => array('argb' => 'FFEEEEEE')),
+				'borders' => array('bottom'=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
+								'right'		=> array('style' => PHPExcel_Style_Border::BORDER_MEDIUM),
+								'left'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+								'top'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+				)
+			));
+			
+		$bodyStylenya->applyFromArray(
+			array('fill' 	=> array(
+				'type'	=> PHPExcel_Style_Fill::FILL_SOLID,
+				'color'	=> array('argb' => 'FFFFFFFF')),
+				'borders' => array(
+								'bottom'	=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
+								'right'		=> array('style' => PHPExcel_Style_Border::BORDER_MEDIUM),
+								'left'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+								'top'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+				)
+			));
+				// Set page orientation and size
+			$excelku->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+			$excelku->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEGAL);
+			$excelku->getActiveSheet()->getPageMargins()->setTop(0.75);
+			$excelku->getActiveSheet()->getPageMargins()->setRight(0.7);
+			$excelku->getActiveSheet()->getPageMargins()->setLeft(0.7);
+			$excelku->getActiveSheet()->getPageMargins()->setBottom(0.75);
+
+
+		$baris  = 9; //Ini untuk dimulai baris datanya, karena di baris 3 itu digunakan untuk header tabel
+		$no     = 1;
+
+		foreach ($dataSK as $SK) {
+		$SI->setCellValue("A".$baris,$no++); //mengisi data untuk nomor urut
+		$SI->setCellValue("B".$baris,$SK->nomor_suratkeluar); 
+		$SI->setCellValue("C".$baris,$SK->tanggalkeluar_suratkeluar); 
+		$SI->setCellValue("D".$baris,$SK->kode_suratkeluar); 
+		$SI->setCellValue("E".$baris,$SK->nama_bagian); 
+		$SI->setCellValue("F".$baris,$SK->tanggalsurat_suratkeluar); 
+		$SI->setCellValue("G".$baris,$SK->kepada_suratkeluar); 
+		$SI->setCellValue("H".$baris,$SK->perihal_suratkeluar); 
+		$baris++; //looping untuk barisnya
+		
+		// Set lebar kolom
+
+			$excelku->getActiveSheet()->getColumnDimension('A')->setWidth(8.14);
+			$excelku->getActiveSheet()->getColumnDimension('B')->setWidth(29);
+			$excelku->getActiveSheet()->getColumnDimension('C')->setWidth(21);
+			$excelku->getActiveSheet()->getColumnDimension('D')->setWidth(16);
+			$excelku->getActiveSheet()->getColumnDimension('E')->setWidth(18);
+			$excelku->getActiveSheet()->getColumnDimension('F')->setWidth(21);
+			$excelku->getActiveSheet()->getColumnDimension('G')->setWidth(35);
+			$excelku->getActiveSheet()->getColumnDimension('H')->setWidth(40);
+			$excelku->getActiveSheet()->getRowDimension($baris)->setRowHeight(-1);
+			$excelku->getActiveSheet()->getStyle('A9:F'.$baris.'')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+			$excelku->getActiveSheet()->getStyle('A9:H'.$baris.'')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+			$excelku->getActiveSheet()->getStyle('A9:H'.$baris.'')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$excelku->getActiveSheet()->getStyle('G9:H'.$baris.'')->getAlignment()->setWrapText(true);
+			//wraptext
+		}
+
+		//Memberi nama sheet
+		$excelku->getActiveSheet()->setTitle('DataSuratKeluar');
+
+		$excelku->setActiveSheetIndex(0);
+
+		// untuk excel 2007 atau yang berekstensi .xlsx
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment;filename="'.$nama_file.'".xlsx');
+		header('Cache-Control: max-age=0');
+		
+		$objWriter = PHPExcel_IOFactory::createWriter($excelku, 'Excel2007');
+		$objWriter->save('php://output');
+		exit;
 	}
 
 	//tutup surat keluar
@@ -704,14 +1234,22 @@ class Bagian extends Auth_Controller {
 	// tutup bagian
 	*/
 
-//profile
-public function profil() {
-	$data['title'] = 'Data Profile';
-	
-	$data['profil'] = $this->bagian->tampil_profil();
-	
-	$this->load->view('bagian/profile', $data);
-}
+	public function detailBagian($id) {
+		$data['detail_bagian'] = $this->admin->bagian_by_id($id);
+		$data['title'] = 'Detail data Bagian';
+
+		$this->load->view('admin/v_bagiandetail', $data);	
+	}
+	// tutup bagian
+
+	//profile
+	public function profil() {
+		$data['title'] = 'Data Profile';
+		
+		$data['profil'] = $this->bagian->tampil_profil();
+		
+		$this->load->view('bagian/profile', $data);
+	}
 
 public function editprofil() {
 	$data['title'] = 'Edit Data';
@@ -785,5 +1323,7 @@ private function _do_uplobagian()
 
 
 //tutup profile
+
+
 
 }
