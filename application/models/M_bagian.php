@@ -225,4 +225,25 @@ class M_bagian extends CI_Model {
 		return $this->db->affected_rows();
 	}
 	// tutup bagian
+
+	function tampil_profil() {
+		$this->db->from('tb_bagian');
+		$this->db->where('nama_bagian',$this->userdata['nama']);
+		$query = $this->db->get();
+
+		return $query->row();
+	}
+
+	function admin_by_id($id) {
+		$this->db->from('tb_bagian');
+		$this->db->where('id_bagian',$id);
+		$query = $this->db->get();
+
+		return $query->row();
+	}
+
+	function profile_edit($data, $id_bagian) {
+		return $this->db->update('tb_bagian', $data, array('id_bagian' => $id_bagian));
+	}
+
 }

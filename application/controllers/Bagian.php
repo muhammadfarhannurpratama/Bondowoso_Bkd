@@ -703,4 +703,87 @@ class Bagian extends Auth_Controller {
 	}
 	// tutup bagian
 	*/
+
+//profile
+public function profil() {
+	$data['title'] = 'Data Profile';
+	
+	$data['profil'] = $this->bagian->tampil_profil();
+	
+	$this->load->view('bagian/profile', $data);
+}
+
+public function editprofil() {
+	$data['title'] = 'Edit Data';
+	
+	$data['profil'] = $this->bagian->tampil_profil();
+	
+	$this->load->view('bagian/editprofile', $data);
+}
+
+public function proses_editprofile() {
+	$id_bagian = $this->input->post('id_bagian');
+	$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+	$data_edit =array(
+		'nama_bagian' => $this->input->post('nama_bagian'),
+		'username_admin_bagian' => $this->input->post('username_admin_bagian'),
+		'password_bagian' => $password
+	);
+
+
+	if(!empty($_FILES['gambar']['name'])){
+		$upload = $this->_do_uplobagian();
+		
+		//delete file
+		$datamin = $this->bagian->bagian_by_id($this->input->post('id_bagian'));
+		if(file_exists('assets/backend/images/bagian/'.$datamin->gambar) && $datamin->gambar != 'default.jpg')
+			unlink('assets/backend/images/bagian/'.$datamin->gambar);
+
+		$data_edit['gambar'] = $upload;
+		$d = $upload;
+	}else{
+		$data_edit['gambar'] = $this->input->post('file_lama');
+		$d = $this->input->post('file_lama');
+	}
+
+	$_SESSION['gambar'] = $d;
+	$result = $this->bagian->profile_edit($data_edit, $id_bagian);
+	if ($result > 0) {
+		
+		$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
+			Data profil berhasil diubah.
+			<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
+			</button></div>');
+		redirect("bagian/profil");
+	} else {
+		$data['error'] = 'Data profil Gagal diubah';
+	}
+}
+
+private function _do_uplobagian()
+{
+	$username = $this->input->post('username_admin_bagian');
+	$nama_file_lengkap 		= $_FILES['gambar']['name'];
+	$ext_file		= substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
+	$config['upload_path']          = 'assets/backend/images/bagian';
+	$config['allowed_types']        = 'gif|jpg|png';
+	$config['max_size']             = 2048; //set max size allowed in Kilobyte
+	$config['max_width']            = 10000; // set max width image allowed
+	$config['max_height']           = 10000; // set max height allowed
+	$config['file_name']            =  $username. $ext_file; //just milisecond timestamp fot unique session_name()
+
+	$this->load->library('upload', $config);
+
+	if(!$this->upload->do_upload('gambar')) //upload and validate
+	{
+		$data['title'] = 'edit Data Surat profile';
+		$data['error'] = $this->upload->display_errors();
+		$this->load->view('bagian/profile', $data);
+	}
+	return $this->upload->data('file_name');
+}
+
+
+//tutup profile
+
 }
