@@ -57,7 +57,7 @@
                             ?>
                           </select>
                         </div>
-                  <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> Unduh Laporan Surat Masuk</button></a>
+                 <!--  <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> Unduh Laporan Surat Masuk</button></a> -->
                   <a href="<?= base_url('admin/tambahSM')?>"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Surat Masuk</button></a>
                   </form>
                   <div class="x_content">
@@ -89,7 +89,7 @@
                             <td><?= $masuk->perihal_suratmasuk ?></td>
                             <td style="text-align:center;">
                               <a href="<?= base_url('assets/backend/surat_masuk/'.$masuk->file_suratmasuk) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
-                              <a href="<?= base_url('admin/unduhDisposisiSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Unduh Disposisi" class="btn btn-info btn-xs"><i class="fa fa-download"></i></button></a>
+                     <!--     <a href="<?= base_url('admin/unduhDisposisiSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Unduh Disposisi" class="btn btn-info btn-xs"><i class="fa fa-download"></i></button></a> -->
                               <a href="<?= base_url('admin/detailSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Detail Surat Masuk" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
                               <a href="<?= base_url('admin/editSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button></a>
                               <a onclick="return konfirmasi()" href="<?= base_url('admin/hapusSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
