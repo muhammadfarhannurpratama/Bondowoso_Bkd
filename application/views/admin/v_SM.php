@@ -28,7 +28,7 @@
                     endif; ?>
                     </div>
                   </div>
-                      <form action="downloadlaporan_suratmasuk.php"  name="download_suratmasuk" method="post" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                      <form action="<?= base_url('admin/downloadlap_SM') ?>"  name="download_suratmasuk" method="post" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                         <div class="col-md-2 col-sm-2 col-xs-6">
                           <select name="bulan" class="select2_single form-control" tabindex="-1">
                             <option>Pilih Bulan</option>
@@ -57,7 +57,7 @@
                             ?>
                           </select>
                         </div>
-                 <!--  <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> Unduh Laporan Surat Masuk</button></a> -->
+                   <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> Unduh Laporan Surat Masuk</button></a> 
                   <a href="<?= base_url('admin/tambahSM')?>"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Surat Masuk</button></a>
                   </form>
                   <div class="x_content">

@@ -88,7 +88,7 @@ class Admin extends Auth_Controller {
 				$data['error'] = 'file gambar terlalu besar';
 			}
 			$nama_baru = $thnNow.'-'.$nomorurut_suratmasuk . $ext_file;
-			$path = $_SERVER['DOCUMENT_ROOT'].'/suratBKD/assets/backend/surat_masuk/'.$nama_baru;
+			$path = $_SERVER['DOCUMENT_ROOT'].'/Bondowoso_Bkd/assets/backend/surat_masuk/'.$nama_baru;
 			move_uploaded_file($tmp_file, $path);
 
 					$tanggal_entry  = date("Y-m-d H:i:s");
@@ -127,6 +127,9 @@ class Admin extends Auth_Controller {
 			}
 		
 	}
+
+
+
 
 	public function editSM($id)
 	{
@@ -180,7 +183,7 @@ class Admin extends Auth_Controller {
 						$data['error'] = 'file gambar terlalu besar';
 					}
 					$nama_baru = $thnNow.'-'.$nomorurut_suratmasuk . $ext_file;
-					$path = $_SERVER['DOCUMENT_ROOT'].'/suratBKD/assets/backend/surat_masuk/'.$nama_baru;
+					$path = $_SERVER['DOCUMENT_ROOT'].'/Bondowoso_Bkd/assets/backend/surat_masuk/'.$nama_baru;
 					move_uploaded_file($tmp_file, $path);
 
 				$SM_edit['file_suratmasuk'] = $nama_baru;
@@ -339,6 +342,8 @@ class Admin extends Auth_Controller {
 		  } elseif ($bulan == '12') {
 			$bulan = "DESEMBER";
 		  }
+
+		 
 		//Mengeset Syle nya
 		$headerStylenya = new PHPExcel_Style();
 		$bodyStylenya   = new PHPExcel_Style();
@@ -502,6 +507,14 @@ class Admin extends Auth_Controller {
 		  } elseif ($bulan == '12') {
 			$bulan = "DESEMBER";
 		  }
+		  if($dataSM == null) {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible show" role="alert">
+			  Tidak ada Surat Masuk pada bulan <b>'.$bulan.'</b> di tahun <b>'.$tahun.'</b> 
+			  <a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
+			 </button></div>');
+			 redirect("admin/surat_masuk");
+			exit();
+		   }
 		$nama_file = 'Surat Masuk-'.$bulan.'-'.$tahun;
 		// Mergecell, menyatukan beberapa kolom
 		$excelku->getActiveSheet()->mergeCells('A2:H2');
@@ -713,7 +726,7 @@ class Admin extends Auth_Controller {
 				$data['error'] = 'file dokumen terlalu besar';
 			}
 			$namaSK_baru = $thnNow.'-'.$ambilnomor . $ext_file;
-			$path = $_SERVER['DOCUMENT_ROOT'].'/suratBKD/assets/backend/surat_keluar/'.$namaSK_baru;
+			$path = $_SERVER['DOCUMENT_ROOT'].'/Bondowoso_Bkd/assets/backend/surat_keluar/'.$namaSK_baru;
 			move_uploaded_file($tmp_file, $path);
 
 					$tanggal_entry  = date("Y-m-d H:i:s");
@@ -817,7 +830,7 @@ class Admin extends Auth_Controller {
 						$data['error'] = 'file dokeumen terlalu besar';
 					}
 					$nama = $thnNow.'-'.$ambilnomor . $ext_fileSK;
-					$pathSK = $_SERVER['DOCUMENT_ROOT'].'/suratBKD/assets/backend/surat_keluar/'.$nama;
+					$pathSK = $_SERVER['DOCUMENT_ROOT'].'/Bondowoso_Bkd/assets/backend/surat_keluar/'.$nama;
 					move_uploaded_file($tmp_fileSK, $pathSK);
 
 				$SK_edit['file_suratkeluar'] = $nama;
@@ -848,7 +861,7 @@ class Admin extends Auth_Controller {
 						'tanggal_entry' => $tanggal_entry
 					];
 
-					$result = $this->admin->SK_edit($SK_edit, $id_suratkeluar);
+					$result = $this->admin->SK_edit($SK_edit, $id_surat);
 					if ($result > 0) {
 						$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
 							Data Surat Keluar berhasil diubah.

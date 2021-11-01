@@ -246,4 +246,5 @@ class M_bagian extends CI_Model {
 		return $this->db->update('tb_bagian', $data, array('id_bagian' => $id_bagian));
 	}
 
+	
 }

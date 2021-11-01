@@ -10,6 +10,14 @@ class M_admin extends CI_Model {
 
 	//suratmasuk
 
+	function download_lapSM($bulan, $tahun){
+		$this->db->from('tb_suratmasuk');
+		$this->db->where('MONTH(tanggalsurat_suratmasuk)',$bulan);
+		$this->db->where('YEAR(tanggalsurat_suratmasuk)',$tahun);
+		$query = $this->db->get();
+		return $query;
+	}
+
 	public function rulesSM()
 	{
 		return [
