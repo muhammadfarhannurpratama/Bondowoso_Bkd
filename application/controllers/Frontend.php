@@ -61,7 +61,7 @@ class Frontend extends Ci_Controller {
 			} else {
 				$this->session->set_flashdata(
 					'message',
-					'<div class="alert alert-danger" role="alert">password yang anda masukanee salah!</div>'
+					'<div class="alert alert-danger" role="alert">password yang anda masukan salah!</div>'
 				);
 				redirect('frontend/login');
 			}
