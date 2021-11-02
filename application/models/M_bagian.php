@@ -137,7 +137,11 @@ class M_bagian extends CI_Model {
 	}
 
 	function tampil_suratkeluar(){
-		return $this->db->get('tb_suratkeluar');
+        $this->db->from('tb_suratkeluar');
+        $this->db->where('nama_bagian', $this->userdata['nama']);
+		$query = $this->db->get();
+
+		return $query;
 	}
 
 	function nomorSK() {

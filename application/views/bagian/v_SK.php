@@ -16,17 +16,18 @@
             </div>
 
             <div class="clearfix"></div>
-            <div class="mb-2">
-                <?php if ($this->session->flashdata('message')) :
-                  echo $this->session->flashdata('message');
-                endif; ?>
-            </div>
+
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Data<small>Surat Keluar</small></h2>
                     <div class="clearfix"></div>
+                    <div class="mb-2">
+                    <?php if ($this->session->flashdata('message')) :
+                        echo $this->session->flashdata('message');
+                    endif; ?>
+                    </div>
                   </div>
                    <form action="downloadlaporan_suratkeluar.php"  name="download_suratkeluar" method="post" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                         <div class="col-md-2 col-sm-2 col-xs-6">
