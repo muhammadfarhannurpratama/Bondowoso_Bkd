@@ -28,7 +28,8 @@
                     <h2>Data<small>Surat Keluar</small></h2>
                     <div class="clearfix"></div>
                   </div>
-                   <form action=""  name="download_suratkeluar" method="post" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                   <form action="<?= base_url('admin/downloadlap_SK') ?>"  name="download_suratkeluar" method="post" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                  <!-- <form action=""  name="download_suratkeluar" method="post" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"> -->
                         <div class="col-md-2 col-sm-2 col-xs-6">
                           <select name="bulan" class="select2_single form-control" tabindex="-1">
                             <option>Pilih Bulan</option>

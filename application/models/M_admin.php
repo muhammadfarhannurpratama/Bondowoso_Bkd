@@ -109,6 +109,14 @@ class M_admin extends CI_Model {
 	//tutup suratmasuk
 	// surat keluar
 
+
+function download_lapSK($bulan, $tahun){
+		$this->db->from('tb_suratkeluar');
+		$this->db->where('MONTH(tanggalsurat_suratkeluar)',$bulan);
+		$this->db->where('YEAR(tanggalsurat_suratkeluar)',$tahun);
+		$query = $this->db->get();
+		return $query;
+	}
 	public function rulesSK()
 	{
 		return [
