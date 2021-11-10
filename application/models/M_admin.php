@@ -58,13 +58,13 @@ class M_admin extends CI_Model {
 				'field' => 'disposisi2', 'label' => 'Disposisi 2', 'rules' => 'required'
 			],
 			[
-				'field' => 'tanggal_disposisi2', 'label' => 'Tanggal DIsposisi 2', 'rules' => 'required'
+				'field' => 'tanggal_disposisi2', 'label' => 'Tanggal Disposisi 2', 'rules' => 'required'
 			],
 			[
 				'field' => 'disposisi3', 'label' => 'Disposisi 3', 'rules' => 'required'
 			],
 			[
-				'field' => 'tanggal_disposisi3', 'label' => 'Tanggal Disposisi', 'rules' => 'required'
+				'field' => 'tanggal_disposisi3', 'label' => 'Tanggal Disposisi 3', 'rules' => 'required'
 			]
 		];
 	}

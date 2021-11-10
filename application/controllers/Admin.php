@@ -39,6 +39,7 @@ class Admin extends Auth_Controller {
 		$disposisi = $this->admin->disposisi()->result();
 		$data['disposisi'] = $disposisi;
 		$data['nomorurut_suratmasuk'] = $this->_ambil_nomorSM();
+		
 
 		$this->load->view('admin/v_SMtambah', $data);
 	
@@ -110,7 +111,8 @@ class Admin extends Auth_Controller {
 						'disposisi2' => $this->input->post('disposisi2'),
 						'tanggal_disposisi2' => $tgl_disp2,
 						'disposisi3' => $this->input->post('disposisi3'),
-						'tanggal_disposisi3' => $tgl_disp3
+						'tanggal_disposisi3' => $tgl_disp3, 
+						'status' => "belumd"
 					];
 
 					$result = $this->admin->SM_tambah($SM_baru);
