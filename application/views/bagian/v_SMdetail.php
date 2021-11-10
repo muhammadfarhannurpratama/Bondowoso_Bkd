@@ -101,11 +101,15 @@ $this->load->view('templates/sidebar_bagian');
                           <td>Tanggal Disposisi 3</td>
                           <td><?= $detail_SM->tanggal_disposisi3 ?></td>
                         </tr>
+
+                        
+                      </div>
+                      </div>
+
                       </tbody>
                     </table>
                     <div class="text-right">
-                   <a href="<?= base_url('admin/surat_masuk') ?>" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Kembali</a></div>
-
+                   <a href="<?= base_url('bagian/surat_masuk') ?>" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Kembali</a></div>
                   </div>
                      
                     </div>

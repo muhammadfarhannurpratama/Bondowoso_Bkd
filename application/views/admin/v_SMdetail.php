@@ -101,6 +101,10 @@
                           <td>Tanggal Disposisi 3</td>
                           <td><?= $detail_SM->tanggal_disposisi3 ?></td>
                         </tr>
+                        <tr>
+                          <td>Status</td>
+                          <td><?php if ($detail_SM->status === "belumd"){ echo "Belum Dikonfirmasi";} if ($detail_SM->status === "belum"){ echo "Belum Dikerjakan";} if ($detail_SM->status === "sudah"){ echo "Sudah Dikerjakan";} if ($detail_SM->status === "pending"){ echo "Pending";} ?></td>
+                        </tr>
                       </tbody>
                     </table>
                     <div class="text-right">

@@ -15,8 +15,7 @@ class Bagian extends Auth_Controller {
 	public function index()
 	{
 		$data['title'] = 'Dashboard';
-		$data['bagian'] = $this->bagian->jumlah('tb_bagian');
-		$data['surat_keluar'] = $this->bagian->jumlah('tb_suratkeluar');
+		$data['surat_keluar'] = $this->bagian->jumlahSK('tb_suratkeluar');
 		$data['surat_masuk'] = $this->bagian->jumlah('tb_suratmasuk');
 
 		
@@ -290,6 +289,34 @@ class Bagian extends Auth_Controller {
 		$data['title'] = 'Detail data Surat Masuk';
 
 		$this->load->view('bagian/v_SMdetail', $data);
+	}
+
+	public function status($id) {
+		$data['ubah_status'] = $this->bagian->SM_by_id($id);
+		$data['title'] = 'Ubah Status Surat Masuk';
+
+		$this->load->view('bagian/v_SMstatus', $data);
+	}
+
+	public function edit_prosesSMstatus() {
+		$id_surat = $this->input->post('id_suratmasuk');
+		$status = $this->input->post('status');
+
+		$UbahstatusSM = $this->bagian->SM_statusProses($id_surat, $status);
+		if ($UbahstatusSM > 0) {
+
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
+					Data Status Surat Masuk Sudah Diubah .
+					<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
+				</button></div>');
+				redirect("bagian/surat_masuk");
+			
+		} else {
+			$this->session->set_flashdata(
+				'message',
+				'<div class="alert alert-danger" role="alert">Data Gagal Diubah!</div>'
+				);
+		}
 	}
 
 	public function unduhDisposisiSM($id) {

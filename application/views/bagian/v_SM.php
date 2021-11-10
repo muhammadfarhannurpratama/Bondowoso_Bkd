@@ -65,14 +65,13 @@
                       <thead>
                         <tr>
                           <th width="3%">No Urut</th>
-                          <th width="10%">Tanggal Masuk</th>
-                          <th width="3%">Kode Surat</th>
+                          <th width="15%">Tanggal Masuk</th>
+                          <th width="3%">Status</th>
                           <th width="10%">Tanggal Surat</th>
                           <th width="14%">Pengirim</th>
                           <th width="15%">Nomor Surat</th>
                           <th width="10%">Kepada</th>
-                          <th width="25%">Perihal</th>
-                          <th width="15%">Aksi</th>
+                          <th width="10%">Aksi</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -80,15 +79,25 @@
                         <tr>
                             <td><?= $masuk->nomorurut_suratmasuk ?></td>
                             <td><?= $masuk->tanggalmasuk_suratmasuk ?></td>
-                            <td><?= $masuk->kode_suratmasuk ?></td>
+                            <td>
+                              <?php if ($masuk->status === "belum" ) {?>
+                                <p class="text-info">Belum Dikerjakan</p>      
+                              <?php } else if($masuk->status === "sudah") { ?>
+                                <p class="text-succes">Sudah Dikerjakan</p> 
+                              <?php }else if($masuk->status === "pending") {?>
+                                <p class="text-warning">Pending</p> 
+                              <?php } else {?>
+                                <p class="text-secondary">Belum dikonfirmasi</p> 
+                              <?php }?>
+                            </td>
                             <td><?= $masuk->tanggalsurat_suratmasuk ?></td>
                             <td><?= $masuk->pengirim ?></td>
                             <td><?= $masuk->nomor_suratmasuk ?></td>
                             <td><?= $masuk->kepada_suratmasuk ?></td>
-                            <td><?= $masuk->perihal_suratmasuk ?></td>
                             <td style="text-align:center;">
                               <a href="<?= base_url('assets/backend/surat_masuk/'.$masuk->file_suratmasuk) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
                               <a href="<?= base_url('bagian/detailSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Detail Surat Masuk" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
+                              <a href="<?= base_url('bagian/status/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Ubah Status Surat Masuk" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></button></a>
                               </td>
                         </tr>
                       <?php endforeach;?>

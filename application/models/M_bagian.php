@@ -1,13 +1,7 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_bagian extends CI_Model {
-
-	public function jumlah($table) {
-		$sql="select * from ".$table."";
-		return $this->db->query($sql)->num_rows();
-	}
-	
+class M_bagian extends CI_Model {	
 	//suratmasuk
 
 	public function rulesSM()
@@ -50,27 +44,29 @@ class M_bagian extends CI_Model {
 				'field' => 'disposisi2', 'label' => 'Disposisi 2', 'rules' => 'required'
 			],
 			[
-				'field' => 'tanggal_disposisi2', 'label' => 'Tanggal DIsposisi 2', 'rules' => 'required'
+				'field' => 'tanggal_disposisi2', 'label' => 'Tanggal Disposisi 2', 'rules' => 'required'
 			],
 			[
 				'field' => 'disposisi3', 'label' => 'Disposisi 3', 'rules' => 'required'
 			],
 			[
-				'field' => 'tanggal_disposisi3', 'label' => 'Tanggal Disposisi', 'rules' => 'required'
+				'field' => 'tanggal_disposisi3', 'label' => 'Tanggal Disposisi 3', 'rules' => 'required'
 			]
 		];
 	}
 
-
-	function tampil_suratmasuk(){
-        $this->db->from('tb_suratmasuk');
-        $this->db->where('disposisi1', $this->userdata['nama']);
-        $this->db->or_where('disposisi2', $this->userdata['nama']);
-        $this->db->or_where('disposisi3', $this->userdata['nama']);
-		$query = $this->db->get();
-
-		return $query;
+	public function jumlah($table) {
+		$user = $this->userdata['nama'];
+		$sql="select * from ".$table." where disposisi1 = '".$user."' OR disposisi2 = '".$user."' OR disposisi3 = '".$user."'";
+		return $this->db->query($sql)->num_rows();
 	}
+
+	function tampil_suratmasuk() {
+        $tanggal = date('y-m-d');
+        $user = $this->userdata['nama'];
+        $query = $this->db->query("SELECT * FROM tb_suratmasuk WHERE (disposisi1 = '".$user."' AND tanggal_disposisi1 <= '".$tanggal."') or (disposisi2 = '".$user."' AND tanggal_disposisi2 <= '".$tanggal."') OR (disposisi3 = '".$user."' AND tanggal_disposisi3 <= '".$tanggal."')");
+        return $query;
+    }
 	function nomorSM() {
 	
 		$query=$this->db->query('SELECT * FROM tb_suratmasuk ORDER BY nomorurut_suratmasuk DESC LIMIT 1');
@@ -102,6 +98,11 @@ class M_bagian extends CI_Model {
 		$query = $this->db->get();
 
 		return $query->row();
+	}
+
+	function SM_statusProses($id, $status) {
+		$query=$this->db->query("UPDATE tb_suratmasuk SET status = '".$status."' WHERE id_suratmasuk =".$id."");
+		return $query;
 	}
 	//tutup suratmasuk
 	// surat keluar
@@ -136,6 +137,12 @@ class M_bagian extends CI_Model {
 		];
 	}
 
+	public function jumlahSK($table) {
+		$user = $this->userdata['nama'];
+		$sql="select * from ".$table." where nama_bagian = '".$user."'";
+		return $this->db->query($sql)->num_rows();
+	}
+	
 	function tampil_suratkeluar(){
         $this->db->from('tb_suratkeluar');
         $this->db->where('nama_bagian', $this->userdata['nama']);
