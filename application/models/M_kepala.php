@@ -1,8 +1,22 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_bagian extends CI_Model {	
+class M_kepala extends CI_Model {
+
+	public function jumlah($table) {
+		$sql="select * from ".$table."";
+		return $this->db->query($sql)->num_rows();
+	}
+
 	//suratmasuk
+
+	function download_lapSM($bulan, $tahun){
+		$this->db->from('tb_suratmasuk');
+		$this->db->where('MONTH(tanggalsurat_suratmasuk)',$bulan);
+		$this->db->where('YEAR(tanggalsurat_suratmasuk)',$tahun);
+		$query = $this->db->get();
+		return $query;
+	}
 
 	public function rulesSM()
 	{
@@ -55,18 +69,11 @@ class M_bagian extends CI_Model {
 		];
 	}
 
-	public function jumlah($table) {
-		$user = $this->userdata['nama'];
-		$sql="select * from ".$table." where disposisi1 = '".$user."' OR disposisi2 = '".$user."' OR disposisi3 = '".$user."'";
-		return $this->db->query($sql)->num_rows();
+
+	function tampil_suratmasuk(){
+		return $this->db->get('tb_suratmasuk');
 	}
 
-	function tampil_suratmasuk() {
-        $tanggal = date('y-m-d');
-        $user = $this->userdata['nama'];
-        $query = $this->db->query("SELECT * FROM tb_suratmasuk WHERE (disposisi1 = '".$user."' AND tanggal_disposisi1 <= '".$tanggal."') OR (disposisi2 = '".$user."' AND tanggal_disposisi2 <= '".$tanggal."') OR (disposisi3 = '".$user."' AND tanggal_disposisi3 <= '".$tanggal."')");
-        return $query;
-    }
 	function nomorSM() {
 	
 		$query=$this->db->query('SELECT * FROM tb_suratmasuk ORDER BY nomorurut_suratmasuk DESC LIMIT 1');
@@ -99,14 +106,17 @@ class M_bagian extends CI_Model {
 
 		return $query->row();
 	}
-
-	function SM_statusProses($id, $status) {
-		$query=$this->db->query("UPDATE tb_suratmasuk SET status = '".$status."' WHERE id_suratmasuk =".$id."");
-		return $query;
-	}
 	//tutup suratmasuk
 	// surat keluar
 
+
+function download_lapSK($bulan, $tahun){
+		$this->db->from('tb_suratkeluar');
+		$this->db->where('MONTH(tanggalsurat_suratkeluar)',$bulan);
+		$this->db->where('YEAR(tanggalsurat_suratkeluar)',$tahun);
+		$query = $this->db->get();
+		return $query;
+	}
 	public function rulesSK()
 	{
 		return [
@@ -137,18 +147,8 @@ class M_bagian extends CI_Model {
 		];
 	}
 
-	public function jumlahSK($table) {
-		$user = $this->userdata['nama'];
-		$sql="select * from ".$table." where nama_bagian = '".$user."'";
-		return $this->db->query($sql)->num_rows();
-	}
-	
 	function tampil_suratkeluar(){
-        $this->db->from('tb_suratkeluar');
-        $this->db->where('nama_bagian', $this->userdata['nama']);
-		$query = $this->db->get();
-
-		return $query;
+		return $this->db->get('tb_suratkeluar');
 	}
 
 	function nomorSK() {
@@ -194,7 +194,7 @@ class M_bagian extends CI_Model {
 				'field' => 'nama_bagian', 'label' => 'Nama bagian', 'rules' => 'required'
 			],
 			[
-				'field' => 'username_bagian_bagian', 'label' => 'Username bagian Bagian', 'rules' => 'required'
+				'field' => 'username_kepala_bagian', 'label' => 'Username Kepala Bagian', 'rules' => 'required'
 			],
 			[
 				'field' => 'password_bagian', 'label' => 'Password Bagian', 'rules' => 'required'
@@ -236,26 +236,23 @@ class M_bagian extends CI_Model {
 		return $this->db->affected_rows();
 	}
 	// tutup bagian
-
 	function tampil_profil() {
-		$this->db->from('tb_bagian');
-		$this->db->where('nama_bagian',$this->userdata['nama']);
+		$this->db->from('tb_kepala');
+		$this->db->where('nama_kepala',$this->userdata['nama']);
 		$query = $this->db->get();
 
 		return $query->row();
 	}
 
-	function admin_by_id($id) {
-		$this->db->from('tb_bagian');
-		$this->db->where('id_bagian',$id);
+	function kepala_by_id($id) {
+		$this->db->from('tb_kepala');
+		$this->db->where('id_kepala',$id);
 		$query = $this->db->get();
 
 		return $query->row();
 	}
 
-	function profile_edit($data, $id_bagian) {
-		return $this->db->update('tb_bagian', $data, array('id_bagian' => $id_bagian));
+	function profile_edit($data, $id_kepala) {
+		return $this->db->update('tb_kepala', $data, array('id_kepala' => $id_kepala));
 	}
-
-	
 }

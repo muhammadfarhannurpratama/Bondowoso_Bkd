@@ -18,7 +18,12 @@ class Frontend extends Ci_Controller {
 			if($_SESSION['userdata']['jenis'] == 'bagian'){
 				redirect('bagian');	
 			}
-		}else{}
+
+			if ($_SESSION['userdata']['jenis'] == 'kepala'){
+				redirect('kepala');
+			}
+
+		}else {}
 
 		$this->form_validation->set_rules('username', 'username', 'trim|required');
 		$this->form_validation->set_rules('password', 'password', 'trim|required');
@@ -39,6 +44,7 @@ class Frontend extends Ci_Controller {
 
 		$usermin = $this->db->get_where('tb_admin', ['username_admin' => $username])->row_array();
 		$userbag = $this->db->get_where('tb_bagian', ['username_admin_bagian' => $username])->row_array();
+		$userkep = $this->db->get_where('tb_kepala', ['username_admin_kepala' => $username])->row_array();
 
 		//jika usernya ada
 		if ($usermin) {
@@ -66,7 +72,7 @@ class Frontend extends Ci_Controller {
 				redirect('frontend/login');
 			}
 		}
-		else if($userbag){
+		else if ($userbag){
 			$pass = $userbag['password_bagian'];
 			if (password_verify($password, $pass)) {
 				$nama_bagian = $userbag['nama_bagian'];
@@ -87,8 +93,33 @@ class Frontend extends Ci_Controller {
 					'<div class="alert alert-danger" role="alert">password yang anda masukan salah!</div>'
 				);
 				redirect('frontend/login');
+			}	
+
+		}
+		else if ($userkep){
+			$pass = $userkep['password'];
+			if (password_verify($password, $pass)) {
+				$nama_kepala = $userkep['nama_kepala'];
+				$gambarkep = $userkep['gambar'];
+				$datanya = [
+					'nama' => $nama_kepala,
+					'jenis' => 'kepala',
+					'gambar' => $gambarkep
+					];
+				$session = array('userdata' => $datanya,
+								'status' => "Loged in" 
+							);
+				$this->session->set_userdata($session);
+				redirect('kepala/index');
+			} else {
+				$this->session->set_flashdata(
+					'message',
+					'<div class="alert alert-danger" role="alert">password yang anda masukan salah!</div>'
+				);
+				redirect('frontend/login');
 			}
-		} else {
+		}
+		 else {
 			$this->session->set_flashdata(
 				'message',
 				'<div class="alert alert-danger" role="alert">Akun anda tidak ditemukan!</div>'
