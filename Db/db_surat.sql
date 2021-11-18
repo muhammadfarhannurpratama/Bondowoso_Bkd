@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2021 at 01:26 AM
+-- Generation Time: Nov 11, 2021 at 01:22 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.1.32
 
@@ -41,7 +41,7 @@ CREATE TABLE `tb_admin` (
 
 INSERT INTO `tb_admin` (`id_admin`, `nama_admin`, `username_admin`, `password`, `gambar`) VALUES
 (1, 'admin', 'admin', '$2y$10$76sSiZgcONYHd0SJFZYT7OeXjQgkJzPp.Owd.TkjJWCHUDiREc5Gu', 'admin.jpg'),
-(2, 'sekretaris', 'sekretaris', '$2y$10$76sSiZgcONYHd0SJFZYT7OeXjQgkJzPp.Owd.TkjJWCHUDiREc5Gu', 'admin2.jpg');
+(2, 'admin2', 'admin2', '315f166c5aca63a157f7d41007675cb44a948b33', 'admin2.jpg');
 
 -- --------------------------------------------------------
 
@@ -93,19 +93,12 @@ INSERT INTO `tb_bagian` (`id_bagian`, `nama_bagian`, `username_admin_bagian`, `p
 --
 
 CREATE TABLE `tb_kepala` (
-  `id_kepala` int(10) NOT NULL,
+  `id_kepala` int(11) NOT NULL,
   `nama_kepala` varchar(50) NOT NULL,
   `username_admin_kepala` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
   `gambar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_kepala`
---
-
-INSERT INTO `tb_kepala` (`id_kepala`, `nama_kepala`, `username_admin_kepala`, `password`, `gambar`) VALUES
-(1, 'kepala', 'kepala', '$2y$10$76sSiZgcONYHd0SJFZYT7OeXjQgkJzPp.Owd.TkjJWCHUDiREc5Gu', '');
 
 -- --------------------------------------------------------
 
@@ -169,7 +162,7 @@ CREATE TABLE `tb_suratmasuk` (
   `disposisi1` varchar(50) NOT NULL,
   `tanggal_disposisi1` datetime NOT NULL DEFAULT current_timestamp(),
   `disposisi2` varchar(50) NOT NULL,
-  `tanggal_disposisi2` datetime NOT NULL,
+  `tanggal_disposisi2` varchar(25) NOT NULL,
   `disposisi3` varchar(50) NOT NULL,
   `tanggal_disposisi3` datetime NOT NULL DEFAULT current_timestamp(),
   `status` varchar(30) NOT NULL
@@ -183,16 +176,33 @@ INSERT INTO `tb_suratmasuk` (`id_suratmasuk`, `tanggalmasuk_suratmasuk`, `kode_s
 (3, '2017-09-20 14:00:00', '011', '4519', '036/B/HMJELEKTRO/IX/2017', '2017-09-18', 'FORUM KOMUNIKASI HIMPUNAN MAHASISWA ELEKTRO INDONESIA WILAYAH XIII KALIMANTAN', 'UMUM', 'Permohonan\r\n', '2017-4519.pdf', 'admin2', '2017-11-14 23:43:44', 'UMUM', '2017-09-22 11:00:00', '', '1970-01-01 07:00:00', 'UMUM', '2017-09-22 11:05:00', 'belumd'),
 (6, '2017-09-26 10:00:00', '061', '4521', '061/4382/SJ', '2017-09-20', 'MENDAGRI RI', 'Organisasi', 'Surat Edaran Tentang Mekanisme Layanan Administrasi Kemendagri\r\n', '2017-4521.pdf', 'admin', '2017-12-02 21:44:11', 'ASS.III', '2017-09-26 15:00:00', '', '1970-01-01 07:00:00', 'ORTAL', '2017-09-27 11:30:00', 'belumd'),
 (7, '2017-09-25 14:00:00', '503', '4522', '503/744/100.26', '2017-09-25', 'DINAS PENANAMAN MODAL DAN PELAYANAN TERPADU SATU PINTU KOTA SAMARINDA', 'PLH SEKDA', 'Tindak Lanjut Permohonan Penghapusan Denda Retribusi IMB PT.Borneo Inti Graha\r\n', '2017-4522.pdf', 'admin', '2021-10-29 09:04:45', 'PLH.SEKDA', '2017-09-26 10:00:00', 'evos', '1970-01-01 07:00:00', 'HUKUM', '2017-09-27 15:00:00', 'belumd'),
-(8, '2017-12-06 08:12:00', '454', '4523 ', '4121/wawali/2017', '2017-12-06', 'pdam', 'wawali', 'air', '2017-4523.pdf', 'admin', '2017-12-06 07:15:07', 'WAKIL WALIKOTA', '2017-12-14 08:14:00', 'ADM.PEMB', '2017-12-12 08:14:00', 'PEM-OTDA', '2017-12-13 08:15:00', 'belumd'),
-(9, '2021-09-30 08:12:00', '0001', '4524 ', '00978789', '2021-09-30', 'kepala bkd', 'wakil walikota', 'rapat', '2021-4524.pdf', 'admin', '2021-09-30 08:15:57', 'WALIKOTA', '2021-09-30 08:15:00', 'WAKIL WALIKOTA', '2021-09-30 08:15:00', 'SEKDA', '2021-09-30 08:16:00', 'belumd'),
-(11, '2021-10-09 12:11:00', '6802', '4526', '050/588/300.03', '2021-10-09', 'BAPPEDA KOTA bondowoso', 'sekertaris daerah', 'naae', '2021-4526', 'admin', '2021-10-09 12:13:01', 'ADM.PEMB', '2021-10-25 12:12:00', 'PLH.SEKDA', '2021-10-06 11:49:00', 'WAKIL WALIKOTA', '2021-10-19 11:50:00', 'belumd'),
-(45, '2021-11-16 09:31:00', '1121', '4527', 'Viva Rrq', '2021-11-16', 'Viva Rrq', 'Viva Rrq Evos', 'ksasjakshkfdjaejwosldkws', '2021-4527.pdf', 'admin', '2021-11-16 09:32:23', 'WALIKOTA', '2021-11-16 09:31:00', 'rrq', '2021-11-16 09:31:00', 'evos', '2021-11-17 09:31:00', 'belumd'),
-(46, '2021-11-16 09:34:00', '1287', '4528', 'ONIC', '2021-11-16', 'onic', 'onic', 'onic', '2021-4528.pdf', 'admin', '2021-11-16 09:34:35', 'WALIKOTA', '2021-11-16 09:34:00', 'rrq', '2021-11-16 09:33:00', 'evos', '2021-11-16 09:33:00', 'belumd'),
-(47, '2021-11-16 10:11:00', '1213', '4529', 'dandi', '2021-11-16', 'uus', 'dandi', 'ksndksndksalsaln', '2021-4529.pdf', 'admin', '2021-11-16 10:12:43', 'WALIKOTA', '2021-11-16 10:12:00', 'rrq', '2021-11-11 10:11:00', 'evos', '2021-11-11 10:11:00', 'belumd'),
-(48, '2021-11-17 09:45:00', '2534', '4530', '231313', '2021-11-17', 'VYN', 'dandi', 'fsffe', '2021-4530.pdf', 'admin', '2021-11-17 09:48:06', 'WALIKOTA', '2021-10-17 09:00:00', 'WAKIL WALIKOTA', '2021-10-17 09:00:00', 'SEKDA', '2021-10-17 09:00:00', 'belumd'),
-(49, '2021-11-17 10:14:00', '1200', '4531', 'bkentt', '2021-11-17', 'bkentt', 'bkentt', 'bkentt', '2021-4531.pdf', 'admin', '2021-11-17 10:17:15', 'evos', '2021-11-17 10:15:00', 'rrq', '2021-11-17 10:14:00', 'SEKDA', '2021-11-17 10:14:00', 'belumd'),
-(50, '2021-11-17 10:30:00', '2109', '4532', 'jonathan', '2021-11-17', 'jonathan', 'jonathan', 'jonathan', '2021-4532.pdf', 'admin', '2021-11-17 10:30:57', 'WALIKOTA', '2021-11-17 10:30:00', 'WAKIL WALIKOTA', '2021-11-17 10:30:00', 'SEKDA', '2021-11-17 10:31:00', 'belumd'),
-(51, '2021-11-17 12:57:00', '37273', '4533', 'abang', '2021-11-17', 'abang', 'abang', 'abang', '2021-4533.pdf', 'admin', '2021-11-17 12:58:51', 'WALIKOTA', '2021-11-17 12:58:00', 'rrq', '2021-11-11 12:57:00', 'evos', '2021-11-17 12:57:00', 'sudah');
+(8, '2017-12-06 08:12:00', '454', '4523 ', '4121/wawali/2017', '2017-12-06', 'pdam', 'wawali', 'air', '2017-4523.pdf', 'admin', '2017-12-06 07:15:07', 'WAKIL WALIKOTA', '2017-12-14 08:14:00', 'ADM.PEMB', '2017-12-12 08:14:00', 'PEM-OTDA', '2017-12-13 08:15:00', 'pending'),
+(9, '2021-09-30 08:12:00', '0001', '4524 ', '00978789', '2021-09-30', 'kepala bkd', 'wakil walikota', 'rapat', '2021-4524.pdf', 'admin', '2021-09-30 08:15:57', 'WALIKOTA', '2021-09-30 08:15:00', 'WAKIL WALIKOTA', '2021-09-30 08:15:00', 'SEKDA', '2021-09-30 08:16:00', 'sudah'),
+(11, '2021-10-09 12:11:00', '6802', '4526', '050/588/300.03', '2021-10-09', 'BAPPEDA KOTA bondowoso', 'sekertaris daerah', 'naae', '2021-4526', 'admin', '2021-10-09 12:13:01', 'ADM.PEMB', '2021-10-25 12:12:00', 'PLH.SEKDA', '2021-10-06 11:49:00', 'WAKIL WALIKOTA', '2021-10-19 11:50:00', 'belum'),
+(19, '2021-10-25 10:51:00', '085', '4527', 'Viva Rrq', '2021-10-25', 'Viva Rrq', 'Onic', 'Final Mpl', '2021-4527.pdf', 'admin', '2021-10-26 10:36:57', 'WALIKOTA', '2021-10-26 10:52:00', 'WAKIL WALIKOTA', '2021-10-18 10:52:00', 'HUKUM', '2021-10-27 10:53:00', 'belumd'),
+(20, '2021-11-03 10:40:00', '0851', '4528', 'BKD BWS', '2021-10-26', 'BKD BWS', 'BKD BWS', 'Rapat Bkd', '2021-4528.pdf', 'admin', '2021-10-26 10:42:21', 'WALIKOTA', '2021-10-27 10:41:00', 'WAKIL WALIKOTA', '2021-10-24 10:52:00', 'evos', '2021-10-27 10:40:00', 'belumd'),
+(21, '2021-10-29 09:56:00', '0822', '4529', '0823456', '2021-10-29', 'polres ', 'BKD BWS', 'rapat', '2021-4529.pdf', 'admin', '2021-10-29 09:59:40', 'UMUM', '2021-10-29 09:57:00', 'WALIKOTA', '2021-11-01 09:57:00', 'SEKDA', '2021-11-02 09:58:00', 'belumd'),
+(22, '2021-11-01 08:52:00', '2831', '4530', 'Viva Rrq Evos', '2021-11-01', 'Viva Rrq Evos', 'Viva Rrq Evos', 'nskdsdkhsdkshdkwq', '2021-4530.pdf', 'admin', '2021-11-01 08:53:09', 'evos', '2021-11-01 08:52:00', 'WALIKOTA', '2021-11-01 08:52:00', 'WAKIL WALIKOTA', '2021-12-03 08:53:00', 'pending'),
+(23, '2021-11-01 09:42:00', '2531', '4531', 'dfafe', '2021-11-01', 'a', 'aaa', 'aaa', '2021-4531.pdf', 'admin', '2021-11-01 09:43:53', 'PEM-OTDA', '2021-10-29 09:57:00', 'BKPPD', '2021-11-01 08:52:00', 'PROTOKOL', '2021-12-03 08:53:00', 'belumd'),
+(24, '2021-11-01 09:50:00', '8372', '4532', 'btr', '2021-11-01', 'btr', 'btr', 'sdjsojd', '2021-4532.pdf', 'admin', '2021-11-01 09:51:27', 'evos', '2021-11-01 09:51:00', 'TU', '2021-11-01 09:51:00', 'HUMAS', '2021-12-03 09:50:00', 'belumd'),
+(25, '2021-11-01 10:27:00', '8236', '4533', 'BTR ONIC GPX', '2021-11-01', 'BTR ONIC GPX', 'BTR ONIC GPX', 'BTR ONIC GPX', '2021-4533.pdf', 'admin', '2021-11-01 11:13:44', 'evos', '2021-11-01 10:27:00', 'WALIKOTA', '2021-11-01 10:28:00', 'BKPPD', '2021-12-01 10:27:00', 'belumd'),
+(26, '2021-11-03 08:08:00', '1214', '4534', 'sdh812', '2021-11-03', 'blacklist', 'vior', 'ba', '2021-4534.pdf', 'admin', '2021-11-03 08:10:59', 'evos', '2021-11-03 08:09:00', 'rrq', '2021-11-10 08:10:00', 'HUMAS', '2021-11-16 08:11:00', 'sudah'),
+(27, '2021-11-03 08:56:00', '2531', '4535', 'BA EVOS', '2021-11-03', 'BA EVOS', 'BA EVOS', 'BA EVOS', '2021-4535.pdf', 'admin', '2021-11-03 08:57:00', 'evos', '2021-11-04 08:56:00', 'rrq', '2021-11-03 08:56:00', 'percobaan', '2021-11-05 08:57:00', 'belum'),
+(28, '2021-11-03 09:00:00', '08511', '4536', 'BA ONIC', '2021-11-03', 'BA ONIC', 'BA ONIC', 'BA ONIC', '2021-4536.pdf', 'admin', '2021-11-03 09:02:23', 'evos', '2021-11-03 09:01:00', 'rrq', '2021-11-04 09:01:00', 'percobaan', '2021-11-05 09:00:00', 'belumd'),
+(29, '2021-11-03 17:25:00', '08521', '4537', 'BA BTR', '2021-11-03', 'BA BTR', 'BA BTR', 'BA BTR', '2021-4537.pdf', 'admin', '2021-11-03 18:27:19', 'evos', '2021-11-03 17:26:00', 'rrq', '2021-11-03 18:26:00', 'HUMAS', '2021-11-03 18:27:00', 'belumd'),
+(30, '2021-11-03 19:01:00', '0121', '4538', 'BA GPX', '2021-11-03', 'BA GPX', 'BA GPX', 'BA GPX', '2021-4538.pdf', 'admin', '2021-11-03 19:03:02', 'evos', '2021-11-03 19:02:00', 'rrq', '2021-11-03 18:02:00', 'percobaan', '2021-11-03 18:03:00', 'belumd'),
+(31, '2021-11-03 20:03:00', '1111', '4539', 'BA OPI', '2021-11-03', 'BA OPI', 'BA OPI', 'BA OPI', '2021-4539.pdf', 'admin', '2021-11-03 20:04:23', 'evos', '2021-11-03 20:10:00', 'rrq', '2021-11-03 20:15:00', 'percobaan', '2021-11-03 20:15:00', 'belumd'),
+(32, '2021-11-03 20:42:00', '0011', '4540', 'BA LEMON', '2021-11-03', 'BA LEMON', 'BA LEMON', 'BA LEMON', '2021-4540.pdf', 'admin', '2021-11-03 20:43:46', 'evos', '2021-11-03 20:45:00', 'rrq', '2021-11-03 20:46:00', 'percobaan', '2021-11-03 20:47:00', 'belumd'),
+(33, '2021-11-03 20:51:00', '0900', '4541', 'BA XIN', '2021-11-03', 'BA XIN', 'BA XIN', 'BA XIN', '2021-4541.pdf', 'admin', '2021-11-03 20:52:51', 'rrq', '2021-11-03 20:55:00', 'TU', '2021-11-03 20:54:00', 'SEKDA', '2021-11-10 20:51:00', 'belumd'),
+(34, '2021-11-03 21:04:00', '0999', '4542', 'BA ALBERTTT', '2021-11-03', 'BA ALBERTTT', 'BA ALBERTTT', 'BA ALBERTTT', '2021-4542.pdf', 'admin', '2021-11-03 21:06:10', 'WALIKOTA', '2021-11-03 21:09:00', 'SEKDA', '2021-11-03 21:08:00', 'UMUM', '2021-11-03 21:10:00', 'belumd'),
+(35, '2021-11-03 21:13:00', '0909', '4543', 'R7', '2021-11-03', 'R7', 'R7', 'R7', '2021-4543.pdf', 'admin', '2021-11-03 21:15:09', 'rrq', '2021-11-03 21:17:00', 'evos', '2021-11-03 21:19:00', 'HUKUM', '2021-11-03 21:20:00', 'belumd'),
+(36, '2021-11-03 21:59:00', '0900', '4544', 'VYN', '2021-11-03', 'VYN', 'VYN', 'VYN', '2021-4544.pdf', 'admin', '2021-11-03 22:00:52', 'rrq', '2021-11-03 22:02:00', 'evos', '2021-11-03 22:03:00', 'HUMAS', '2021-11-03 22:05:00', 'belumd'),
+(37, '2021-11-10 09:58:00', '221', '4545', 'asdad', '2021-11-11', 'dadad', 'adwa', 'asdadw', '2021-4545.pdf', 'admin', '2021-11-10 09:59:36', 'evos', '2021-10-26 10:52:00', 'BKPPD', '2021-10-24 10:52:00', 'percobaan', '2021-11-02 09:58:00', 'belumd'),
+(38, '2021-11-10 14:15:00', '081021', '4546', 'Bkent', '2021-11-10', 'Bkent', 'Bkent', 'Bkent wkwkwk', '2021-4546.pdf', 'admin', '2021-11-10 14:17:05', 'evos', '2021-11-10 14:16:00', 'rrq', '2021-11-10 14:16:00', 'HUMAS', '2021-11-10 14:17:00', ''),
+(39, '2021-11-10 16:37:00', '029', '4547', 'JO', '2021-11-10', 'JO', 'JO', 'JO', '2021-4547.pdf', 'admin', '2021-11-10 16:38:34', 'evos', '2021-11-10 16:38:00', 'rrq', '2021-11-10 16:38:00', 'WALIKOTA', '2021-11-10 16:39:00', 'belumd'),
+(40, '2021-11-10 16:40:00', '6328', '4548', 'JAMET', '2021-11-10', 'JAMET', 'JAMET', 'JAMET', '2021-4548.pdf', 'admin', '2021-11-10 16:41:02', 'rrq', '2021-11-10 16:40:00', 'evos', '2021-11-10 16:40:00', 'WALIKOTA', '2021-11-10 16:41:00', 'pending'),
+(41, '2021-11-10 16:54:00', '8361', '4549', 'Doyok', '2021-11-10', 'Doyok', 'Doyok', 'Doyok', '2021-4549.pdf', 'admin', '2021-11-10 16:55:40', 'evos', '2021-11-10 16:55:00', 'rrq', '2021-11-10 16:55:00', 'WALIKOTA', '2021-11-10 16:56:00', 'belumd'),
+(42, '2021-11-10 17:23:00', '8281', '4550', 'Tanggul', '2021-11-10', 'Tanggul', 'Tanggul', 'Tanggul', '2021-4550.pdf', 'admin', '2021-11-10 17:24:24', 'evos', '2021-11-10 17:24:00', 'rrq', '2021-11-10 18:24:00', 'WALIKOTA', '2021-11-10 20:25:00', 'sudah');
 
 --
 -- Indexes for dumped tables
@@ -240,7 +250,7 @@ ALTER TABLE `tb_suratmasuk`
 -- AUTO_INCREMENT for table `tb_admin`
 --
 ALTER TABLE `tb_admin`
-  MODIFY `id_admin` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_admin` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_bagian`
@@ -252,7 +262,7 @@ ALTER TABLE `tb_bagian`
 -- AUTO_INCREMENT for table `tb_kepala`
 --
 ALTER TABLE `tb_kepala`
-  MODIFY `id_kepala` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kepala` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_suratkeluar`
@@ -264,7 +274,7 @@ ALTER TABLE `tb_suratkeluar`
 -- AUTO_INCREMENT for table `tb_suratmasuk`
 --
 ALTER TABLE `tb_suratmasuk`
-  MODIFY `id_suratmasuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_suratmasuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
