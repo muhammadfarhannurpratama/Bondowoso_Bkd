@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2021 at 05:05 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.1.32
+-- Waktu pembuatan: 19 Nov 2021 pada 03.17
+-- Versi server: 10.4.6-MariaDB
+-- Versi PHP: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_admin`
+-- Struktur dari tabel `tb_admin`
 --
 
 CREATE TABLE `tb_admin` (
@@ -36,7 +37,7 @@ CREATE TABLE `tb_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_admin`
+-- Dumping data untuk tabel `tb_admin`
 --
 
 INSERT INTO `tb_admin` (`id_admin`, `nama_admin`, `username_admin`, `password`, `gambar`) VALUES
@@ -46,7 +47,28 @@ INSERT INTO `tb_admin` (`id_admin`, `nama_admin`, `username_admin`, `password`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_bagian`
+-- Struktur dari tabel `tb_admin2`
+--
+
+CREATE TABLE `tb_admin2` (
+  `id_admin2` int(11) NOT NULL,
+  `nama_admin2` varchar(50) NOT NULL,
+  `username_admin2` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `gambar` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_admin2`
+--
+
+INSERT INTO `tb_admin2` (`id_admin2`, `nama_admin2`, `username_admin2`, `password`, `gambar`) VALUES
+(1, 'admin2', 'admin2', '$2y$10$76sSiZgcONYHd0SJFZYT7OeXjQgkJzPp.Owd.TkjJWCHUDiREc5Gu', '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_bagian`
 --
 
 CREATE TABLE `tb_bagian` (
@@ -62,7 +84,7 @@ CREATE TABLE `tb_bagian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_bagian`
+-- Dumping data untuk tabel `tb_bagian`
 --
 
 INSERT INTO `tb_bagian` (`id_bagian`, `nama_bagian`, `username_admin_bagian`, `password_bagian`, `nama_lengkap`, `tanggal_lahir_bagian`, `alamat`, `no_hp_bagian`, `gambar`) VALUES
@@ -89,7 +111,7 @@ INSERT INTO `tb_bagian` (`id_bagian`, `nama_bagian`, `username_admin_bagian`, `p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_kepala`
+-- Struktur dari tabel `tb_kepala`
 --
 
 CREATE TABLE `tb_kepala` (
@@ -101,7 +123,7 @@ CREATE TABLE `tb_kepala` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_kepala`
+-- Dumping data untuk tabel `tb_kepala`
 --
 
 INSERT INTO `tb_kepala` (`id_kepala`, `nama_kepala`, `username_admin_kepala`, `password`, `gambar`) VALUES
@@ -110,7 +132,7 @@ INSERT INTO `tb_kepala` (`id_kepala`, `nama_kepala`, `username_admin_kepala`, `p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_suratkeluar`
+-- Struktur dari tabel `tb_suratkeluar`
 --
 
 CREATE TABLE `tb_suratkeluar` (
@@ -128,7 +150,7 @@ CREATE TABLE `tb_suratkeluar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_suratkeluar`
+-- Dumping data untuk tabel `tb_suratkeluar`
 --
 
 INSERT INTO `tb_suratkeluar` (`id_suratkeluar`, `tanggalkeluar_suratkeluar`, `kode_suratkeluar`, `nomor_suratkeluar`, `nama_bagian`, `tanggalsurat_suratkeluar`, `kepada_suratkeluar`, `perihal_suratkeluar`, `file_suratkeluar`, `operator`, `tanggal_entry`) VALUES
@@ -150,7 +172,7 @@ INSERT INTO `tb_suratkeluar` (`id_suratkeluar`, `tanggalkeluar_suratkeluar`, `ko
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_suratmasuk`
+-- Struktur dari tabel `tb_suratmasuk`
 --
 
 CREATE TABLE `tb_suratmasuk` (
@@ -176,7 +198,7 @@ CREATE TABLE `tb_suratmasuk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_suratmasuk`
+-- Dumping data untuk tabel `tb_suratmasuk`
 --
 
 INSERT INTO `tb_suratmasuk` (`id_suratmasuk`, `tanggalmasuk_suratmasuk`, `kode_suratmasuk`, `nomorurut_suratmasuk`, `nomor_suratmasuk`, `tanggalsurat_suratmasuk`, `pengirim`, `kepada_suratmasuk`, `perihal_suratmasuk`, `file_suratmasuk`, `operator`, `tanggal_entry`, `disposisi1`, `tanggal_disposisi1`, `disposisi2`, `tanggal_disposisi2`, `disposisi3`, `tanggal_disposisi3`, `status`) VALUES
@@ -188,77 +210,130 @@ INSERT INTO `tb_suratmasuk` (`id_suratmasuk`, `tanggalmasuk_suratmasuk`, `kode_s
 (57, '2021-11-18 10:58:00', '9232', '4525', 'TESTTTT', '2021-11-18', 'TESTTTT', 'TESTTTT', 'TESTTTT', '2021-4525.pdf', 'admin', '2021-11-18 10:59:14', 'WALIKOTA', '2021-11-18 10:58:00', 'WAKIL WALIKOTA', '2021-11-18 10:59:00', 'SEKDA', '2021-11-18 11:00:00', 'belumd'),
 (58, '2021-11-18 11:03:00', '6153', '4526', 'eror', '2021-11-18', 'eror', 'eror', 'eror', '2021-4526.pdf', 'admin', '2021-11-18 11:03:44', 'WALIKOTA', '2021-11-18 11:03:00', 'WAKIL WALIKOTA', '2021-11-18 11:03:00', 'SEKDA', '2021-11-18 11:04:00', 'sudah');
 
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_suratregistrasi`
+--
+
+CREATE TABLE `tb_suratregistrasi` (
+  `id_suratregistrasi` int(11) NOT NULL,
+  `tanggalmasuk_suratregistrasi` datetime NOT NULL DEFAULT current_timestamp(),
+  `kode_suratregistrasi` varchar(10) NOT NULL,
+  `nomorurut_suratregistrasi` varchar(7) NOT NULL,
+  `nomor_suratregstrasi` varchar(25) NOT NULL,
+  `tanggalsurat_suratregistrasi` date NOT NULL,
+  `pengirim_registrasi` varchar(255) NOT NULL,
+  `kepada_suratregistrasi` varchar(255) NOT NULL,
+  `perihal_suratregistrasi` text NOT NULL,
+  `file_suratregistrasi` varchar(255) NOT NULL,
+  `operatorregistrasi` varchar(50) NOT NULL,
+  `tanggal_entryregistrasi` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_suratregistrasi`
+--
+
+INSERT INTO `tb_suratregistrasi` (`id_suratregistrasi`, `tanggalmasuk_suratregistrasi`, `kode_suratregistrasi`, `nomorurut_suratregistrasi`, `nomor_suratregstrasi`, `tanggalsurat_suratregistrasi`, `pengirim_registrasi`, `kepada_suratregistrasi`, `perihal_suratregistrasi`, `file_suratregistrasi`, `operatorregistrasi`, `tanggal_entryregistrasi`, `status`) VALUES
+(1, '2021-11-19 06:03:05', '123', '321', '1', '2021-11-19', 'bupati', 'kepala bkd', 'rapat', '', 'amin2', '2021-11-19 02:03:03', '');
+
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `tb_admin`
+-- Indeks untuk tabel `tb_admin`
 --
 ALTER TABLE `tb_admin`
   ADD PRIMARY KEY (`id_admin`),
   ADD UNIQUE KEY `username_admin` (`username_admin`);
 
 --
--- Indexes for table `tb_bagian`
+-- Indeks untuk tabel `tb_admin2`
+--
+ALTER TABLE `tb_admin2`
+  ADD PRIMARY KEY (`id_admin2`);
+
+--
+-- Indeks untuk tabel `tb_bagian`
 --
 ALTER TABLE `tb_bagian`
   ADD PRIMARY KEY (`id_bagian`),
   ADD UNIQUE KEY `username_admin_bagian` (`username_admin_bagian`);
 
 --
--- Indexes for table `tb_kepala`
+-- Indeks untuk tabel `tb_kepala`
 --
 ALTER TABLE `tb_kepala`
   ADD PRIMARY KEY (`id_kepala`);
 
 --
--- Indexes for table `tb_suratkeluar`
+-- Indeks untuk tabel `tb_suratkeluar`
 --
 ALTER TABLE `tb_suratkeluar`
   ADD PRIMARY KEY (`id_suratkeluar`),
   ADD UNIQUE KEY `nomor_suratkeluar` (`nomor_suratkeluar`);
 
 --
--- Indexes for table `tb_suratmasuk`
+-- Indeks untuk tabel `tb_suratmasuk`
 --
 ALTER TABLE `tb_suratmasuk`
   ADD PRIMARY KEY (`id_suratmasuk`),
   ADD UNIQUE KEY `nomorurut_suratmasuk` (`nomorurut_suratmasuk`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indeks untuk tabel `tb_suratregistrasi`
+--
+ALTER TABLE `tb_suratregistrasi`
+  ADD PRIMARY KEY (`id_suratregistrasi`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tb_admin`
+-- AUTO_INCREMENT untuk tabel `tb_admin`
 --
 ALTER TABLE `tb_admin`
   MODIFY `id_admin` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `tb_bagian`
+-- AUTO_INCREMENT untuk tabel `tb_admin2`
+--
+ALTER TABLE `tb_admin2`
+  MODIFY `id_admin2` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_bagian`
 --
 ALTER TABLE `tb_bagian`
   MODIFY `id_bagian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT for table `tb_kepala`
+-- AUTO_INCREMENT untuk tabel `tb_kepala`
 --
 ALTER TABLE `tb_kepala`
   MODIFY `id_kepala` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tb_suratkeluar`
+-- AUTO_INCREMENT untuk tabel `tb_suratkeluar`
 --
 ALTER TABLE `tb_suratkeluar`
   MODIFY `id_suratkeluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
--- AUTO_INCREMENT for table `tb_suratmasuk`
+-- AUTO_INCREMENT untuk tabel `tb_suratmasuk`
 --
 ALTER TABLE `tb_suratmasuk`
   MODIFY `id_suratmasuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_suratregistrasi`
+--
+ALTER TABLE `tb_suratregistrasi`
+  MODIFY `id_suratregistrasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

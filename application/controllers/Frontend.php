@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Frontend extends Ci_Controller {
+class Frontend extends Ci_Controller
+{
 
 	public function index()
 	{
@@ -10,20 +11,24 @@ class Frontend extends Ci_Controller {
 
 	public function login()
 	{
-		if (!empty($_SESSION['userdata'])){
-			if ($_SESSION['userdata']['jenis'] == 'admin'){
+		if (!empty($_SESSION['userdata'])) {
+			if ($_SESSION['userdata']['jenis'] == 'admin') {
 				redirect('admin');
 			}
-			
-			if($_SESSION['userdata']['jenis'] == 'bagian'){
-				redirect('bagian');	
+
+			if ($_SESSION['userdata']['jenis'] == 'bagian') {
+				redirect('bagian');
 			}
 
-			if ($_SESSION['userdata']['jenis'] == 'kepala'){
+			if ($_SESSION['userdata']['jenis'] == 'kepala') {
 				redirect('kepala');
 			}
 
-		}else {}
+			if ($_SESSION['userdata']['jenis'] == 'admin2') {
+				redirect('admin2');
+			}
+		} else {
+		}
 
 		$this->form_validation->set_rules('username', 'username', 'trim|required');
 		$this->form_validation->set_rules('password', 'password', 'trim|required');
@@ -45,6 +50,7 @@ class Frontend extends Ci_Controller {
 		$usermin = $this->db->get_where('tb_admin', ['username_admin' => $username])->row_array();
 		$userbag = $this->db->get_where('tb_bagian', ['username_admin_bagian' => $username])->row_array();
 		$userkep = $this->db->get_where('tb_kepala', ['username_admin_kepala' => $username])->row_array();
+		$usermin2 = $this->db->get_where('tb_admin2', ['username_admin2' => $username])->row_array();
 
 		//jika usernya ada
 		if ($usermin) {
@@ -58,10 +64,11 @@ class Frontend extends Ci_Controller {
 					'nama' => $nama_admin,
 					'jenis' => 'admin',
 					'gambar' => $gambar
-					];
-				$session = array('userdata' => $datanya,
-								'status' => "Loged in" 
-							);
+				];
+				$session = array(
+					'userdata' => $datanya,
+					'status' => "Loged in"
+				);
 				$this->session->set_userdata($session);
 				redirect('admin/index');
 			} else {
@@ -71,8 +78,7 @@ class Frontend extends Ci_Controller {
 				);
 				redirect('frontend/login');
 			}
-		}
-		else if ($userbag){
+		} else if ($userbag) {
 			$pass = $userbag['password_bagian'];
 			if (password_verify($password, $pass)) {
 				$nama_bagian = $userbag['nama_bagian'];
@@ -81,10 +87,11 @@ class Frontend extends Ci_Controller {
 					'nama' => $nama_bagian,
 					'jenis' => 'bagian',
 					'gambar' => $gambarbag
-					];
-				$session = array('userdata' => $datanya,
-								'status' => "Loged in" 
-							);
+				];
+				$session = array(
+					'userdata' => $datanya,
+					'status' => "Loged in"
+				);
 				$this->session->set_userdata($session);
 				redirect('bagian/index');
 			} else {
@@ -93,10 +100,8 @@ class Frontend extends Ci_Controller {
 					'<div class="alert alert-danger" role="alert">password yang anda masukan salah!</div>'
 				);
 				redirect('frontend/login');
-			}	
-
-		}
-		else if ($userkep){
+			}
+		} else if ($userkep) {
 			$pass = $userkep['password'];
 			if (password_verify($password, $pass)) {
 				$nama_kepala = $userkep['nama_kepala'];
@@ -105,10 +110,11 @@ class Frontend extends Ci_Controller {
 					'nama' => $nama_kepala,
 					'jenis' => 'kepala',
 					'gambar' => $gambarkep
-					];
-				$session = array('userdata' => $datanya,
-								'status' => "Loged in" 
-							);
+				];
+				$session = array(
+					'userdata' => $datanya,
+					'status' => "Loged in"
+				);
 				$this->session->set_userdata($session);
 				redirect('kepala/index');
 			} else {
@@ -118,8 +124,30 @@ class Frontend extends Ci_Controller {
 				);
 				redirect('frontend/login');
 			}
-		}
-		 else {
+		} else if ($usermin2) {
+			$pass = $usermin2['password'];
+			if (password_verify($password, $pass)) {
+				$nama_admin2 = $usermin2['nama_admin2'];
+				$gambar = $usermin2['gambar'];
+				$datanya = [
+					'nama' => $nama_admin2,
+					'jenis' => 'admin2',
+					'gambar' => $gambar
+				];
+				$session = array(
+					'userdata' => $datanya,
+					'status' => "Loged in"
+				);
+				$this->session->set_userdata($session);
+				redirect('admin2/index');
+			} else {
+				$this->session->set_flashdata(
+					'message',
+					'<div class="alert alert-danger" role="alert">password yang anda masukan salah!</div>'
+				);
+				redirect('frontend/login');
+			}
+		} else {
 			$this->session->set_flashdata(
 				'message',
 				'<div class="alert alert-danger" role="alert">Akun anda tidak ditemukan!</div>'
@@ -128,9 +156,9 @@ class Frontend extends Ci_Controller {
 		}
 	}
 
-	public function logout() {
+	public function logout()
+	{
 		$this->session->sess_destroy();
 		redirect('frontend/login');
 	}
-
 }
