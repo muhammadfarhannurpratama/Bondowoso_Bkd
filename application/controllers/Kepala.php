@@ -1252,7 +1252,7 @@ class Kepala extends Auth_Controller {
 	}
 	// tutup bagian
 
-	//profile
+	// profil
 	public function profil() {
 		$data['title'] = 'Data Profile';
 		
@@ -1274,7 +1274,7 @@ class Kepala extends Auth_Controller {
 		$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
 		$data_edit =array(
 			'nama_kepala' => $this->input->post('nama_kepala'),
-			'username_kepala' => $this->input->post('username_kepala'),
+			'username_admin_kepala' => $this->input->post('username_admin_kepala'),
 			'password' => $password
 		);
 

@@ -27,7 +27,7 @@
                       <div class="profile_img">
                         <div id="crop-avatar">
                           <!-- Current avatar -->
-                          <img class="img-responsive avatar-view" src="<?= base_url('assets/backend/')?>images/<?= $this->userdata['jenis']; ?>/<?= $this->userdata['gambar']; ?>" alt="Avatar" title="Change the avatar">
+                          <img class="img-responsive avatar-view" src="<?= base_url('assets/backend/images/kepala')?>images/<?= $this->userdata['jenis']; ?>/<?= $this->userdata['gambar']; ?>" alt="Avatar" title="Change the avatar">
                         </div>
                       </div>
                       <h3 align="center"><?= $profil->nama_kepala;?></h3>
