@@ -91,7 +91,7 @@
                               <a href="<?= base_url('assets/backend/surat_masuk/'.$masuk->file_suratmasuk) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
                      <!--     <a href="<?= base_url('kepala/unduhDisposisiSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Unduh Disposisi" class="btn btn-info btn-xs"><i class="fa fa-download"></i></button></a> -->
                               <a href="<?= base_url('kepala/detailSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Detail Surat Masuk" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
-                              <a href="<?= base_url('kepala/editSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button></a>
+                     <!--         <a href="<?= base_url('kepala/editSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button></a> -->
                               <a onclick="return konfirmasi()" href="<?= base_url('kepala/hapusSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
                               </td>
                         </tr>
