@@ -18,18 +18,17 @@ class Admin2 extends Auth_Controller
     {
         $data['title'] = 'Dashboard';
         $data['bagian'] = $this->admin2->jumlah('tb_bagian');
-        $data['surat_keluar'] = $this->admin2->jumlah('tb_suratkeluar');
-        $data['surat_masuk'] = $this->admin2->jumlah('tb_suratmasuk');
+        $data['surat_registrasi'] = $this->admin2->jumlah('tb_suratregistrasi');
 
 
         $this->load->view('admin2/index', $data);
     }
 
     // surat masuk
-    public function surat_masuk()
+    public function surat_registrasi()
     {
-        $data['title'] = 'Data Surat Masuk';
-        $data['surat_masuk'] = $this->admin2->tampil_suratmasuk()->result();
+        $data['title'] = 'Data Surat Registrasi';
+        $data['surat_registrasi'] = $this->admin2->tampil_suratregistrasi()->result();
 
 
         $this->load->view('admin2/v_SM', $data);
@@ -37,10 +36,10 @@ class Admin2 extends Auth_Controller
 
     public function tambahSM()
     {
-        $data['title'] = 'Tambah Data Surat Masuk';
+        $data['title'] = 'Tambah Data Surat Registrasi';
         $disposisi = $this->admin2->disposisi()->result();
         $data['disposisi'] = $disposisi;
-        $data['nomorurut_suratmasuk'] = $this->_ambil_nomorSM();
+        $data['nomorurut_suratregistrasi'] = $this->_ambil_nomorSM();
 
 
         $this->load->view('admin2/v_SMtambah', $data);
@@ -56,23 +55,23 @@ class Admin2 extends Auth_Controller
 
             $this->load->library('form_validation');
             if ($this->form_validation->run() == FALSE) {
-                $data['title'] = 'Tambah Data Surat Masuk';
+                $data['title'] = 'Tambah Data Surat Registrasi';
                 $disposisi = $this->admin2->disposisi()->result();
                 $data['disposisi'] = $disposisi;
-                $data['nomorurut_suratmasuk'] = $this->_ambil_nomorSM();
+                $data['nomorurut_suratregistrasi'] = $this->_ambil_nomorSM();
 
                 return $this->load->view('admin2/v_SMtambah', $data);
             }
 
-            $tanggalmasuk_suratmasuk = $this->input->post('tanggalmasuk_suratmasuk');
-            $tanggalsurat_suratmasuk = $this->input->post('tanggalsurat_suratmasuk');
+            $tanggalmasuk_suratregistrasi = $this->input->post('tanggalmasuk_suratregistrasi');
+            $tanggalsurat_suratregistrasi = $this->input->post('tanggalsurat_suratregistrasi');
             $tanggal_disposisi1 = $this->input->post('tanggal_disposisi1');
             $tanggal_disposisi2 = $this->input->post('tanggal_disposisi2');
             $tanggal_disposisi3 = $this->input->post('tanggal_disposisi3');
-            $nomorurut_suratmasuk = $this->input->post('nomorurut_suratmasuk');
+            $nomorurut_suratregistrasi = $this->input->post('nomorurut_suratregistrasi');
 
-            $tgl_masuk                  = date('Y-m-d H:i:s', strtotime($tanggalmasuk_suratmasuk));
-            $tgl_surat                  = date('Y-m-d', strtotime($tanggalsurat_suratmasuk));
+            $tgl_masuk                  = date('Y-m-d H:i:s', strtotime($tanggalmasuk_suratregistrasi));
+            $tgl_surat                  = date('Y-m-d', strtotime($tanggalsurat_suratregistrasi));
             $tgl_disp1                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi1));
             $tgl_disp2                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi2));
             $tgl_disp3                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi3));
@@ -80,31 +79,31 @@ class Admin2 extends Auth_Controller
             date_default_timezone_set('Asia/Jakarta');
             $thnNow = date("Y");
 
-            $nama_file_lengkap         = $_FILES['file_suratmasuk']['name'];
+            $nama_file_lengkap         = $_FILES['file_suratregistrasi']['name'];
             $nama_file         = substr($nama_file_lengkap, 0, strripos($nama_file_lengkap, '.'));
             $ext_file        = substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
-            $tipe_file         = $_FILES['file_suratmasuk']['type'];
-            $ukuran_file     = $_FILES['file_suratmasuk']['size'];
-            $tmp_file         = $_FILES['file_suratmasuk']['tmp_name'];
+            $tipe_file         = $_FILES['file_suratregistrasi']['type'];
+            $ukuran_file     = $_FILES['file_suratregistrasi']['size'];
+            $tmp_file         = $_FILES['file_suratregistrasi']['tmp_name'];
             if ($ukuran_file > 10340000) {
                 $data['error'] = 'file gambar terlalu besar';
             }
-            $nama_baru = $thnNow . '-' . $nomorurut_suratmasuk . $ext_file;
-            $path = $_SERVER['DOCUMENT_ROOT'] . '/Bondowoso_Bkd/assets/backend/surat_masuk/' . $nama_baru;
+            $nama_baru = $thnNow . '-' . $nomorurut_suratregistrasi . $ext_file;
+            $path = $_SERVER['DOCUMENT_ROOT'] . '/Bondowoso_Bkd/assets/backend/surat_registrasi/' . $nama_baru;
             move_uploaded_file($tmp_file, $path);
 
             $tanggal_entry  = date("Y-m-d H:i:s");
 
             $SM_baru = [
-                'tanggalmasuk_suratmasuk' => $tgl_masuk,
-                'kode_suratmasuk' => $this->input->post('kode_suratmasuk'),
-                'nomorurut_suratmasuk' => $this->input->post('nomorurut_suratmasuk'),
-                'nomor_suratmasuk' => $this->input->post('nomor_suratmasuk'),
-                'tanggalsurat_suratmasuk' => $tgl_surat,
-                'pengirim' => $this->input->post('pengirim'),
-                'kepada_suratmasuk' => $this->input->post('kepada_suratmasuk'),
-                'perihal_suratmasuk' => $this->input->post('perihal_suratmasuk'),
-                'file_suratmasuk' => $nama_baru,
+                'tanggalmasuk_suratregistrasi' => $tgl_masuk,
+                'kode_suratregistrasi' => $this->input->post('kode_suratregistrasi'),
+                'nomorurut_suratregistrasi' => $this->input->post('nomorurut_suratregistrasi'),
+                'nomor_suratregistrasi' => $this->input->post('nomor_suratregistrasi'),
+                'tanggalsurat_suratregistrasi' => $tgl_surat,
+                'pengirim_registrasi' => $this->input->post('pengirim_registrasi'),
+                'kepada_suratregistrasi' => $this->input->post('kepada_suratregistrasi'),
+                'perihal_suratregistrasi' => $this->input->post('perihal_suratregistrasi'),
+                'file_suratregistrasi' => $nama_baru,
                 'operator' => $this->input->post('operator'),
                 'tanggal_entry' => $tanggal_entry,
                 'disposisi1' => $this->input->post('disposisi1'),
@@ -119,10 +118,10 @@ class Admin2 extends Auth_Controller
             $result = $this->admin2->SM_tambah($SM_baru);
             if ($result > 0) {
                 $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
-							Data Surat Masuk berhasil ditambahkan.
+							Data Surat Registrasi berhasil ditambahkan.
 							<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
 						</button></div>');
-                redirect("admin2/surat_masuk");
+                redirect("admin2/surat_registrasi");
             } else {
                 $data['error'] = 'Data Mahasiswa Gagal ditambahkan';
                 var_dump($result);
@@ -135,8 +134,8 @@ class Admin2 extends Auth_Controller
 
     public function editSM($id)
     {
-        $data['surat_masuk'] = $this->admin2->SM_by_id($id);
-        $data['title'] = 'Edit data Surat Masuk';
+        $data['surat_registrasi'] = $this->admin2->SM_by_id($id);
+        $data['title'] = 'Edit data Surat Registrasi';
 
         // $disposisi = $this->admin2->disposisi()->result();
         $data['disposisi'] = $this->admin2->disposisi()->result();
@@ -154,53 +153,53 @@ class Admin2 extends Auth_Controller
 
             $this->load->library('form_validation');
             if ($this->form_validation->run() == FALSE) {
-                $data['title'] = 'Tambah Data Surat Masuk';
+                $data['title'] = 'Tambah Data Surat Registrasi';
                 $disposisi = $this->admin2->disposisi()->result();
                 $data['disposisi'] = $disposisi;
-                $data['nomorurut_suratmasuk'] = $this->_ambil_nomorSM();
-                $id = $this->input->post('id_suratmasuk');
-                $data['surat_masuk'] = $this->admin2->SM_by_id($id);
+                $data['nomorurut_suratregistrasi'] = $this->_ambil_nomorSM();
+                $id = $this->input->post('id_suratregistrasi');
+                $data['surat_registrasi'] = $this->admin2->SM_by_id($id);
 
                 return $this->load->view('admin2/v_SMedit', $data);
             }
             date_default_timezone_set('Asia/Jakarta');
             $thnNow = date("Y");
-            $nomorurut_suratmasuk = $this->input->post('nomorurut_suratmasuk');
+            $nomorurut_suratregistrasi = $this->input->post('nomorurut_suratregistrasi');
 
-            if (!empty($_FILES['file_suratmasuk']['name'])) {
+            if (!empty($_FILES['file_suratregistrasi']['name'])) {
 
 
                 //delete file
-                $SM = $this->admin2->SM_by_id($this->input->post('id_suratmasuk'));
-                if (file_exists('assets/backend/surat_masuk/' . $SM->file_suratmasuk) && $SM->file_suratmasuk) {
-                    unlink('assets/backend/surat_masuk/' . $SM->file_suratmasuk);
+                $SM = $this->admin2->SM_by_id($this->input->post('id_suratregistrasi'));
+                if (file_exists('assets/backend/surat_registrasi/' . $SM->file_suratregistrasi) && $SM->file_suratregistrasi) {
+                    unlink('assets/backend/surat_registrasi/' . $SM->file_suratregistrasi);
                 }
-                $nama_file_lengkap         = $_FILES['file_suratmasuk']['name'];
+                $nama_file_lengkap         = $_FILES['file_suratregistrasi']['name'];
                 $nama_file         = substr($nama_file_lengkap, 0, strripos($nama_file_lengkap, '.'));
                 $ext_file        = substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
-                $tipe_file         = $_FILES['file_suratmasuk']['type'];
-                $ukuran_file     = $_FILES['file_suratmasuk']['size'];
-                $tmp_file         = $_FILES['file_suratmasuk']['tmp_name'];
+                $tipe_file         = $_FILES['file_suratregistrasi']['type'];
+                $ukuran_file     = $_FILES['file_suratregistrasi']['size'];
+                $tmp_file         = $_FILES['file_suratregistrasi']['tmp_name'];
                 if ($ukuran_file > 10340000) {
                     $data['error'] = 'file gambar terlalu besar';
                 }
-                $nama_baru = $thnNow . '-' . $nomorurut_suratmasuk . $ext_file;
-                $path = $_SERVER['DOCUMENT_ROOT'] . '/Bondowoso_Bkd/assets/backend/surat_masuk/' . $nama_baru;
+                $nama_baru = $thnNow . '-' . $nomorurut_suratregistrasi . $ext_file;
+                $path = $_SERVER['DOCUMENT_ROOT'] . '/Bondowoso_Bkd/assets/backend/surat_registrasi/' . $nama_baru;
                 move_uploaded_file($tmp_file, $path);
 
-                $SM_edit['file_suratmasuk'] = $nama_baru;
+                $SM_edit['file_suratregistrasi'] = $nama_baru;
             } else {
-                $SM_edit['file_suratmasuk'] = $this->input->post('file_lama');
+                $SM_edit['file_suratregistrasi'] = $this->input->post('file_lama');
             }
-            $tanggalmasuk_suratmasuk = $this->input->post('tanggalmasuk_suratmasuk');
-            $tanggalsurat_suratmasuk = $this->input->post('tanggalsurat_suratmasuk');
+            $tanggalmasuk_suratregistrasi = $this->input->post('tanggalmasuk_suratregistrasi');
+            $tanggalsurat_suratregistrasi = $this->input->post('tanggalsurat_suratregistrasi');
             $tanggal_disposisi1 = $this->input->post('tanggal_disposisi1');
             $tanggal_disposisi2 = $this->input->post('tanggal_disposisi2');
             $tanggal_disposisi3 = $this->input->post('tanggal_disposisi3');
 
 
-            $tgl_masuk                  = date('Y-m-d H:i:s', strtotime($tanggalmasuk_suratmasuk));
-            $tgl_surat                  = date('Y-m-d', strtotime($tanggalsurat_suratmasuk));
+            $tgl_masuk                  = date('Y-m-d H:i:s', strtotime($tanggalmasuk_suratregistrasi));
+            $tgl_surat                  = date('Y-m-d', strtotime($tanggalsurat_suratregistrasi));
             $tgl_disp1                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi1));
             $tgl_disp2                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi2));
             $tgl_disp3                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi3));
@@ -210,14 +209,14 @@ class Admin2 extends Auth_Controller
             $tanggal_entry  = date("Y-m-d H:i:s");
 
             $SM_edit = [
-                'tanggalmasuk_suratmasuk' => $tgl_masuk,
-                'kode_suratmasuk' => $this->input->post('kode_suratmasuk'),
-                'nomorurut_suratmasuk' => $this->input->post('nomorurut_suratmasuk'),
-                'nomor_suratmasuk' => $this->input->post('nomor_suratmasuk'),
-                'tanggalsurat_suratmasuk' => $tgl_surat,
-                'pengirim' => $this->input->post('pengirim'),
-                'kepada_suratmasuk' => $this->input->post('kepada_suratmasuk'),
-                'perihal_suratmasuk' => $this->input->post('perihal_suratmasuk'),
+                'tanggalmasuk_suratregistrasi' => $tgl_masuk,
+                'kode_suratregistrasi' => $this->input->post('kode_suratregistrasi'),
+                'nomorurut_suratregistrasi' => $this->input->post('nomorurut_suratregistrasi'),
+                'nomor_suratregistrasi' => $this->input->post('nomor_suratregistrasi'),
+                'tanggalsurat_suratregistrasi' => $tgl_surat,
+                'pengirim_registrasi' => $this->input->post('pengirim_registrasi'),
+                'kepada_suratregistrasi' => $this->input->post('kepada_suratregistrasi'),
+                'perihal_suratregistrasi' => $this->input->post('perihal_suratregistrasi'),
                 'operator' => $this->input->post('operator'),
                 'tanggal_entry' => $tanggal_entry,
                 'disposisi1' => $this->input->post('disposisi1'),
@@ -228,18 +227,18 @@ class Admin2 extends Auth_Controller
                 'tanggal_disposisi3' => $tgl_disp3
             ];
 
-            $id_suratmasuk  =  $this->input->post('id_suratmasuk');
+            $id_suratregistrasi  =  $this->input->post('id_suratregistrasi');
 
-            $result = $this->admin2->SM_edit($SM_edit, $id_suratmasuk);
+            $result = $this->admin2->SM_edit($SM_edit, $id_suratregistrasi);
 
             if ($result > 0) {
                 $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
-					Data Surat Masuk berhasil diubah.
+					Data Surat Registrasi berhasil diubah.
 					<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
 				</button></div>');
-                redirect('admin2/surat_masuk');
+                redirect('admin2/surat_registrasi');
             } else {
-                $data['error'] = 'Data Surat Masuk Gagal diubah!';
+                $data['error'] = 'Data Surat Registrasi Gagal diubah!';
             }
         }
     }
@@ -250,10 +249,10 @@ class Admin2 extends Auth_Controller
         var_dump($SMlist);
 
         $data = array(
-            'id_suratmasuk' => $SMlist->id_suratmasuk
+            'id_suratregistrasi' => $SMlist->id_suratregistrasi
         );
-        unlink('assets/backend/surat_masuk/' . $SMlist->file_suratmasuk);
-        $hapusSM = $this->admin2->SM_hapus($data['id_suratmasuk']);
+        unlink('assets/backend/surat_registrasi/' . $SMlist->file_suratregistrasi);
+        $hapusSM = $this->admin2->SM_hapus($data['id_suratregistrasi']);
 
 
 
@@ -261,10 +260,10 @@ class Admin2 extends Auth_Controller
         if ($hapusSM > 0) {
 
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
-					Data Surat Masuk berhasil dihapus.
+					Data Surat Registrasi berhasil dihapus.
 					<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
 				</button></div>');
-            redirect("admin2/surat_masuk");
+            redirect("admin2/surat_registrasi");
         } else {
             $this->session->set_flashdata(
                 'message',
@@ -277,7 +276,7 @@ class Admin2 extends Auth_Controller
     {
         $data1 = $this->admin2->nomorSM()->result();
         $jumlah = $this->admin2->nomorSM()->num_rows();
-        $nomor = $data1[0]->nomorurut_suratmasuk;
+        $nomor = $data1[0]->nomorurut_suratregistrasi;
 
         if ($jumlah = 0) {
             $nomorbaru = "0001";
@@ -293,7 +292,7 @@ class Admin2 extends Auth_Controller
     public function detailSM($id)
     {
         $data['detail_SM'] = $this->admin2->SM_by_id($id);
-        $data['title'] = 'Detail data Surat Masuk';
+        $data['title'] = 'Detail data Surat Registrasi';
 
         $this->load->view('admin2/v_SMdetail', $data);
     }
@@ -311,15 +310,15 @@ class Admin2 extends Auth_Controller
         //ambil data
         $dataDisSM = $this->admin2->SM_by_id($id);
 
-        $tgl_surat = $dataDisSM->tanggalsurat_suratmasuk;
+        $tgl_surat = $dataDisSM->tanggalsurat_suratregistrasi;
         $tgl_surat = date('d/m/Y', strtotime($tgl_surat));
-        $tgl_masuk = $dataDisSM->tanggalmasuk_suratmasuk;
+        $tgl_masuk = $dataDisSM->tanggalmasuk_suratregistrasi;
         $tgl_masuk = date('d/m/Y', strtotime($tgl_masuk));
 
-        $tahun = $dataDisSM->tanggalmasuk_suratmasuk;
+        $tahun = $dataDisSM->tanggalmasuk_suratregistrasi;
         $tahun =  date('Y', strtotime($tahun));
-        $nama_file = $tahun . '-' . $dataDisSM->nomorurut_suratmasuk . '-disposisi';
-        $bulan = $dataDisSM->tanggalmasuk_suratmasuk;
+        $nama_file = $tahun . '-' . $dataDisSM->nomorurut_suratregistrasi . '-disposisi';
+        $bulan = $dataDisSM->tanggalmasuk_suratregistrasi;
         $bulan = date('m', strtotime($bulan));
         if ($bulan == '01') {
             $bulan = "JANUARI";
@@ -455,14 +454,14 @@ class Admin2 extends Auth_Controller
 
         // Buat Kolom judul tabel
         $SI = $excelku->setActiveSheetIndex(0);
-        $SI->setCellValue('N1', $dataDisSM->kode_suratmasuk);
-        $SI->setCellValue('U1', $dataDisSM->nomorurut_suratmasuk);
+        $SI->setCellValue('N1', $dataDisSM->kode_suratregistrasi);
+        $SI->setCellValue('U1', $dataDisSM->nomorurut_suratregistrasi);
         $SI->setCellValue('S1', $bulan);
-        $SI->setCellValue('D3', $dataDisSM->perihal_suratmasuk);
+        $SI->setCellValue('D3', $dataDisSM->perihal_suratregistrasi);
         $SI->setCellValue('B8', $dataDisSM->pengirim);
         $SI->setCellValue('D11', $tgl_surat);
         $SI->setCellValue('B13', $dataDisSM->disposisi1);
-        $SI->setCellValue('K11', $dataDisSM->nomor_suratmasuk);
+        $SI->setCellValue('K11', $dataDisSM->nomor_suratregistrasi);
         $SI->setCellValue('M13', $tgl_masuk);
         //Memberi nama sheet
         $excelku->getActiveSheet()->setTitle('DataDisposisi');
@@ -520,13 +519,13 @@ class Admin2 extends Auth_Controller
         }
         if ($dataSM == null) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible show" role="alert">
-			  Tidak ada Surat Masuk pada bulan <b>' . $bulan . '</b> di tahun <b>' . $tahun . '</b> 
+			  Tidak ada Surat Registrasi pada bulan <b>' . $bulan . '</b> di tahun <b>' . $tahun . '</b> 
 			  <a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
 			 </button></div>');
-            redirect("admin2/surat_masuk");
+            redirect("admin2/surat_registrasi");
             exit();
         }
-        $nama_file = 'Surat Masuk-' . $bulan . '-' . $tahun;
+        $nama_file = 'Surat Registrasi-' . $bulan . '-' . $tahun;
         // Mergecell, menyatukan beberapa kolom
         $excelku->getActiveSheet()->mergeCells('A2:H2');
         $excelku->getActiveSheet()->setCellValue('A2', "PEMERINTAH KOTA BONDOWOSO");
@@ -537,7 +536,7 @@ class Admin2 extends Auth_Controller
         $excelku->getActiveSheet()->mergeCells('A5:H5');
         $excelku->getActiveSheet()->setCellValue('A5', "Jl. KH Ashari No.123 Kademangan, Kec. Bondowoso, Kabupaten Bondowoso, Jawa Timur 68217");
         $excelku->getActiveSheet()->mergeCells('A6:H6');
-        $excelku->getActiveSheet()->setCellValue('A6', "DATA SURAT MASUK BULAN $bulan TAHUN $tahun");
+        $excelku->getActiveSheet()->setCellValue('A6', "DATA SURAT REGISTRASI BULAN $bulan TAHUN $tahun");
         $excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setName('Arial');
         $excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setSize(14);
         $excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setBold(true);
@@ -547,10 +546,10 @@ class Admin2 extends Auth_Controller
         $excelku->getActiveSheet()->mergeCells('B8:B9');
         $excelku->getActiveSheet()->setCellValue('B8', "NO URUT");
         $excelku->getActiveSheet()->mergeCells('C8:F8');
-        $excelku->getActiveSheet()->setCellValue('C8', "SURAT MASUK");
+        $excelku->getActiveSheet()->setCellValue('C8', "SURAT REGISTRASI");
         $excelku->getActiveSheet()->getStyle('C8:F8')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
         $excelku->getActiveSheet()->mergeCells('G8:G9');
-        $excelku->getActiveSheet()->setCellValue('G8', "TANGGAL MASUK");
+        $excelku->getActiveSheet()->setCellValue('G8', "TANGGAL REGISTRASI");
         $excelku->getActiveSheet()->mergeCells('H8:H9');
         $excelku->getActiveSheet()->setCellValue('H8', "KODE SURAT");
         $excelku->getActiveSheet()->mergeCells('I8:N8');
@@ -623,13 +622,13 @@ class Admin2 extends Auth_Controller
         foreach ($dataSM as $SM) {
 
             $SI->setCellValue("A" . $baris, $no++); //mengisi data untuk nomor urut
-            $SI->setCellValue("B" . $baris, $SM->nomorurut_suratmasuk);
+            $SI->setCellValue("B" . $baris, $SM->nomorurut_suratregistrasi);
             $SI->setCellValue("C" . $baris, $SM->pengirim);
-            $SI->setCellValue("D" . $baris, $SM->nomor_suratmasuk);
-            $SI->setCellValue("E" . $baris, $SM->tanggalsurat_suratmasuk);
-            $SI->setCellValue("F" . $baris, $SM->perihal_suratmasuk);
-            $SI->setCellValue("G" . $baris, $SM->tanggalmasuk_suratmasuk);
-            $SI->setCellValue("H" . $baris, $SM->kode_suratmasuk);
+            $SI->setCellValue("D" . $baris, $SM->nomor_suratregistrasi);
+            $SI->setCellValue("E" . $baris, $SM->tanggalsurat_suratregistrasi);
+            $SI->setCellValue("F" . $baris, $SM->perihal_suratregistrasi);
+            $SI->setCellValue("G" . $baris, $SM->tanggalmasuk_suratregistrasi);
+            $SI->setCellValue("H" . $baris, $SM->kode_suratregistrasi);
             $SI->setCellValue("I" . $baris, $SM->disposisi1);
             $SI->setCellValue("J" . $baris, $SM->tanggal_disposisi1);
             $SI->setCellValue("K" . $baris, $SM->disposisi2);

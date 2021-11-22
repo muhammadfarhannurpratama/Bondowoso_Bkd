@@ -2,7 +2,7 @@
 
 $this->load->view('templates/header', $title);
 $this->load->view('templates/navbar');
-$this->load->view('templates/sidebar');
+$this->load->view('templates/sidebar2');
 
 ?>
 <!-- page content -->
@@ -25,9 +25,9 @@ $this->load->view('templates/sidebar');
             <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
               <div class="tile-stats">
                 <div class="icon"><i class="fa fa-inbox"></i>
-                </div>
-                <div class="count"><?= $surat_masuk ?></div>
-                <h3><a href="<?= base_url('admin/surat_masuk') ?>" class="text-decoration-none">Surat Masuk</a></h3>
+                </div><!--
+                <div class="count"><?= $surat_registrasi ?></div>
+                <h3><a href="<?= base_url('admin2/surat_masuk') ?>" class="text-decoration-none">Surat Masuk</a></h3>
                 <p>Telah diarsipkan</p>
               </div>
             </div>
@@ -45,6 +45,7 @@ $this->load->view('templates/sidebar');
               <div class="tile-stats">
                 <div class="icon"><i class="fa fa-group (alias)"></i>
                 </div>
+                -->
                 <div class="count"><?= $bagian ?></div>
                 <h3><a href="<?= base_url('admin/bagian') ?>" class="text-decoration-none">Bagian</a></h3>
                 <p>Telah Didaftarkan</p>

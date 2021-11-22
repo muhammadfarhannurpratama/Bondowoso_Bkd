@@ -2,7 +2,7 @@
 
 $this->load->view('templates/header', $title);
 $this->load->view('templates/navbar');
-$this->load->view('templates/sidebar');
+$this->load->view('templates/sidebar2');
 
 ?>
 

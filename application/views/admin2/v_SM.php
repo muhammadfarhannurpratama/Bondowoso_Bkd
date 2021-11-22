@@ -2,7 +2,7 @@
 
 $this->load->view('templates/header', $title);
 $this->load->view('templates/navbar');
-$this->load->view('templates/sidebar');
+$this->load->view('templates/sidebar2');
 
 ?>
 <!-- page content -->
@@ -10,7 +10,7 @@ $this->load->view('templates/sidebar');
   <div class="">
     <div class="page-title">
       <div class="title_right">
-        <h2>Surat Masuk > <small>Data Surat Masuk</small></h2>
+        <h2>Surat Registrasi > <small>Data Surat Registrasi</small></h2>
       </div>
     </div>
 
@@ -20,7 +20,7 @@ $this->load->view('templates/sidebar');
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Data<small>Surat Masuk</small></h2>
+            <h2>Data<small>Surat Registrasi</small></h2>
             <div class="clearfix"></div>
             <div class="mb-2">
               <?php if ($this->session->flashdata('message')) :
@@ -28,7 +28,7 @@ $this->load->view('templates/sidebar');
               endif; ?>
             </div>
           </div>
-          <form action="<?= base_url('admin/downloadlap_SM') ?>" name="download_suratmasuk" method="post" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+          <form action="<?= base_url('admin2/downloadlap_SM') ?>" name="download_suratmasuk" method="post" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
             <div class="col-md-2 col-sm-2 col-xs-6">
               <select name="bulan" class="select2_single form-control" tabindex="-1">
                 <option>Pilih Bulan</option>
@@ -57,7 +57,7 @@ $this->load->view('templates/sidebar');
               </select>
             </div>
             <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> Unduh Laporan Surat Masuk</button></a>
-            <a href="<?= base_url('admin/tambahSM') ?>"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Surat Masuk</button></a>
+            <a href="<?= base_url('admin2/tambahSM') ?>"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Surat Masuk</button></a>
           </form>
           <div class="x_content">
             <div class="x_content">
@@ -65,7 +65,7 @@ $this->load->view('templates/sidebar');
                 <thead>
                   <tr>
                     <th width="3%">No Urut</th>
-                    <th width="10%">Tanggal Masuk</th>
+                    <th width="10%">Tanggal Registrasi</th>
                     <th width="3%">Kode Surat</th>
                     <th width="10%">Tanggal Surat</th>
                     <th width="14%">Pengirim</th>
@@ -76,22 +76,22 @@ $this->load->view('templates/sidebar');
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($surat_masuk as $masuk) : ?>
+                  <?php foreach ($surat_registrasi as $registrasi) : ?>
                     <tr>
-                      <td><?= $masuk->nomorurut_suratmasuk ?></td>
-                      <td><?= $masuk->tanggalmasuk_suratmasuk ?></td>
-                      <td><?= $masuk->kode_suratmasuk ?></td>
-                      <td><?= $masuk->tanggalsurat_suratmasuk ?></td>
-                      <td><?= $masuk->pengirim ?></td>
-                      <td><?= $masuk->nomor_suratmasuk ?></td>
-                      <td><?= $masuk->kepada_suratmasuk ?></td>
-                      <td><?= $masuk->perihal_suratmasuk ?></td>
+                      <td><?= $registrasi->nomorurut_suratregistrasi ?></td>
+                      <td><?= $registrasi->tanggalmasuk_suratregistrasi ?></td>
+                      <td><?= $registrasi->kode_suratregistrasi ?></td>
+                      <td><?= $registrasi->tanggalsurat_suratregistrasi ?></td>
+                      <td><?= $registrasi->pengirim_registrasi ?></td>
+                      <td><?= $registrasi->nomor_suratregistrasi ?></td>
+                      <td><?= $registrasi->kepada_suratregistrasi ?></td>
+                      <td><?= $registrasi->perihal_suratregistrasi ?></td>
                       <td style="text-align:center;">
-                        <a href="<?= base_url('assets/backend/surat_masuk/' . $masuk->file_suratmasuk) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
-                        <!--     <a href="<?= base_url('admin/unduhDisposisiSM/' . $masuk->id_suratmasuk) ?>"><button type="button" title="Unduh Disposisi" class="btn btn-info btn-xs"><i class="fa fa-download"></i></button></a> -->
-                        <a href="<?= base_url('admin/detailSM/' . $masuk->id_suratmasuk) ?>"><button type="button" title="Detail Surat Masuk" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
-                        <a href="<?= base_url('admin/editSM/' . $masuk->id_suratmasuk) ?>"><button type="button" title="Edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button></a>
-                        <a onclick="return konfirmasi()" href="<?= base_url('admin/hapusSM/' . $masuk->id_suratmasuk) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
+                        <a href="<?= base_url('assets/backend/surat_registrasi/' . $registrasi->file_suratregistrasi) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
+                        <!--     <a href="<?= base_url('admin/unduhDisposisiSM/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Unduh Disposisi" class="btn btn-info btn-xs"><i class="fa fa-download"></i></button></a> -->
+                        <a href="<?= base_url('admin/detailSM/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Detail Surat Registrasi" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
+                        <a href="<?= base_url('admin/editSM/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button></a>
+                        <a onclick="return konfirmasi()" href="<?= base_url('admin/hapusSM/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
                       </td>
                     </tr>
                   <?php endforeach; ?>

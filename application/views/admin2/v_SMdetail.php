@@ -2,7 +2,7 @@
 
 $this->load->view('templates/header', $title);
 $this->load->view('templates/navbar');
-$this->load->view('templates/sidebar');
+$this->load->view('templates/sidebar2');
 
 ?>
 <div class="right_col" role="main">
@@ -34,24 +34,24 @@ $this->load->view('templates/sidebar');
               <table class="table table-striped">
                 <tbody>
                   <tr>
-                    <td width="40%">Tanggal Masuk</td>
-                    <td><?= $detail_SM->tanggalmasuk_suratmasuk ?></td>
+                    <td width="40%">Tanggal Registrasi</td>
+                    <td><?= $detail_SM->tanggalmasuk_suratregistrasi ?></td>
                   </tr>
                   <tr>
                     <td>Kode Surat</td>
-                    <td><?= $detail_SM->kode_suratmasuk ?></td>
+                    <td><?= $detail_SM->kode_suratregistrasi ?></td>
                   </tr>
                   <tr>
                     <td>Nomor Urut</td>
-                    <td><?= $detail_SM->nomorurut_suratmasuk ?></td>
+                    <td><?= $detail_SM->nomorurut_suratregistrasi ?></td>
                   </tr>
                   <tr>
                     <td>Nomor Surat</td>
-                    <td><?= $detail_SM->nomor_suratmasuk ?></td>
+                    <td><?= $detail_SM->nomor_suratregistrasi ?></td>
                   </tr>
                   <tr>
                     <td>Tanggal Surat</td>
-                    <td><?= $detail_SM->tanggalsurat_suratmasuk ?></td>
+                    <td><?= $detail_SM->tanggalsurat_suratregistrasi ?></td>
                   </tr>
                   <tr>
                     <td>Pengirim</td>
@@ -59,15 +59,15 @@ $this->load->view('templates/sidebar');
                   </tr>
                   <tr>
                     <td>Kepada</td>
-                    <td><?= $detail_SM->kepada_suratmasuk ?></td>
+                    <td><?= $detail_SM->kepada_suratregistrasi ?></td>
                   </tr>
                   <tr>
                     <td>Perihal</td>
-                    <td><?= $detail_SM->perihal_suratmasuk ?></td>
+                    <td><?= $detail_SM->perihal_suratregistrasi ?></td>
                   </tr>
                   <tr>
                     <td>File</td>
-                    <td><a href="<?= base_url('assets/backend/surat_masuk/' . $detail_SM->file_suratmasuk) ?>"><b>Unduh File</b></a></td>
+                    <td><a href="<?= base_url('assets/backend/surat_registrasi/' . $detail_SM->file_suratregistrasi) ?>"><b>Unduh File</b></a></td>
                   </tr>
                   <tr>
                     <td>Operator</td>
@@ -119,7 +119,7 @@ $this->load->view('templates/sidebar');
                 </tbody>
               </table>
               <div class="text-right">
-                <a href="<?= base_url('admin/surat_masuk') ?>" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Kembali</a>
+                <a href="<?= base_url('admin/surat_registrasi') ?>" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Kembali</a>
               </div>
 
             </div>

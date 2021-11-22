@@ -1,8 +1,8 @@
 <?php
 
-$this->load->view('templates/header_kepala', $title);
-$this->load->view('templates/navbar_kepala');
-$this->load->view('templates/sidebar_kepala');
+$this->load->view('templates/header', $title);
+$this->load->view('templates/navbar');
+$this->load->view('templates/sidebar');
 
 ?>    
         <div class="right_col" role="main">
@@ -88,5 +88,5 @@ $this->load->view('templates/sidebar_kepala');
           </div>
         </div>
 <?php
-  $detail_SKthis->load->view('templates/footer_kepala');
+  $detail_SKthis->load->view('templates/footer');
 ?>

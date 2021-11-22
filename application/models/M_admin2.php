@@ -14,9 +14,9 @@ class M_admin2 extends CI_Model
 
     function download_lapSM($bulan, $tahun)
     {
-        $this->db->from('tb_suratmasuk');
-        $this->db->where('MONTH(tanggalsurat_suratmasuk)', $bulan);
-        $this->db->where('YEAR(tanggalsurat_suratmasuk)', $tahun);
+        $this->db->from('tb_suratregistrasi');
+        $this->db->where('MONTH(tanggalsurat_suratregistrasi)', $bulan);
+        $this->db->where('YEAR(tanggalsurat_suratregistrasi)', $tahun);
         $query = $this->db->get();
         return $query;
     }
@@ -25,28 +25,28 @@ class M_admin2 extends CI_Model
     {
         return [
             [
-                'field' => 'tanggalmasuk_suratmasuk', 'label' => 'Tanggal Surat Masuk', 'rules' => 'required'
+                'field' => 'tanggalmasuk_suratregistrasi', 'label' => 'Tanggal Surat Registrasi', 'rules' => 'required'
             ],
             [
-                'field' => 'kode_suratmasuk', 'label' => 'Kode surat masuk', 'rules' => 'required'
+                'field' => 'kode_suratregistrasi', 'label' => 'Kode surat Registrasi', 'rules' => 'required'
             ],
             [
-                'field' => 'nomorurut_suratmasuk', 'label' => 'Nomor urut surat Masuk', 'rules' => 'required'
+                'field' => 'nomorurut_suratregistrasi', 'label' => 'Nomor urut surat Registrasi', 'rules' => 'required'
             ],
             [
-                'field' => 'nomor_suratmasuk', 'label' => 'Nomor Surat Masuk', 'rules' => 'required'
+                'field' => 'nomor_suratregistrasi', 'label' => 'Nomor Surat Registrasi', 'rules' => 'required'
             ],
             [
-                'field' => 'tanggalsurat_suratmasuk', 'label' => 'Tanggal Surat Masuk', 'rules' => 'required'
+                'field' => 'tanggalsurat_suratregistrasi', 'label' => 'Tanggal Surat Registrasi', 'rules' => 'required'
             ],
             [
                 'field' => 'pengirim', 'label' => 'Pengirim', 'rules' => 'required'
             ],
             [
-                'field' => 'kepada_suratmasuk', 'label' => 'Kepada ', 'rules' => 'required'
+                'field' => 'kepada_suratregistrasi', 'label' => 'Kepada ', 'rules' => 'required'
             ],
             [
-                'field' => 'perihal_suratmasuk', 'label' => 'Perihal', 'rules' => 'required'
+                'field' => 'perihal_suratregistrasi', 'label' => 'Perihal', 'rules' => 'required'
             ],
             [
                 'field' => 'operator', 'label' => 'Operator', 'rules' => 'required'
@@ -73,15 +73,15 @@ class M_admin2 extends CI_Model
     }
 
 
-    function tampil_suratmasuk()
+    function tampil_suratregistrasi()
     {
-        return $this->db->get('tb_suratmasuk');
+        return $this->db->get('tb_suratregistrasi');
     }
 
     function nomorSM()
     {
 
-        $query = $this->db->query('SELECT * FROM tb_suratmasuk ORDER BY nomorurut_suratmasuk DESC LIMIT 1');
+        $query = $this->db->query('SELECT * FROM tb_suratregistrasi ORDER BY nomorurut_suratregistrasi DESC LIMIT 1');
         return $query;
     }
 
@@ -92,30 +92,30 @@ class M_admin2 extends CI_Model
 
     function SM_tambah($data)
     {
-        $this->db->insert('tb_suratmasuk', $data);
+        $this->db->insert('tb_suratregistrasi', $data);
         return $this->db->affected_rows();
     }
 
-    function SM_edit($data, $id_suratmasuk)
+    function SM_edit($data, $id_suratregistrasi)
     {
-        return $this->db->update('tb_suratmasuk', $data, array('id_suratmasuk' => $id_suratmasuk));
+        return $this->db->update('tb_suratregistrasi', $data, array('id_suratregistrasi' => $id_suratregistrasi));
     }
 
-    function SM_hapus($id_suratmasuk)
+    function SM_hapus($id_suratregistrasi)
     {
-        $this->db->delete('tb_suratmasuk', array('id_suratmasuk' => $id_suratmasuk));
+        $this->db->delete('tb_suratregistrasi', array('id_suratregistrasi' => $id_suratregistrasi));
         return $this->db->affected_rows();
     }
 
     function SM_by_id($id)
     {
-        $this->db->from('tb_suratmasuk');
-        $this->db->where('id_suratmasuk', $id);
+        $this->db->from('tb_suratregistrasi');
+        $this->db->where('id_suratregistrasi', $id);
         $query = $this->db->get();
 
         return $query->row();
     }
-    //tutup suratmasuk
+    //tutup suratregistrasi
     // surat keluar
 
 
