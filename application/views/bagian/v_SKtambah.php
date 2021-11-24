@@ -1,8 +1,8 @@
 <?php
 
-    $this->load->view('templates/header_bagian', $title);
-		$this->load->view('templates/navbar_bagian');
-    $this->load->view('templates/sidebar_bagian');
+    $this->load->view('templates/header', $title);
+		$this->load->view('templates/navbar');
+    $this->load->view('templates/sidebar');
 
 ?>
  <!-- page content -->
@@ -153,5 +153,5 @@
 
 
 <?php
-$this->load->view('templates/footer_bagian');
+$this->load->view('templates/footer');
 ?>
