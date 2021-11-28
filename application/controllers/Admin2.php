@@ -17,1260 +17,403 @@ class Admin2 extends Auth_Controller
     public function index()
     {
         $data['title'] = 'Dashboard';
-        $data['bagian'] = $this->admin2->jumlah('tb_bagian');
         $data['surat_registrasi'] = $this->admin2->jumlah('tb_suratregistrasi');
-
 
         $this->load->view('admin2/index', $data);
     }
 
     // surat masuk
     public function surat_registrasi()
-    {
-        $data['title'] = 'Data Surat Registrasi';
-        $data['surat_registrasi'] = $this->admin2->tampil_suratregistrasi()->result();
+	{	
+		$data['title'] = 'Data Surat Registrasi';
+		$data['surat_registrasi'] = $this->admin2->tampil_suratregistrasi()->result();	
+		$this->load->view('admin2/v_SR', $data);
+	}
 
+	public function tambahSR()
+	{
+		$data['title'] = 'Tambah Data Surat Registrasi';
+		$data['nomor_suratregistrasi'] = $this->_ambil_nomorSR();
 
-        $this->load->view('admin2/v_SM', $data);
-    }
+		$this->load->view('admin2/v_SRtambah', $data);
+	
+	}
 
-    public function tambahSM()
-    {
-        $data['title'] = 'Tambah Data Surat Registrasi';
-        $disposisi = $this->admin2->disposisi()->result();
-        $data['disposisi'] = $disposisi;
-        $data['nomorurut_suratregistrasi'] = $this->_ambil_nomorSM();
+	public function tambah_prosesSR()
+	{		
+		if ($this->input->method() === 'post') {
+		
+			$rules = $this->admin2->rulesSR();
+			$this->form_validation->set_rules($rules);
+			
+			
+			$this->load->library('form_validation');
+			if ($this->form_validation->run() == FALSE) {
+				$data['title'] = 'Tambah Data Surat Registrasi';
+				$data['nomor_suratregistrasi'] = $this->_ambil_nomorSR();
 
+				return $this->load->view('admin2/v_SRtambah', $data);
+			}
+		
+			$tanggalmasuk_suratregistrasi = $this->input->post('tanggalmasuk_suratregistrasi');
+			$tanggalsurat_suratregistrasi = $this->input->post('tanggalsurat_suratregistrasi');
+			$nomor_suratregistrasi = $this->input->post('nomor_suratregistrasi');
+            $ambilnomor                 = substr("$nomor_suratregistrasi",0,4);
 
-        $this->load->view('admin2/v_SMtambah', $data);
-    }
-
-    public function tambah_prosesSM()
-    {
-        if ($this->input->method() === 'post') {
-
-            $rules = $this->admin2->rulesSM();
-            $this->form_validation->set_rules($rules);
-
-
-            $this->load->library('form_validation');
-            if ($this->form_validation->run() == FALSE) {
-                $data['title'] = 'Tambah Data Surat Registrasi';
-                $disposisi = $this->admin2->disposisi()->result();
-                $data['disposisi'] = $disposisi;
-                $data['nomorurut_suratregistrasi'] = $this->_ambil_nomorSM();
-
-                return $this->load->view('admin2/v_SMtambah', $data);
-            }
-
-            $tanggalmasuk_suratregistrasi = $this->input->post('tanggalmasuk_suratregistrasi');
-            $tanggalsurat_suratregistrasi = $this->input->post('tanggalsurat_suratregistrasi');
-            $tanggal_disposisi1 = $this->input->post('tanggal_disposisi1');
-            $tanggal_disposisi2 = $this->input->post('tanggal_disposisi2');
-            $tanggal_disposisi3 = $this->input->post('tanggal_disposisi3');
-            $nomorurut_suratregistrasi = $this->input->post('nomorurut_suratregistrasi');
-
-            $tgl_masuk                  = date('Y-m-d H:i:s', strtotime($tanggalmasuk_suratregistrasi));
+			$tgl_masuk                  = date('Y-m-d H:i:s', strtotime($tanggalmasuk_suratregistrasi));
             $tgl_surat                  = date('Y-m-d', strtotime($tanggalsurat_suratregistrasi));
-            $tgl_disp1                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi1));
-            $tgl_disp2                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi2));
-            $tgl_disp3                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi3));
 
-            date_default_timezone_set('Asia/Jakarta');
-            $thnNow = date("Y");
+			date_default_timezone_set('Asia/Jakarta'); 
+					$thnNow = date("Y");
 
-            $nama_file_lengkap         = $_FILES['file_suratregistrasi']['name'];
-            $nama_file         = substr($nama_file_lengkap, 0, strripos($nama_file_lengkap, '.'));
-            $ext_file        = substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
-            $tipe_file         = $_FILES['file_suratregistrasi']['type'];
-            $ukuran_file     = $_FILES['file_suratregistrasi']['size'];
-            $tmp_file         = $_FILES['file_suratregistrasi']['tmp_name'];
-            if ($ukuran_file > 10340000) {
-                $data['error'] = 'file gambar terlalu besar';
-            }
-            $nama_baru = $thnNow . '-' . $nomorurut_suratregistrasi . $ext_file;
-            $path = $_SERVER['DOCUMENT_ROOT'] . '/Bondowoso_Bkd/assets/backend/surat_registrasi/' . $nama_baru;
-            move_uploaded_file($tmp_file, $path);
+			$nama_file_lengkap 		= $_FILES['file_suratregistrasi']['name'];
+			$nama_file 		= substr($nama_file_lengkap, 0, strripos($nama_file_lengkap, '.'));
+			$ext_file		= substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
+			$tipe_file 		= $_FILES['file_suratregistrasi']['type'];
+			$ukuran_file 	= $_FILES['file_suratregistrasi']['size'];
+			$tmp_file 		= $_FILES['file_suratregistrasi']['tmp_name'];
+			if($ukuran_file > 10340000){
+				$data['error'] = 'file dokumen terlalu besar';
+			}
+			$namaSR_baru = $thnNow.'-'.$ambilnomor . $ext_file;
+			$path = $_SERVER['DOCUMENT_ROOT'].'/Bondowoso_Bkd/assets/backend/surat_registrasi/'.$namaSR_baru;
+			move_uploaded_file($tmp_file, $path);
 
-            $tanggal_entry  = date("Y-m-d H:i:s");
+					$tanggal_entry  = date("Y-m-d H:i:s");
+					
+					$SR_baru = [
+						'tanggalmasuk_suratregistrasi' => $tgl_masuk,
+						'kode_suratregistrasi' => $this->input->post('kode_suratregistrasi'),
+						'nomor_suratregistrasi' => $this->input->post('nomor_suratregistrasi'),
+						'nama_bagian' => $this->input->post('nama_bagian'),
+						'tanggalsurat_suratregistrasi' => $tgl_surat,
+						'kepada_suratregistrasi' => $this->input->post('kepada_suratregistrasi'),
+						'perihal_suratregistrasi' => $this->input->post('perihal_suratregistrasi'),
+						'operatorregistrasi' => $this->input->post('operatorregistrasi'),
+						'file_suratregistrasi' => $namaSR_baru,
+						'tanggal_entry' => $tanggal_entry
+						
+					];
 
-            $SM_baru = [
-                'tanggalmasuk_suratregistrasi' => $tgl_masuk,
-                'kode_suratregistrasi' => $this->input->post('kode_suratregistrasi'),
-                'nomorurut_suratregistrasi' => $this->input->post('nomorurut_suratregistrasi'),
-                'nomor_suratregistrasi' => $this->input->post('nomor_suratregistrasi'),
-                'tanggalsurat_suratregistrasi' => $tgl_surat,
-                'pengirim_registrasi' => $this->input->post('pengirim_registrasi'),
-                'kepada_suratregistrasi' => $this->input->post('kepada_suratregistrasi'),
-                'perihal_suratregistrasi' => $this->input->post('perihal_suratregistrasi'),
-                'file_suratregistrasi' => $nama_baru,
-                'operator' => $this->input->post('operator'),
-                'tanggal_entry' => $tanggal_entry,
-                'disposisi1' => $this->input->post('disposisi1'),
-                'tanggal_disposisi1' => $tgl_disp1,
-                'disposisi2' => $this->input->post('disposisi2'),
-                'tanggal_disposisi2' => $tgl_disp2,
-                'disposisi3' => $this->input->post('disposisi3'),
-                'tanggal_disposisi3' => $tgl_disp3,
-                'status' => "belumd"
-            ];
-
-            $result = $this->admin2->SM_tambah($SM_baru);
-            if ($result > 0) {
-                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
+					$result = $this->admin2->SR_tambah($SR_baru);
+					if ($result > 0) {
+						$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
 							Data Surat Registrasi berhasil ditambahkan.
 							<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
 						</button></div>');
-                redirect("admin2/surat_registrasi");
-            } else {
-                $data['error'] = 'Data Mahasiswa Gagal ditambahkan';
-                var_dump($result);
-            }
-        }
-    }
-
-
-
-
-    public function editSM($id)
-    {
-        $data['surat_registrasi'] = $this->admin2->SM_by_id($id);
-        $data['title'] = 'Edit data Surat Registrasi';
-
-        // $disposisi = $this->admin2->disposisi()->result();
-        $data['disposisi'] = $this->admin2->disposisi()->result();
-
-        $this->load->view('admin2/v_SMedit', $data);
-    }
-
-    public function edit_prosesSM()
-    {
-        if ($this->input->method() === 'post') {
-
-            $rules = $this->admin2->rulesSM();
-            $this->form_validation->set_rules($rules);
-
-
-            $this->load->library('form_validation');
-            if ($this->form_validation->run() == FALSE) {
-                $data['title'] = 'Tambah Data Surat Registrasi';
-                $disposisi = $this->admin2->disposisi()->result();
-                $data['disposisi'] = $disposisi;
-                $data['nomorurut_suratregistrasi'] = $this->_ambil_nomorSM();
-                $id = $this->input->post('id_suratregistrasi');
-                $data['surat_registrasi'] = $this->admin2->SM_by_id($id);
-
-                return $this->load->view('admin2/v_SMedit', $data);
-            }
-            date_default_timezone_set('Asia/Jakarta');
-            $thnNow = date("Y");
-            $nomorurut_suratregistrasi = $this->input->post('nomorurut_suratregistrasi');
-
-            if (!empty($_FILES['file_suratregistrasi']['name'])) {
-
-
-                //delete file
-                $SM = $this->admin2->SM_by_id($this->input->post('id_suratregistrasi'));
-                if (file_exists('assets/backend/surat_registrasi/' . $SM->file_suratregistrasi) && $SM->file_suratregistrasi) {
-                    unlink('assets/backend/surat_registrasi/' . $SM->file_suratregistrasi);
-                }
-                $nama_file_lengkap         = $_FILES['file_suratregistrasi']['name'];
-                $nama_file         = substr($nama_file_lengkap, 0, strripos($nama_file_lengkap, '.'));
-                $ext_file        = substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
-                $tipe_file         = $_FILES['file_suratregistrasi']['type'];
-                $ukuran_file     = $_FILES['file_suratregistrasi']['size'];
-                $tmp_file         = $_FILES['file_suratregistrasi']['tmp_name'];
-                if ($ukuran_file > 10340000) {
-                    $data['error'] = 'file gambar terlalu besar';
-                }
-                $nama_baru = $thnNow . '-' . $nomorurut_suratregistrasi . $ext_file;
-                $path = $_SERVER['DOCUMENT_ROOT'] . '/Bondowoso_Bkd/assets/backend/surat_registrasi/' . $nama_baru;
-                move_uploaded_file($tmp_file, $path);
-
-                $SM_edit['file_suratregistrasi'] = $nama_baru;
-            } else {
-                $SM_edit['file_suratregistrasi'] = $this->input->post('file_lama');
-            }
-            $tanggalmasuk_suratregistrasi = $this->input->post('tanggalmasuk_suratregistrasi');
-            $tanggalsurat_suratregistrasi = $this->input->post('tanggalsurat_suratregistrasi');
-            $tanggal_disposisi1 = $this->input->post('tanggal_disposisi1');
-            $tanggal_disposisi2 = $this->input->post('tanggal_disposisi2');
-            $tanggal_disposisi3 = $this->input->post('tanggal_disposisi3');
-
-
-            $tgl_masuk                  = date('Y-m-d H:i:s', strtotime($tanggalmasuk_suratregistrasi));
-            $tgl_surat                  = date('Y-m-d', strtotime($tanggalsurat_suratregistrasi));
-            $tgl_disp1                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi1));
-            $tgl_disp2                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi2));
-            $tgl_disp3                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi3));
-
-
-
-            $tanggal_entry  = date("Y-m-d H:i:s");
-
-            $SM_edit = [
-                'tanggalmasuk_suratregistrasi' => $tgl_masuk,
-                'kode_suratregistrasi' => $this->input->post('kode_suratregistrasi'),
-                'nomorurut_suratregistrasi' => $this->input->post('nomorurut_suratregistrasi'),
-                'nomor_suratregistrasi' => $this->input->post('nomor_suratregistrasi'),
-                'tanggalsurat_suratregistrasi' => $tgl_surat,
-                'pengirim_registrasi' => $this->input->post('pengirim_registrasi'),
-                'kepada_suratregistrasi' => $this->input->post('kepada_suratregistrasi'),
-                'perihal_suratregistrasi' => $this->input->post('perihal_suratregistrasi'),
-                'operator' => $this->input->post('operator'),
-                'tanggal_entry' => $tanggal_entry,
-                'disposisi1' => $this->input->post('disposisi1'),
-                'tanggal_disposisi1' => $tgl_disp1,
-                'disposisi2' => $this->input->post('disposisi2'),
-                'tanggal_disposisi2' => $tgl_disp2,
-                'disposisi3' => $this->input->post('disposisi3'),
-                'tanggal_disposisi3' => $tgl_disp3
-            ];
-
-            $id_suratregistrasi  =  $this->input->post('id_suratregistrasi');
-
-            $result = $this->admin2->SM_edit($SM_edit, $id_suratregistrasi);
-
-            if ($result > 0) {
-                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
-					Data Surat Registrasi berhasil diubah.
-					<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
-				</button></div>');
-                redirect('admin2/surat_registrasi');
-            } else {
-                $data['error'] = 'Data Surat Registrasi Gagal diubah!';
-            }
-        }
-    }
-
-    public function hapusSM($id)
-    {
-        $SMlist = $this->admin2->SM_by_id($id);
-        var_dump($SMlist);
-
-        $data = array(
-            'id_suratregistrasi' => $SMlist->id_suratregistrasi
-        );
-        unlink('assets/backend/surat_registrasi/' . $SMlist->file_suratregistrasi);
-        $hapusSM = $this->admin2->SM_hapus($data['id_suratregistrasi']);
-
-
-
-
-        if ($hapusSM > 0) {
-
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
-					Data Surat Registrasi berhasil dihapus.
-					<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
-				</button></div>');
-            redirect("admin2/surat_registrasi");
-        } else {
-            $this->session->set_flashdata(
-                'message',
-                '<div class="alert alert-danger" role="alert">Data Gagal Diubah!</div>'
-            );
-        }
-    }
-
-    private function _ambil_nomorSM()
-    {
-        $data1 = $this->admin2->nomorSM()->result();
-        $jumlah = $this->admin2->nomorSM()->num_rows();
-        $nomor = $data1[0]->nomorurut_suratregistrasi;
-
-        if ($jumlah = 0) {
-            $nomorbaru = "0001";
-        } else {
-            $nomormax = substr($nomor, 0, 4);
-            $nomorbaru = intval($nomormax) + 1;
-        }
-
-
-        return $nomorbaru;
-    }
-
-    public function detailSM($id)
-    {
-        $data['detail_SM'] = $this->admin2->SM_by_id($id);
-        $data['title'] = 'Detail data Surat Registrasi';
-
-        $this->load->view('admin2/v_SMdetail', $data);
-    }
-
-    public function unduhDisposisiSM($id)
-    {
-        include APPPATH . 'third_party/PHPExcel/Classes/PHPExcel.php';
-        date_default_timezone_set("Asia/Jakarta");
-
-        $excelku = new PHPExcel();
-
-        // Set properties
-        $excelku->getProperties()->setCreator("Gabut Koding")
-            ->setLastModifiedBy("Gabut Koding");
-        //ambil data
-        $dataDisSM = $this->admin2->SM_by_id($id);
-
-        $tgl_surat = $dataDisSM->tanggalsurat_suratregistrasi;
-        $tgl_surat = date('d/m/Y', strtotime($tgl_surat));
-        $tgl_masuk = $dataDisSM->tanggalmasuk_suratregistrasi;
-        $tgl_masuk = date('d/m/Y', strtotime($tgl_masuk));
-
-        $tahun = $dataDisSM->tanggalmasuk_suratregistrasi;
-        $tahun =  date('Y', strtotime($tahun));
-        $nama_file = $tahun . '-' . $dataDisSM->nomorurut_suratregistrasi . '-disposisi';
-        $bulan = $dataDisSM->tanggalmasuk_suratregistrasi;
-        $bulan = date('m', strtotime($bulan));
-        if ($bulan == '01') {
-            $bulan = "JANUARI";
-        } elseif ($bulan == '02') {
-            $bulan = "FEBRUARI";
-        } elseif ($bulan == '03') {
-            $bulan = "MARET";
-        } elseif ($bulan == '04') {
-            $bulan = "APRIL";
-        } elseif ($bulan == '05') {
-            $bulan = "MEI";
-        } elseif ($bulan == '06') {
-            $bulan = "JUNI";
-        } elseif ($bulan == '07') {
-            $bulan = "JULI";
-        } elseif ($bulan == '08') {
-            $bulan = "AGUSTUS";
-        } elseif ($bulan == '09') {
-            $bulan = "SEPTEMBER";
-        } elseif ($bulan == '10') {
-            $bulan = "OKTOBER";
-        } elseif ($bulan == '11') {
-            $bulan = "NOVEMBER";
-        } elseif ($bulan == '12') {
-            $bulan = "DESEMBER";
-        }
-
-
-        //Mengeset Syle nya
-        $headerStylenya = new PHPExcel_Style();
-        $bodyStylenya   = new PHPExcel_Style();
-
-        $headerStylenya->applyFromArray(
-            array(
-                'fill'     => array(
-                    'type'    => PHPExcel_Style_Fill::FILL_SOLID,
-                    'color'   => array('argb' => 'FFEEEEEE')
-                ),
-                'borders' => array(
-                    'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'right'        => array('style' => PHPExcel_Style_Border::BORDER_MEDIUM),
-                    'left'        => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'top'        => array('style' => PHPExcel_Style_Border::BORDER_THIN)
-                )
-            )
-        );
-
-        $bodyStylenya->applyFromArray(
-            array(
-                'fill'     => array(
-                    'type'    => PHPExcel_Style_Fill::FILL_SOLID,
-                    'color'    => array('argb' => 'FFFFFFFF')
-                ),
-                'borders' => array(
-                    'bottom'    => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'right'        => array('style' => PHPExcel_Style_Border::BORDER_MEDIUM),
-                    'left'        => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'top'        => array('style' => PHPExcel_Style_Border::BORDER_THIN)
-                )
-            )
-        );
-
-
-        // Set page orientation and size
-        $excelku->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_PORTRAIT);
-        $excelku->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEGAL);
-        $excelku->getActiveSheet()->getPageMargins()->setTop(0.175);
-        $excelku->getActiveSheet()->getPageMargins()->setRight(1.574);
-        $excelku->getActiveSheet()->getPageMargins()->setLeft(0.787);
-        $excelku->getActiveSheet()->getPageMargins()->setBottom(0.748);
-
-
-        // Set lebar kolom
-
-        $excelku->getActiveSheet()->getColumnDimension('A')->setWidth(4.5);
-        $excelku->getActiveSheet()->getColumnDimension('B')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('C')->setWidth(4.35);
-        $excelku->getActiveSheet()->getColumnDimension('D')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('E')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('F')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('G')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('H')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('I')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('J')->setWidth(1);
-        $excelku->getActiveSheet()->getColumnDimension('K')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('L')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('M')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('N')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('O')->setWidth(1.8);
-        $excelku->getActiveSheet()->getColumnDimension('P')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('Q')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('R')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('S')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('T')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('U')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('V')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('W')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('X')->setWidth(3.2);
-        $excelku->getActiveSheet()->getColumnDimension('Y')->setWidth(3.2);
-        // TINGGI BARIS
-        $excelku->getActiveSheet()->getRowDimension(1)->setRowHeight(33);
-        $excelku->getActiveSheet()->getRowDimension(2)->setRowHeight(30);
-        $excelku->getActiveSheet()->getRowDimension(3)->setRowHeight(17.25);
-        $excelku->getActiveSheet()->getRowDimension(4)->setRowHeight(17.25);
-        $excelku->getActiveSheet()->getRowDimension(5)->setRowHeight(17.25);
-        $excelku->getActiveSheet()->getRowDimension(6)->setRowHeight(17.25);
-        $excelku->getActiveSheet()->getRowDimension(7)->setRowHeight(12);
-        $excelku->getActiveSheet()->getRowDimension(8)->setRowHeight(17.25);
-        $excelku->getActiveSheet()->getRowDimension(9)->setRowHeight(11.25);
-        $excelku->getActiveSheet()->getRowDimension(10)->setRowHeight(15.75);
-        $excelku->getActiveSheet()->getRowDimension(11)->setRowHeight(15.75);
-        $excelku->getActiveSheet()->getRowDimension(12)->setRowHeight(14.25);
-        $excelku->getActiveSheet()->getRowDimension(13)->setRowHeight(17.25);
-        $excelku->getActiveSheet()->getStyle('D3:V6')->getAlignment()->setWrapText(true);
-
-
-
-        // Mergecell, menyatukan beberapa kolom
-        $excelku->getActiveSheet()->mergeCells('N1:R1');
-        $excelku->getActiveSheet()->mergeCells('U1:X1');
-        $excelku->getActiveSheet()->mergeCells('D3:V6');
-        $excelku->getActiveSheet()->getStyle('D3:V6')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-        $excelku->getActiveSheet()->getStyle('D3:V6')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $excelku->getActiveSheet()->mergeCells('B8:X8');
-        $excelku->getActiveSheet()->mergeCells('D11:H11');
-        $excelku->getActiveSheet()->mergeCells('K11:T11');
-        $excelku->getActiveSheet()->mergeCells('B13:H13');
-        $excelku->getActiveSheet()->mergeCells('M13:S13');
-        $excelku->getActiveSheet()->mergeCells('S1:T1');
-        $excelku->getActiveSheet()->getStyle('A1:Y13')->getFont()->setName('Calibri');
-        $excelku->getActiveSheet()->getStyle('A1:Y13')->getFont()->setSize(13);
-        $excelku->getActiveSheet()->getStyle('A1:Y13')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        // Buat Kolom judul tabel
-        $SI = $excelku->setActiveSheetIndex(0);
-        $SI->setCellValue('N1', $dataDisSM->kode_suratregistrasi);
-        $SI->setCellValue('U1', $dataDisSM->nomorurut_suratregistrasi);
-        $SI->setCellValue('S1', $bulan);
-        $SI->setCellValue('D3', $dataDisSM->perihal_suratregistrasi);
-        $SI->setCellValue('B8', $dataDisSM->pengirim);
-        $SI->setCellValue('D11', $tgl_surat);
-        $SI->setCellValue('B13', $dataDisSM->disposisi1);
-        $SI->setCellValue('K11', $dataDisSM->nomor_suratregistrasi);
-        $SI->setCellValue('M13', $tgl_masuk);
-        //Memberi nama sheet
-        $excelku->getActiveSheet()->setTitle('DataDisposisi');
-
-        $excelku->setActiveSheetIndex(0);
-
-        // untuk excel 2007 atau yang berekstensi .xlsx
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $nama_file . '".xlsx');
-        header('Cache-Control: max-age=0');
-
-        $objWriter = PHPExcel_IOFactory::createWriter($excelku, 'Excel2007');
-        $objWriter->save('php://output');
-        exit;
-    }
-
-    public function downloadlap_SM()
-    {
-        include APPPATH . 'third_party/PHPExcel/Classes/PHPExcel.php';
-        date_default_timezone_set("Asia/Jakarta");
-
-        $excelku = new PHPExcel();
-
-        // Set properties
-        $excelku->getProperties()->setCreator("Gabut Koding")
-            ->setLastModifiedBy("Gabut Koding");
-        //ambil data
-        $bulan = $this->input->post('bulan');
-        $tahun = $this->input->post('tahun');
-        $dataSM = $this->admin2->download_lapSM($bulan, $tahun)->result();
-        if ($bulan == '01') {
-            $bulan = "JANUARI";
-        } elseif ($bulan == '02') {
-            $bulan = "FEBRUARI";
-        } elseif ($bulan == '03') {
-            $bulan = "MARET";
-        } elseif ($bulan == '04') {
-            $bulan = "APRIL";
-        } elseif ($bulan == '05') {
-            $bulan = "MEI";
-        } elseif ($bulan == '06') {
-            $bulan = "JUNI";
-        } elseif ($bulan == '07') {
-            $bulan = "JULI";
-        } elseif ($bulan == '08') {
-            $bulan = "AGUSTUS";
-        } elseif ($bulan == '09') {
-            $bulan = "SEPTEMBER";
-        } elseif ($bulan == '10') {
-            $bulan = "OKTOBER";
-        } elseif ($bulan == '11') {
-            $bulan = "NOVEMBER";
-        } elseif ($bulan == '12') {
-            $bulan = "DESEMBER";
-        }
-        if ($dataSM == null) {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible show" role="alert">
-			  Tidak ada Surat Registrasi pada bulan <b>' . $bulan . '</b> di tahun <b>' . $tahun . '</b> 
-			  <a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
-			 </button></div>');
-            redirect("admin2/surat_registrasi");
-            exit();
-        }
-        $nama_file = 'Surat Registrasi-' . $bulan . '-' . $tahun;
-        // Mergecell, menyatukan beberapa kolom
-        $excelku->getActiveSheet()->mergeCells('A2:H2');
-        $excelku->getActiveSheet()->setCellValue('A2', "PEMERINTAH KOTA BONDOWOSO");
-        $excelku->getActiveSheet()->mergeCells('A3:H3');
-        $excelku->getActiveSheet()->setCellValue('A3', "BADAN KEPEGAWAIAN DAERAH KOTA BONDOWOSO");
-        $excelku->getActiveSheet()->mergeCells('A4:H4');
-        $excelku->getActiveSheet()->setCellValue('A4', "BAGIAN TATA USAHA");
-        $excelku->getActiveSheet()->mergeCells('A5:H5');
-        $excelku->getActiveSheet()->setCellValue('A5', "Jl. KH Ashari No.123 Kademangan, Kec. Bondowoso, Kabupaten Bondowoso, Jawa Timur 68217");
-        $excelku->getActiveSheet()->mergeCells('A6:H6');
-        $excelku->getActiveSheet()->setCellValue('A6', "DATA SURAT REGISTRASI BULAN $bulan TAHUN $tahun");
-        $excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setName('Arial');
-        $excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setSize(14);
-        $excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setBold(true);
-        $excelku->getActiveSheet()->getStyle('A2:H6')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $excelku->getActiveSheet()->mergeCells('A8:A9');
-        $excelku->getActiveSheet()->setCellValue('A8', "NO");
-        $excelku->getActiveSheet()->mergeCells('B8:B9');
-        $excelku->getActiveSheet()->setCellValue('B8', "NO URUT");
-        $excelku->getActiveSheet()->mergeCells('C8:F8');
-        $excelku->getActiveSheet()->setCellValue('C8', "SURAT REGISTRASI");
-        $excelku->getActiveSheet()->getStyle('C8:F8')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-        $excelku->getActiveSheet()->mergeCells('G8:G9');
-        $excelku->getActiveSheet()->setCellValue('G8', "TANGGAL REGISTRASI");
-        $excelku->getActiveSheet()->mergeCells('H8:H9');
-        $excelku->getActiveSheet()->setCellValue('H8', "KODE SURAT");
-        $excelku->getActiveSheet()->mergeCells('I8:N8');
-        $excelku->getActiveSheet()->setCellValue('I8', "DISPOSISI");
-        $excelku->getActiveSheet()->getStyle('A8:N9')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-        $excelku->getActiveSheet()->getStyle('A8:N9')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $excelku->getActiveSheet()->getStyle('A8:N9')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-
-        // Buat Kolom judul tabel
-        $SI = $excelku->setActiveSheetIndex(0);
-        $SI->setCellValue('C9', "ALAMAT PENGIRIM");
-        $SI->setCellValue('D9', "NOMOR SURAT");
-        $SI->setCellValue('E9', "TANGGAL SURAT");
-        $SI->setCellValue('F9', "PERIHAL");
-        $SI->setCellValue('I9', "I");
-        $SI->setCellValue('J9', "TGL I");
-        $SI->setCellValue('K9', "II");
-        $SI->setCellValue('L9', "TGL II");
-        $SI->setCellValue('M9', "III");
-        $SI->setCellValue('N9', "TGL III");
-
-
-        //Mengeset Syle nya
-        $headerStylenya = new PHPExcel_Style();
-        $bodyStylenya   = new PHPExcel_Style();
-
-        $headerStylenya->applyFromArray(
-            array(
-                'fill'     => array(
-                    'type'    => PHPExcel_Style_Fill::FILL_SOLID,
-                    'color'   => array('argb' => 'FFEEEEEE')
-                ),
-                'borders' => array(
-                    'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'right'        => array('style' => PHPExcel_Style_Border::BORDER_MEDIUM),
-                    'left'        => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'top'        => array('style' => PHPExcel_Style_Border::BORDER_THIN)
-                )
-            )
-        );
-
-        $bodyStylenya->applyFromArray(
-            array(
-                'fill'     => array(
-                    'type'    => PHPExcel_Style_Fill::FILL_SOLID,
-                    'color'    => array('argb' => 'FFFFFFFF')
-                ),
-                'borders' => array(
-                    'bottom'    => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'right'        => array('style' => PHPExcel_Style_Border::BORDER_MEDIUM),
-                    'left'        => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'top'        => array('style' => PHPExcel_Style_Border::BORDER_THIN)
-                )
-            )
-        );
-
-        $excelku->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
-        $excelku->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEGAL);
-        $excelku->getActiveSheet()->getPageMargins()->setTop(0.75);
-        $excelku->getActiveSheet()->getPageMargins()->setRight(0.7);
-        $excelku->getActiveSheet()->getPageMargins()->setLeft(0.7);
-        $excelku->getActiveSheet()->getPageMargins()->setBottom(0.75);
-        $excelku->getActiveSheet()->getPageSetup()->setFitToWidth(1);
-        $excelku->getActiveSheet()->getPageSetup()->setFitToHeight(0);
-
-
-        $baris  = 10; //Ini untuk dimulai baris datanya, karena di baris 3 itu digunakan untuk header tabel
-        $no     = 1;
-
-        foreach ($dataSM as $SM) {
-
-            $SI->setCellValue("A" . $baris, $no++); //mengisi data untuk nomor urut
-            $SI->setCellValue("B" . $baris, $SM->nomorurut_suratregistrasi);
-            $SI->setCellValue("C" . $baris, $SM->pengirim);
-            $SI->setCellValue("D" . $baris, $SM->nomor_suratregistrasi);
-            $SI->setCellValue("E" . $baris, $SM->tanggalsurat_suratregistrasi);
-            $SI->setCellValue("F" . $baris, $SM->perihal_suratregistrasi);
-            $SI->setCellValue("G" . $baris, $SM->tanggalmasuk_suratregistrasi);
-            $SI->setCellValue("H" . $baris, $SM->kode_suratregistrasi);
-            $SI->setCellValue("I" . $baris, $SM->disposisi1);
-            $SI->setCellValue("J" . $baris, $SM->tanggal_disposisi1);
-            $SI->setCellValue("K" . $baris, $SM->disposisi2);
-            $SI->setCellValue("L" . $baris, $SM->tanggal_disposisi2);
-            $SI->setCellValue("M" . $baris, $SM->disposisi3);
-            $SI->setCellValue("N" . $baris, $SM->tanggal_disposisi3);
-            $baris++; //looping untuk barisnya
-
-            // Set lebar kolom
-
-            $excelku->getActiveSheet()->getColumnDimension('A')->setWidth(8.14);
-            $excelku->getActiveSheet()->getColumnDimension('B')->setWidth(13);
-            $excelku->getActiveSheet()->getColumnDimension('C')->setWidth(29);
-            $excelku->getActiveSheet()->getColumnDimension('D')->setWidth(30);
-            $excelku->getActiveSheet()->getColumnDimension('E')->setWidth(16);
-            $excelku->getActiveSheet()->getColumnDimension('F')->setWidth(39);
-            $excelku->getActiveSheet()->getColumnDimension('G')->setWidth(28);
-            $excelku->getActiveSheet()->getColumnDimension('H')->setWidth(18);
-            $excelku->getActiveSheet()->getColumnDimension('I')->setWidth(21);
-            $excelku->getActiveSheet()->getColumnDimension('J')->setWidth(21);
-            $excelku->getActiveSheet()->getColumnDimension('K')->setWidth(21);
-            $excelku->getActiveSheet()->getColumnDimension('L')->setWidth(21);
-            $excelku->getActiveSheet()->getColumnDimension('M')->setWidth(21);
-            $excelku->getActiveSheet()->getColumnDimension('N')->setWidth(21);
-            $excelku->getActiveSheet()->getStyle('A10:N' . $baris . '')->getFont()->setName('Calibri');
-            $excelku->getActiveSheet()->getStyle('A10:N' . $baris . '')->getFont()->setSize(11);
-            $excelku->getActiveSheet()->getRowDimension($baris)->setRowHeight(-1);
-            $excelku->getActiveSheet()->getStyle('C10:C' . $baris . '')->getAlignment()->setWrapText(true); // wraptext
-            $excelku->getActiveSheet()->getStyle('F10:F' . $baris . '')->getAlignment()->setWrapText(true);
-            $excelku->getActiveSheet()->getStyle('A10:B' . $baris . '')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $excelku->getActiveSheet()->getStyle('D10:E' . $baris . '')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $excelku->getActiveSheet()->getStyle('G10:N' . $baris . '')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $excelku->getActiveSheet()->getStyle('A10:N' . $baris . '')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-            $excelku->getActiveSheet()->getStyle('A10:N' . $baris . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-        }
-
-        //Memberi nama sheet
-        $excelku->getActiveSheet()->setTitle('DataSuratKeluar');
-
-        $excelku->setActiveSheetIndex(0);
-
-        // untuk excel 2007 atau yang berekstensi .xlsx
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $nama_file . '".xlsx');
-        header('Cache-Control: max-age=0');
-
-        $objWriter = PHPExcel_IOFactory::createWriter($excelku, 'Excel2007');
-        $objWriter->save('php://output');
-        exit;
-    }
-
-    // tutup surat masuk
-
-    // surat keluar
-    public function surat_keluar()
-    {
-        $data['title'] = 'Data Surat Keluar';
-        $data['surat_keluar'] = $this->admin2->tampil_suratkeluar()->result();
-        $this->load->view('admin2/v_SK', $data);
-    }
-
-    public function tambahSK()
-    {
-        $data['title'] = 'Tambah Data Surat Keluar';
-        $disposisi = $this->admin2->disposisi()->result();
-        $data['disposisi'] = $disposisi;
-        $data['nomor_suratkeluar'] = $this->_ambil_nomorSK();
-
-        $this->load->view('admin2/v_SKtambah', $data);
-    }
-
-    public function tambah_prosesSK()
-    {
-        if ($this->input->method() === 'post') {
-
-            $rules = $this->admin2->rulesSK();
-            $this->form_validation->set_rules($rules);
-
-
-            $this->load->library('form_validation');
-            if ($this->form_validation->run() == FALSE) {
-                $data['title'] = 'Tambah Data Surat Keluar';
-                $disposisi = $this->admin2->disposisi()->result();
-                $data['disposisi'] = $disposisi;
-                $data['nomor_suratkeluar'] = $this->_ambil_nomorSK();
-
-                return $this->load->view('admin2/v_SKtambah', $data);
-            }
-
-            $tanggalkeluar_suratkeluar = $this->input->post('tanggalkeluar_suratkeluar');
-            $tanggalsurat_suratkeluar = $this->input->post('tanggalsurat_suratkeluar');
-            $nomor_suratkeluar = $this->input->post('nomor_suratkeluar');
-            $ambilnomor                 = substr("$nomor_suratkeluar", 0, 4);
-
-            $tgl_keluar                  = date('Y-m-d H:i:s', strtotime($tanggalkeluar_suratkeluar));
-            $tgl_surat                  = date('Y-m-d', strtotime($tanggalsurat_suratkeluar));
-
-            date_default_timezone_set('Asia/Jakarta');
-            $thnNow = date("Y");
-
-            $nama_file_lengkap         = $_FILES['file_suratkeluar']['name'];
-            $nama_file         = substr($nama_file_lengkap, 0, strripos($nama_file_lengkap, '.'));
-            $ext_file        = substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
-            $tipe_file         = $_FILES['file_suratkeluar']['type'];
-            $ukuran_file     = $_FILES['file_suratkeluar']['size'];
-            $tmp_file         = $_FILES['file_suratkeluar']['tmp_name'];
-            if ($ukuran_file > 10340000) {
-                $data['error'] = 'file dokumen terlalu besar';
-            }
-            $namaSK_baru = $thnNow . '-' . $ambilnomor . $ext_file;
-            $path = $_SERVER['DOCUMENT_ROOT'] . '/Bondowoso_Bkd/assets/backend/surat_keluar/' . $namaSK_baru;
-            move_uploaded_file($tmp_file, $path);
-
-            $tanggal_entry  = date("Y-m-d H:i:s");
-
-            $SK_baru = [
-                'tanggalkeluar_suratkeluar' => $tgl_keluar,
-                'kode_suratkeluar' => $this->input->post('kode_suratkeluar'),
-                'nomor_suratkeluar' => $this->input->post('nomor_suratkeluar'),
-                'nama_bagian' => $this->input->post('nama_bagian'),
-                'tanggalsurat_suratkeluar' => $tgl_surat,
-                'kepada_suratkeluar' => $this->input->post('kepada_suratkeluar'),
-                'perihal_suratkeluar' => $this->input->post('perihal_suratkeluar'),
-                'operator' => $this->input->post('operator'),
-                'file_suratkeluar' => $namaSK_baru,
-                'tanggal_entry' => $tanggal_entry
-            ];
-
-            $result = $this->admin2->SK_tambah($SK_baru);
-            if ($result > 0) {
-                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
-							Data Surat Keluar berhasil ditambahkan.
+						redirect("admin2/surat_registrasi");
+					} else {
+						$data['error'] = 'Data Surat Keluar Gagal ditambahkan';
+					}
+			}
+		
+	}
+
+
+	private function _ambil_nomorSR() 
+	{
+		$data1 = $this->admin2->nomorSR()->result();
+		$jumlah = $this->admin2->nomorSR()->num_rows();
+		$nomor = $data1[0]->nomor_suratregistrasi;
+
+		if ($jumlah =0){
+			$nomorbaru = "0001";
+		} else {
+			$nomormax = substr($nomor,0,4);
+			$nomorbaru = intval($nomormax)+1;
+		}
+
+		
+		return $nomorbaru;
+	}
+
+	public function editSR($id)
+	{
+		$data['surat_registrasi'] = $this->admin2->SR_by_id($id);
+		$data['title'] = 'Edit data Surat Registrasi';
+
+		$this->load->view('admin2/v_SRedit', $data);
+	}
+
+	public function edit_prosesSR() {
+		if ($this->input->method() === 'post') {
+		
+			$rules = $this->admin2->rulesSR();
+			$this->form_validation->set_rules($rules);
+			
+			
+			// $this->load->library('form_validation');
+			// if ($this->form_validation->run() == FALSE) {
+			// 	$data['title'] = 'Tambah Data Surat Keluar';
+			// 	$disposisi = $this->admin2->disposisi()->result();
+			// 	$data['disposisi'] = $disposisi;
+			// 	$data['nomor_suratkeluar'] = $this->_ambil_nomorSR();
+
+			// 	return $this->load->view('admin2/v_SRtambah', $data);
+			// }
+			date_default_timezone_set('Asia/Jakarta'); 
+					
+			if(!empty($_FILES['file_suratregistrasi']['name'])){		
+				
+
+				//delete file
+				$SR = $this->admin2->SR_by_id($this->input->post('id_suratregistrasi'));
+
+				if(file_exists('assets/backend/surat_registrasi/'.$SR->file_suratregistrasi) && $SR->file_suratregistrasi) {
+					unlink('assets/backend/surat_registrasi/'.$SR->file_suratregistrasi);
+				}
+				
+					$nomor_suratregistrasi = $this->input->post('nomor_suratregistrasi');
+
+					$thnNow = date("Y");
+					$ambilnomor                 = substr("$nomor_suratregistrasi",0,4);
+
+					$nama_file_lengkapSR 		= $_FILES['file_suratregistrasi']['name'];
+					$nama_fileSR 		= substr($nama_file_lengkapSR, 0, strripos($nama_file_lengkapSR, '.'));
+					$ext_fileSR		= substr($nama_file_lengkapSR, strripos($nama_file_lengkapSR, '.'));
+					$tipe_fileSR		= $_FILES['file_suratregistrasi']['type'];
+					$ukuran_fileSR 	= $_FILES['file_suratregistrasi']['size'];
+					$tmp_fileSR 		= $_FILES['file_suratregistrasi']['tmp_name'];
+					if($ukuran_fileSR > 10340000){
+						$data['error'] = 'file dokumen terlalu besar';
+					}
+					$nama = $thnNow.'-'.$ambilnomor . $ext_fileSR;
+					$pathSR = $_SERVER['DOCUMENT_ROOT'].'/Bondowoso_Bkd/assets/backend/surat_registrasi/'.$nama;
+					move_uploaded_file($tmp_fileSR, $pathSR);
+
+				$SR_edit['file_suratregistrasi'] = $nama;
+			}else{
+				$SR_edit['file_suratregistrasi'] = $this->input->post('file_lama');
+			}
+		
+			$tanggalmasuk_suratregistrasi = $this->input->post('tanggalmasuk_suratregistrasi');
+			$tanggalsurat_suratregistrasi = $this->input->post('tanggalsurat_suratregistrasi');
+			
+
+			$tgl_masuk                 = date('Y-m-d H:i:s', strtotime($tanggalmasuk_suratregistrasi));
+            $tgl_surat = date('Y-m-d', strtotime($tanggalsurat_suratregistrasi));
+			$id_surat = $this->input->post('id_suratregistrasi');
+
+			
+					$tanggal_entry  = date("Y-m-d H:i:s");
+					
+					$SR_edit = [
+
+                        'tanggalmasuk_suratregistrasi' => $tgl_masuk,
+						'kode_suratregistrasi' => $this->input->post('kode_suratregistrasi'),
+						'nomor_suratregistrasi' => $this->input->post('nomor_suratregistrasi'),
+						'nama_bagian' => $this->input->post('nama_bagian'),
+						'tanggalsurat_suratregistrasi' => $tgl_surat,
+						'kepada_suratregistrasi' => $this->input->post('kepada_suratregistrasi'),
+						'perihal_suratregistrasi' => $this->input->post('perihal_suratregistrasi'),
+						'operatorregistrasi' => $this->input->post('operatorregistrasi'),
+						'tanggal_entry' => $tanggal_entry
+
+					];
+
+					$result = $this->admin2->SR_edit($SR_edit, $id_surat);
+					if ($result > 0) {
+						$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
+							Data Surat Registrasi berhasil diubah.
 							<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
-						</button></div>');
-                redirect("admin2/surat_keluar");
-            } else {
-                $data['error'] = 'Data Surat Keluar Gagal ditambahkan';
-            }
-        }
-    }
+						</button></div>'.$pathSR);
+						redirect("admin2/surat_registrasi");
+					} else {
+						$data['error'] = 'Data Surat Registrasi Gagal diubah';
+					}
+			}
+	}
 
+	public function hapusSR($id)
+	{
+		$SRlist = $this->admin2->SR_by_id($id);
+		var_dump($SRlist);
+		
+		$data = array('id_suratregistrasi' => $SRlist->id_suratregistrasi
+						 );
+		unlink('assets/backend/surat_registrasi/'.$SRlist->file_suratregistrasi);
+		$hapusSR = $this->admin2->SR_hapus($data['id_suratregistrasi']);
+			
+	
+			
 
-    private function _ambil_nomorSK()
-    {
-        $data1 = $this->admin2->nomorSK()->result();
-        $jumlah = $this->admin2->nomorSK()->num_rows();
-        $nomor = $data1[0]->nomor_suratkeluar;
+		if ($hapusSR > 0) {
 
-        if ($jumlah = 0) {
-            $nomorbaru = "0001";
-        } else {
-            $nomormax = substr($nomor, 0, 4);
-            $nomorbaru = intval($nomormax) + 1;
-        }
-
-
-        return $nomorbaru;
-    }
-
-    public function editSK($id)
-    {
-        $data['surat_keluar'] = $this->admin2->SK_by_id($id);
-        $data['title'] = 'Edit data Surat Keluar';
-
-        // $disposisi = $this->admin->disposisi()->result();
-        $data['disposisi'] = $this->admin2->disposisi()->result();
-
-        $this->load->view('admin2/v_SKedit', $data);
-    }
-
-    public function edit_prosesSK()
-    {
-        if ($this->input->method() === 'post') {
-
-            $rules = $this->admin2->rulesSK();
-            $this->form_validation->set_rules($rules);
-
-
-            // $this->load->library('form_validation');
-            // if ($this->form_validation->run() == FALSE) {
-            // 	$data['title'] = 'Tambah Data Surat Keluar';
-            // 	$disposisi = $this->admin->disposisi()->result();
-            // 	$data['disposisi'] = $disposisi;
-            // 	$data['nomor_suratkeluar'] = $this->_ambil_nomorSK();
-
-            // 	return $this->load->view('admin/v_SKtambah', $data);
-            // }
-            date_default_timezone_set('Asia/Jakarta');
-
-            if (!empty($_FILES['file_suratkeluar']['name'])) {
-
-
-                //delete file
-                $SK = $this->admin2->SK_by_id($this->input->post('id_suratkeluar'));
-
-                if (file_exists('assets/backend/surat_keluar/' . $SK->file_suratkeluar) && $SK->file_suratkeluar) {
-                    unlink('assets/backend/surat_keluar/' . $SK->file_suratkeluar);
-                }
-
-                $nomor_suratkeluar = $this->input->post('nomor_suratkeluar');
-
-                $thnNow = date("Y");
-                $ambilnomor                 = substr("$nomor_suratkeluar", 0, 4);
-
-                $nama_file_lengkapSK         = $_FILES['file_suratkeluar']['name'];
-                $nama_fileSK         = substr($nama_file_lengkapSK, 0, strripos($nama_file_lengkapSK, '.'));
-                $ext_fileSK        = substr($nama_file_lengkapSK, strripos($nama_file_lengkapSK, '.'));
-                $tipe_fileSK         = $_FILES['file_suratkeluar']['type'];
-                $ukuran_fileSK     = $_FILES['file_suratkeluar']['size'];
-                $tmp_fileSK         = $_FILES['file_suratkeluar']['tmp_name'];
-                if ($ukuran_fileSK > 10340000) {
-                    $data['error'] = 'file dokeumen terlalu besar';
-                }
-                $nama = $thnNow . '-' . $ambilnomor . $ext_fileSK;
-                $pathSK = $_SERVER['DOCUMENT_ROOT'] . '/Bondowoso_Bkd/assets/backend/surat_keluar/' . $nama;
-                move_uploaded_file($tmp_fileSK, $pathSK);
-
-                $SK_edit['file_suratkeluar'] = $nama;
-            } else {
-                $SK_edit['file_suratkeluar'] = $this->input->post('file_lama');
-            }
-
-            $tanggalkeluar_suratkeluar = $this->input->post('tanggalkeluar_suratkeluar');
-            $tanggalsurat_suratkeluar = $this->input->post('tanggalsurat_suratkeluar');
-
-
-            $tgl_keluar                  = date('Y-m-d H:i:s', strtotime($tanggalkeluar_suratkeluar));
-            $tgl_surat                  = date('Y-m-d', strtotime($tanggalsurat_suratkeluar));
-            $id_surat = $this->input->post('id_suratkeluar');
-
-
-            $tanggal_entry  = date("Y-m-d H:i:s");
-
-            $SK_edit = [
-                'tanggalkeluar_suratkeluar' => $tgl_keluar,
-                'kode_suratkeluar' => $this->input->post('kode_suratkeluar'),
-                'nomor_suratkeluar' => $this->input->post('nomor_suratkeluar'),
-                'nama_bagian' => $this->input->post('nama_bagian'),
-                'tanggalsurat_suratkeluar' => $tgl_surat,
-                'kepada_suratkeluar' => $this->input->post('kepada_suratkeluar'),
-                'perihal_suratkeluar' => $this->input->post('perihal_suratkeluar'),
-                'operator' => $this->input->post('operator'),
-                'tanggal_entry' => $tanggal_entry
-            ];
-
-            $result = $this->admin2->SK_edit($SK_edit, $id_surat);
-            if ($result > 0) {
-                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
-							Data Surat Keluar berhasil diubah.
-							<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
-						</button></div>' . $pathSK);
-                redirect("admin2/surat_keluar");
-            } else {
-                $data['error'] = 'Data Surat Keluar Gagal diubah';
-            }
-        }
-    }
-
-    public function hapusSK($id)
-    {
-        $SKlist = $this->admin2->SK_by_id($id);
-        var_dump($SKlist);
-
-        $data = array(
-            'id_suratkeluar' => $SKlist->id_suratkeluar
-        );
-        unlink('assets/backend/surat_keluar/' . $SKlist->file_suratkeluar);
-        $hapusSK = $this->admin2->SK_hapus($data['id_suratkeluar']);
-
-
-
-
-        if ($hapusSK > 0) {
-
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
 					Data Surat KEluar berhasil dihapus.
 					<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
 				</button></div>');
-            redirect("admin2/surat_keluar");
-        } else {
-            $this->session->set_flashdata(
-                'message',
-                '<div class="alert alert-danger" role="alert">Data Gagal Diubah!</div>'
-            );
-        }
-    }
+				redirect("admin2/surat_registrasi");
+			
+		} else {
+			$this->session->set_flashdata(
+				'message',
+				'<div class="alert alert-danger" role="alert">Data Gagal Diubah!</div>'
+				);
+		}
+	}
 
-    public function detailSK($id)
-    {
-        $data['detail_SK'] = $this->admin2->SK_by_id($id);
-        $data['title'] = 'Detail data Surat Keluar';
+	public function detailSR($id) {
+		$data['detail_SR'] = $this->admin2->SR_by_id($id);
+		$data['title'] = 'Detail data Surat Keluar';
 
-        $this->load->view('admin2/v_SKdetail', $data);
-    }
+		$this->load->view('admin2/v_SRdetail', $data);
+	}
 
-    public function downloadlap_SK()
-    {
-        include APPPATH . 'third_party/PHPExcel/Classes/PHPExcel.php';
-        date_default_timezone_set("Asia/Jakarta");
+	public function downloadlap_SR()
+	{
+		include APPPATH.'third_party/PHPExcel/Classes/PHPExcel.php';
+		date_default_timezone_set("Asia/Jakarta");
 
-        $excelku = new PHPExcel();
+		$excelku = new PHPExcel();
 
-        // Set properties
-        $excelku->getProperties()->setCreator("Gabut Koding")
-            ->setLastModifiedBy("Gabut Koding");
-        //ambil data
-        $bulan = $this->input->post('bulan');
-        $tahun = $this->input->post('tahun');
-        $dataSK = $this->admin2->download_lapSK($bulan, $tahun)->result();
-        if ($bulan == '01') {
-            $bulan = "JANUARI";
-        } elseif ($bulan == '02') {
-            $bulan = "FEBRUARI";
-        } elseif ($bulan == '03') {
-            $bulan = "MARET";
-        } elseif ($bulan == '04') {
-            $bulan = "APRIL";
-        } elseif ($bulan == '05') {
-            $bulan = "MEI";
-        } elseif ($bulan == '06') {
-            $bulan = "JUNI";
-        } elseif ($bulan == '07') {
-            $bulan = "JULI";
-        } elseif ($bulan == '08') {
-            $bulan = "AGUSTUS";
-        } elseif ($bulan == '09') {
-            $bulan = "SEPTEMBER";
-        } elseif ($bulan == '10') {
-            $bulan = "OKTOBER";
-        } elseif ($bulan == '11') {
-            $bulan = "NOVEMBER";
-        } elseif ($bulan == '12') {
-            $bulan = "DESEMBER";
-        }
-        $nama_file = 'Surat Keluar-' . $bulan . '-' . $tahun;
-        // Mergecell, menyatukan beberapa kolom
-        $excelku->getActiveSheet()->mergeCells('A2:H2');
-        $excelku->getActiveSheet()->setCellValue('A2', "PEMERINTAH KOTA BONDOWOSO");
-        $excelku->getActiveSheet()->mergeCells('A3:H3');
-        $excelku->getActiveSheet()->setCellValue('A3', "BADAN KEPEGAWAIAN DAERAH KOTA BONDOWOSO");
-        $excelku->getActiveSheet()->mergeCells('A4:H4');
-        $excelku->getActiveSheet()->setCellValue('A4', "BAGIAN TATA USAHA");
-        $excelku->getActiveSheet()->mergeCells('A5:H5');
-        $excelku->getActiveSheet()->setCellValue('A5', "Jl. KH Ashari No.123 Kademangan, Kec. Bondowoso, Kabupaten Bondowoso, Jawa Timur 68217");
-        $excelku->getActiveSheet()->mergeCells('A6:H6');
-        $excelku->getActiveSheet()->setCellValue('A6', "DATA SURAT KELUAR BULAN $bulan TAHUN $tahun");
-        $excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setName('Arial');
-        $excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setSize(14);
-        $excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setBold(true);
-        $excelku->getActiveSheet()->getStyle('A2:H6')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $excelku->getActiveSheet()->getStyle('A8:H8')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $excelku->getActiveSheet()->getStyle('A8:H8')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-
-
-        // Buat Kolom judul tabel
-        $SI = $excelku->setActiveSheetIndex(0);
-        $SI->setCellValue('A8', "No");
-        $SI->setCellValue('B8', "NOMOR SURAT");
-        $SI->setCellValue('C8', "TANGGAL KELUAR");
-        $SI->setCellValue('D8', "KODE SURAT");
-        $SI->setCellValue('E8', "NAMA BAGIAN");
-        $SI->setCellValue('F8', "TANGGAL SURAT");
-        $SI->setCellValue('G8', "KEPADA");
-        $SI->setCellValue('H8', "PERIHAL");
-
-        //Mengeset Syle nya
-        $headerStylenya = new PHPExcel_Style();
-        $bodyStylenya   = new PHPExcel_Style();
-
-        $headerStylenya->applyFromArray(
-            array(
-                'fill'     => array(
-                    'type'    => PHPExcel_Style_Fill::FILL_SOLID,
-                    'color'   => array('argb' => 'FFEEEEEE')
-                ),
-                'borders' => array(
-                    'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'right'        => array('style' => PHPExcel_Style_Border::BORDER_MEDIUM),
-                    'left'        => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'top'        => array('style' => PHPExcel_Style_Border::BORDER_THIN)
-                )
-            )
-        );
-
-        $bodyStylenya->applyFromArray(
-            array(
-                'fill'     => array(
-                    'type'    => PHPExcel_Style_Fill::FILL_SOLID,
-                    'color'    => array('argb' => 'FFFFFFFF')
-                ),
-                'borders' => array(
-                    'bottom'    => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'right'        => array('style' => PHPExcel_Style_Border::BORDER_MEDIUM),
-                    'left'        => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'top'        => array('style' => PHPExcel_Style_Border::BORDER_THIN)
-                )
-            )
-        );
-        // Set page orientation and size
-        $excelku->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
-        $excelku->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEGAL);
-        $excelku->getActiveSheet()->getPageMargins()->setTop(0.75);
-        $excelku->getActiveSheet()->getPageMargins()->setRight(0.7);
-        $excelku->getActiveSheet()->getPageMargins()->setLeft(0.7);
-        $excelku->getActiveSheet()->getPageMargins()->setBottom(0.75);
+		// Set properties
+		$excelku->getProperties()->setCreator("Gabut Koding")
+								->setLastModifiedBy("Gabut Koding");
+		//ambil data
+		$bulan = $this->input->post('bulan');
+		$tahun = $this->input->post('tahun');
+		$dataSR = $this->admin2->download_lapSR($bulan, $tahun)->result();
+		if ($bulan == '01') {
+			$bulan = "JANUARI";
+		  } elseif ($bulan == '02') {
+			$bulan = "FEBRUARI";
+		  } elseif ($bulan == '03') {
+			$bulan = "MARET";
+		  } elseif ($bulan == '04') {
+			$bulan = "APRIL";
+		  } elseif ($bulan == '05') {
+			$bulan = "MEI";
+		  } elseif ($bulan == '06') {
+			$bulan = "JUNI";
+		  } elseif ($bulan == '07') {
+			$bulan = "JULI";
+		  } elseif ($bulan == '08') {
+			$bulan = "AGUSTUS";
+		  } elseif ($bulan == '09') {
+			$bulan = "SEPTEMBER";
+		  } elseif ($bulan == '10') {
+			$bulan = "OKTOBER";
+		  } elseif ($bulan == '11') {
+			$bulan = "NOVEMBER";
+		  } elseif ($bulan == '12') {
+			$bulan = "DESEMBER";
+		  }
+		$nama_file = 'Surat Keluar-'.$bulan.'-'.$tahun;
+		// Mergecell, menyatukan beberapa kolom
+		$excelku->getActiveSheet()->mergeCells('A2:H2');
+		$excelku->getActiveSheet()->setCellValue('A2', "PEMERINTAH KOTA BONDOWOSO");
+		$excelku->getActiveSheet()->mergeCells('A3:H3');
+		$excelku->getActiveSheet()->setCellValue('A3', "BADAN KEPEGAWAIAN DAERAH KOTA BONDOWOSO");
+		$excelku->getActiveSheet()->mergeCells('A4:H4');
+		$excelku->getActiveSheet()->setCellValue('A4', "BAGIAN TATA USAHA");
+		$excelku->getActiveSheet()->mergeCells('A5:H5');
+		$excelku->getActiveSheet()->setCellValue('A5', "Jl. KH Ashari No.123 Kademangan, Kec. Bondowoso, Kabupaten Bondowoso, Jawa Timur 68217");
+		$excelku->getActiveSheet()->mergeCells('A6:H6');
+		$excelku->getActiveSheet()->setCellValue('A6', "DATA SURAT KELUAR BULAN $bulan TAHUN $tahun");
+		$excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setName('Arial');
+		$excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setSize(14);
+		$excelku->getActiveSheet()->getStyle('A2:H6')->getFont()->setBold(true);
+		$excelku->getActiveSheet()->getStyle('A2:H6')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$excelku->getActiveSheet()->getStyle('A8:H8')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$excelku->getActiveSheet()->getStyle('A8:H8')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 
 
-        $baris  = 9; //Ini untuk dimulai baris datanya, karena di baris 3 itu digunakan untuk header tabel
-        $no     = 1;
+		// Buat Kolom judul tabel
+		$SI = $excelku->setActiveSheetIndex(0);
+		$SI->setCellValue('A8', "No");
+		$SI->setCellValue('B8', "NOMOR SURAT");
+		$SI->setCellValue('C8', "TANGGAL KELUAR");
+		$SI->setCellValue('D8', "KODE SURAT");
+		$SI->setCellValue('E8', "NAMA BAGIAN");
+		$SI->setCellValue('F8', "TANGGAL SURAT");
+		$SI->setCellValue('G8', "KEPADA");
+		$SI->setCellValue('H8', "PERIHAL");
 
-        foreach ($dataSK as $SK) {
-            $SI->setCellValue("A" . $baris, $no++); //mengisi data untuk nomor urut
-            $SI->setCellValue("B" . $baris, $SK->nomor_suratkeluar);
-            $SI->setCellValue("C" . $baris, $SK->tanggalkeluar_suratkeluar);
-            $SI->setCellValue("D" . $baris, $SK->kode_suratkeluar);
-            $SI->setCellValue("E" . $baris, $SK->nama_bagian);
-            $SI->setCellValue("F" . $baris, $SK->tanggalsurat_suratkeluar);
-            $SI->setCellValue("G" . $baris, $SK->kepada_suratkeluar);
-            $SI->setCellValue("H" . $baris, $SK->perihal_suratkeluar);
-            $baris++; //looping untuk barisnya
+		//Mengeset Syle nya
+		$headerStylenya = new PHPExcel_Style();
+		$bodyStylenya   = new PHPExcel_Style();
 
-            // Set lebar kolom
+		$headerStylenya->applyFromArray(
+			array('fill' 	=> array(
+				'type'    => PHPExcel_Style_Fill::FILL_SOLID,
+				'color'   => array('argb' => 'FFEEEEEE')),
+				'borders' => array('bottom'=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
+								'right'		=> array('style' => PHPExcel_Style_Border::BORDER_MEDIUM),
+								'left'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+								'top'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+				)
+			));
+			
+		$bodyStylenya->applyFromArray(
+			array('fill' 	=> array(
+				'type'	=> PHPExcel_Style_Fill::FILL_SOLID,
+				'color'	=> array('argb' => 'FFFFFFFF')),
+				'borders' => array(
+								'bottom'	=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
+								'right'		=> array('style' => PHPExcel_Style_Border::BORDER_MEDIUM),
+								'left'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+								'top'	    => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+				)
+			));
+				// Set page orientation and size
+			$excelku->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+			$excelku->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEGAL);
+			$excelku->getActiveSheet()->getPageMargins()->setTop(0.75);
+			$excelku->getActiveSheet()->getPageMargins()->setRight(0.7);
+			$excelku->getActiveSheet()->getPageMargins()->setLeft(0.7);
+			$excelku->getActiveSheet()->getPageMargins()->setBottom(0.75);
 
-            $excelku->getActiveSheet()->getColumnDimension('A')->setWidth(8.14);
-            $excelku->getActiveSheet()->getColumnDimension('B')->setWidth(29);
-            $excelku->getActiveSheet()->getColumnDimension('C')->setWidth(21);
-            $excelku->getActiveSheet()->getColumnDimension('D')->setWidth(16);
-            $excelku->getActiveSheet()->getColumnDimension('E')->setWidth(18);
-            $excelku->getActiveSheet()->getColumnDimension('F')->setWidth(21);
-            $excelku->getActiveSheet()->getColumnDimension('G')->setWidth(35);
-            $excelku->getActiveSheet()->getColumnDimension('H')->setWidth(40);
-            $excelku->getActiveSheet()->getRowDimension($baris)->setRowHeight(-1);
-            $excelku->getActiveSheet()->getStyle('A9:F' . $baris . '')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $excelku->getActiveSheet()->getStyle('A9:H' . $baris . '')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-            $excelku->getActiveSheet()->getStyle('A9:H' . $baris . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-            $excelku->getActiveSheet()->getStyle('G9:H' . $baris . '')->getAlignment()->setWrapText(true);
-            //wraptext
-        }
 
-        //Memberi nama sheet
-        $excelku->getActiveSheet()->setTitle('DataSuratKeluar');
+		$baris  = 9; //Ini untuk dimulai baris datanya, karena di baris 3 itu digunakan untuk header tabel
+		$no     = 1;
 
-        $excelku->setActiveSheetIndex(0);
+		foreach ($dataSR as $SR) {
+		$SI->setCellValue("A".$baris,$no++); //mengisi data untuk nomor urut
+		$SI->setCellValue("B".$baris,$SR->nomor_suratkeluar); 
+		$SI->setCellValue("C".$baris,$SR->tanggalkeluar_suratkeluar); 
+		$SI->setCellValue("D".$baris,$SR->kode_suratkeluar); 
+		$SI->setCellValue("E".$baris,$SR->nama_bagian); 
+		$SI->setCellValue("F".$baris,$SR->tanggalsurat_suratkeluar); 
+		$SI->setCellValue("G".$baris,$SR->kepada_suratkeluar); 
+		$SI->setCellValue("H".$baris,$SR->perihal_suratkeluar); 
+		$baris++; //looping untuk barisnya
+		
+		// Set lebar kolom
 
-        // untuk excel 2007 atau yang berekstensi .xlsx
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $nama_file . '".xlsx');
-        header('Cache-Control: max-age=0');
+			$excelku->getActiveSheet()->getColumnDimension('A')->setWidth(8.14);
+			$excelku->getActiveSheet()->getColumnDimension('B')->setWidth(29);
+			$excelku->getActiveSheet()->getColumnDimension('C')->setWidth(21);
+			$excelku->getActiveSheet()->getColumnDimension('D')->setWidth(16);
+			$excelku->getActiveSheet()->getColumnDimension('E')->setWidth(18);
+			$excelku->getActiveSheet()->getColumnDimension('F')->setWidth(21);
+			$excelku->getActiveSheet()->getColumnDimension('G')->setWidth(35);
+			$excelku->getActiveSheet()->getColumnDimension('H')->setWidth(40);
+			$excelku->getActiveSheet()->getRowDimension($baris)->setRowHeight(-1);
+			$excelku->getActiveSheet()->getStyle('A9:F'.$baris.'')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+			$excelku->getActiveSheet()->getStyle('A9:H'.$baris.'')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+			$excelku->getActiveSheet()->getStyle('A9:H'.$baris.'')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$excelku->getActiveSheet()->getStyle('G9:H'.$baris.'')->getAlignment()->setWrapText(true);
+			//wraptext
+		}
 
-        $objWriter = PHPExcel_IOFactory::createWriter($excelku, 'Excel2007');
-        $objWriter->save('php://output');
-        exit;
-    }
+		//Memberi nama sheet
+		$excelku->getActiveSheet()->setTitle('DataSuratKeluar');
+
+		$excelku->setActiveSheetIndex(0);
+
+		// untuk excel 2007 atau yang berekstensi .xlsx
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment;filename="'.$nama_file.'".xlsx');
+		header('Cache-Control: max-age=0');
+		
+		$objWriter = PHPExcel_IOFactory::createWriter($excelku, 'Excel2007');
+		$objWriter->save('php://output');
+		exit;
+	}
 
     //tutup surat keluar
 
-    // data Bagian
-    public function bagian()
-    {
-        $data['title'] = 'Data Bagian';
-        $data['data_bagian'] = $this->admin2->tampil_bagian()->result();
-
-        $this->load->view('admin2/v_bagian', $data);
-    }
-
-    public function bagian_tambah()
-    {
-        $data['title'] = 'Tambah Data Bagian';
-        $data['error'] = ' ';
-
-
-        $this->load->view('admin2/v_bagianTambah', $data);
-    }
-
-    public function bagian_proses_tambah()
-    {
-        if ($this->input->method() === 'post') {
-
-            $rules = $this->admin2->rulesBagian();
-            $this->form_validation->set_rules($rules);
-
-
-            $this->load->library('form_validation');
-            if ($this->form_validation->run() == FALSE) {
-                $data['title'] = 'Tambah Data Surat Bagian';
-                $data['error'] = ' ';
-                return $this->load->view('admin2/v_bagianTambah', $data);
-            }
-
-            $tgl_lahir                  = date('Y-m-d', strtotime($this->input->post('tanggal_lahir_bagian')));
-            $password = password_hash($this->input->post('password_bagian'), PASSWORD_DEFAULT);
-            $data_bagian = array(
-                'nama_bagian' => $this->input->post('nama_bagian'),
-                'username_admin_bagian' => $this->input->post('username_admin_bagian'),
-                'password_bagian' => $password,
-                'nama_lengkap' => $this->input->post('nama_lengkap'),
-                'tanggal_lahir_bagian' => $tgl_lahir,
-                'alamat' => $this->input->post('alamat'),
-                'no_hp_bagian' => $this->input->post('no_hp_bagian')
-            );
-            // upload gambar
-            if (!empty($_FILES['gambar']['name'])) {
-                $upload = $this->_do_upload();
-                $data_bagian['gambar'] = $upload;
-            } else {
-                $data_bagian['gambar'] = "default.jpg";
-            }
-
-            $result = $this->admin2->bagian_tambah($data_bagian);
-            if ($result > 0) {
-                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
-							Data bagian berhasil ditambahkan.
-							<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
-						</button></div>');
-                redirect("admin2/bagian");
-            } else {
-                $data['error'] = 'Data bagian Gagal ditambahkan';
-            }
-        }
-    }
-
-    public function editBagian($id)
-    {
-        $data['bagian'] = $this->admin2->bagian_by_id($id);
-        $data['title'] = 'Edit data Bagian';
-
-
-        $this->load->view('admin2/v_bagianEdit', $data);
-    }
-
-    public function bagian_proses_edit()
-    {
-        $rules = $this->admin2->rulesBagian();
-        $this->form_validation->set_rules($rules);
-
-
-        $this->load->library('form_validation');
-        if ($this->form_validation->run() == FALSE) {
-            $data['title'] = 'Edit Data Surat Bagian';
-            $data['error'] = ' ';
-            return $this->load->view('admin2/editBagian/' . $this->input->post('id_bagian'), $data);
-        }
-
-        $tgl_lahir = date('Y-m-d', strtotime($this->input->post('tanggal_lahir_bagian')));
-        $password = password_hash($this->input->post('password_bagian'), PASSWORD_DEFAULT);
-        $id_bagian = $this->input->post('id_bagian');
-        $data_edit = array(
-            'nama_bagian' => $this->input->post('nama_bagian'),
-            'username_admin_bagian' => $this->input->post('username_admin_bagian'),
-            'password_bagian' => $password,
-            'nama_lengkap' => $this->input->post('nama_lengkap'),
-            'tanggal_lahir_bagian' => $tgl_lahir,
-            'alamat' => $this->input->post('alamat'),
-            'no_hp_bagian' => $this->input->post('no_hp_bagian')
-        );
-
-
-        if (!empty($_FILES['gambar']['name'])) {
-            $upload = $this->_do_upload();
-
-            //delete file
-            $bagian = $this->admin2->bagian_by_id($this->input->post('nim'));
-            if (file_exists('assets/backend/images/bagian/' . $bagian->gambar) && $bagian->gambar != 'default.jpg')
-                unlink('assets/backend/images/bagian/' . $bagian->gambar);
-
-            $data_edit['gambar'] = $upload;
-        } else {
-            $data_edit['gambar'] = $this->input->post('file_lama');
-        }
-
-
-        $result = $this->admin2->bagian_edit($data_edit, $id_bagian);
-        if ($result > 0) {
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
-				Data bagian berhasil diubah.
-				<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
-				</button></div>');
-            redirect("admin2/bagian");
-        } else {
-            $data['error'] = 'Data bagian Gagal diubah';
-        }
-    }
-
-    private function _do_upload()
-    {
-        $username = $this->input->post('username_admin2_bagian');
-        $nama_file_lengkap         = $_FILES['gambar']['name'];
-        $ext_file        = substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
-        $config['upload_path']          = 'assets/backend/images/bagian';
-        $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 2048; //set max size allowed in Kilobyte
-        $config['max_width']            = 10000; // set max width image allowed
-        $config['max_height']           = 10000; // set max height allowed
-        $config['file_name']            =  $username . $ext_file; //just milisecond timestamp fot unique session_name()
-
-        $this->load->library('upload', $config);
-
-        if (!$this->upload->do_upload('gambar')) //upload and validate
-        {
-            $data['title'] = 'Tambah Data Surat Bagian';
-            $data['error'] = $this->upload->display_errors();
-            $this->load->view('admin2/v_bagianTambah', $data);
-        }
-        return $this->upload->data('file_name');
-    }
-
-    public function hapusBagian($id)
-    {
-        $bagianlist = $this->admin2->bagian_by_id($id);
-
-
-        $data = array('id_bagian' => $bagianlist->id_bagian);
-
-        if (file_exists('assets/backend/images/bagian/' . $bagianlist->gambar) && $bagianlist->gambar && $bagianlist->gambar != "default.jpg") {
-            unlink('assets/backend/images/bagian/' . $bagianlist->gambar);
-        }
-
-        $hapusbagian = $this->admin2->bagian_hapus($data['id_bagian']);
-
-        if ($hapusbagian > 0) {
-
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
-					Data Bagian berhasil dihapus.
-					<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
-				</button></div>');
-            redirect("admin2/bagian");
-        } else {
-            $this->session->set_flashdata(
-                'message',
-                '<div class="alert alert-danger" role="alert">Data Gagal Diubah!</div>'
-            );
-        }
-    }
-
-    public function detailBagian($id)
-    {
-        $data['detail_bagian'] = $this->admin2->bagian_by_id($id);
-        $data['title'] = 'Detail data Bagian';
-
-        $this->load->view('admin2/v_bagiandetail', $data);
-    }
-    // tutup bagian
 
     //profile
     public function profil()

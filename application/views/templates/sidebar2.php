@@ -28,19 +28,6 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                <li><a><i class="fa fa-file-text"></i> Kategori Surat <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                <!--      <li><a href="<?= base_url($this->userdata['jenis'].'/surat_masuk') ?>"><i class="fa  fa-inbox"></i>Surat Masuk</a></li>-->
-                      <li><a href="<?= base_url($this->userdata['jenis'].'/surat_keluar') ?>"><i class="fa fa-send"></i>Surat Keluar</a></li>
-                    </ul>
-                  </li>
-                  
-                    <li><a><i class="fa fa-users"></i> Registrasi <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="<?= base_url('admin2/tambahSM') ?>"><i class="fa  fa-laptop"></i>Registrasi Surat Masuk</a></li>
-                      </ul>
-                  </li>
-
                   <li><a><i class="fa fa-book" aria-hidden="true"></i> Data Registrasi <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?= base_url($this->userdata['jenis'].'/surat_registrasi') ?>"><i class="fa  fa-laptop"></i>Data Surat Masuk</a></li>
