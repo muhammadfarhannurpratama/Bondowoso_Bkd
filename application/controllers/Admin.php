@@ -18,6 +18,8 @@ class Admin extends Auth_Controller {
 		$data['bagian'] = $this->admin->jumlah('tb_bagian');
 		$data['surat_keluar'] = $this->admin->jumlah('tb_suratkeluar');
 		$data['surat_masuk'] = $this->admin->jumlah('tb_suratmasuk');
+		$data['surat_registrasi'] = $this->admin->jumlah('tb_suratregistrasi');
+
 
 		
 		$this->load->view('admin/index', $data);
@@ -31,6 +33,13 @@ class Admin extends Auth_Controller {
 
 		
 		$this->load->view('admin/v_SM', $data);
+	}
+
+	public function surat_registrasi()
+	{	
+		$data['title'] = 'Data Surat Registrasi';
+		$data['surat_registrasi'] = $this->admin->tampil_suratregistrasi()->result();	
+		$this->load->view('admin/v_SR', $data);
 	}
 
 	public function tambahSM()
@@ -243,6 +252,43 @@ class Admin extends Auth_Controller {
 			}
 		}
 	}
+
+	public function hapusSR($id)
+	{
+		$SRlist = $this->admin->SR_by_id($id);
+		var_dump($SRlist);
+		
+		$data = array('id_suratregistrasi' => $SRlist->id_suratregistrasi
+						 );
+		unlink('assets/backend/surat_registrasi/'.$SRlist->file_suratregistrasi);
+		$hapusSR2 = $this->admin->SR_hapus($data['id_suratregistrasi']);
+			
+	
+			
+
+		if ($hapusSR > 0) {
+
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
+					Data Surat Keluar berhasil dihapus.
+					<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
+				</button></div>');
+				redirect("admin/surat_registrasi");
+			
+		} else {
+			$this->session->set_flashdata(
+				'message',
+				'<div class="alert alert-danger" role="alert">Data Gagal Diubah!</div>'
+				);
+		}
+	}
+
+	public function detailSR($id) {
+		$data['detail_SR'] = $this->admin->SR_by_id($id);
+		$data['title'] = 'Detail data Surat Keluar';
+
+		$this->load->view('admin/v_SRdetail', $data);
+	}
+
 
 	public function hapusSM($id)
 	{

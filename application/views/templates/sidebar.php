@@ -37,9 +37,15 @@
                   <?php if( $this->userdata['nama'] === "admin") { ?>
                   <li><a><i class="fa fa-users"></i> Bagian <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?= base_url('admin/bagian') ?>"><i class="fa  fa-inbox"></i>Data Bagian</a></li>
+                    <li><a href="<?= base_url('admin/bagian') ?>"><i class="fa  fa-inbox"></i>Data Bagian</a></li>
                     </ul>
                   </li>
+                  <li><a><i class="fa fa-users"></i> Surat Registrasi <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="<?= base_url('admin/surat_registrasi') ?>"><i class="fa  fa-inbox"></i>Data Surat Registrasi</a></li>
+                    </ul>
+                  </li>
+                  
                   <?php } else {?>
                     <li><a><i class="fa fa-search"></i> Cek Nomor <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
