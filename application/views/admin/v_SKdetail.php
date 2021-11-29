@@ -88,5 +88,5 @@ $this->load->view('templates/sidebar');
           </div>
         </div>
 <?php
-  $detail_SKthis->load->view('templates/footer');
+  $this->load->view('templates/footer');
 ?>
