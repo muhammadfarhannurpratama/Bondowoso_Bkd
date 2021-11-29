@@ -22,21 +22,21 @@ $this->load->view('templates/sidebar2');
           </div>
           <div class="x_content">
             <br />
-            <form action="<?= base_url('admin/proses_editprofile') ?>" method="post" enctype="multipart/form-data" name="updateadmin" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-              <input type="hidden" name="id_admin" value="<?= $profil->id_admin; ?>">
+            <form action="<?= base_url('admin2/proses_editprofile') ?>" method="post" enctype="multipart/form-data" name="updateadmin" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+              <input type="hidden" name="id_admin2" value="<?= $profil->id_admin2; ?>">
               <input type="hidden" name="file_lama" value="<?= $profil->gambar; ?>">
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama Lengkap <span class="required">*</span>
                 </label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <input value="<?= $profil->nama_admin; ?>" type="text" id="nama_admin" name="nama_admin" required="required" maxlength="70" placeholder="Masukkan Nama Lengkap" class="form-control col-md-7 col-xs-12">
+                  <input value="<?= $profil->nama_admin2; ?>" type="text" id="nama_admin2" name="nama_admin2" required="required" maxlength="70" placeholder="Masukkan Nama Lengkap" class="form-control col-md-7 col-xs-12">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Username Admin <span class="required">*</span>
                 </label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <input value="<?= $profil->username_admin; ?>" type="text" id="username_admin" name="username_admin" required="required" maxlength="50" placeholder="Masukkan Username Admin" class="form-control col-md-7 col-xs-12">
+                  <input value="<?= $profil->username_admin2; ?>" type="text" id="username_admin2" name="username_admin2" required="required" maxlength="50" placeholder="Masukkan Username Admin" class="form-control col-md-7 col-xs-12">
                 </div>
               </div>
               <div class="form-group">
@@ -63,7 +63,7 @@ $this->load->view('templates/sidebar2');
               <div class="ln_solid"></div>
               <div class="form-group">
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                  <a href="<?= base_url('admin/profil') ?>" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Batal</a>
+                  <a href="<?= base_url('admin2/profil') ?>" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Batal</a>
                   <button type="submit" name="input" value="Simpan" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Simpan</button>
                 </div>
               </div>

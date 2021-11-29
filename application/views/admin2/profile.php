@@ -30,9 +30,9 @@ $this->load->view('templates/sidebar2');
                   <img class="img-responsive avatar-view" src="<?= base_url('assets/backend/') ?>images/<?= $this->userdata['jenis']; ?>/<?= $this->userdata['gambar']; ?>" alt="Avatar" title="Change the avatar">
                 </div>
               </div>
-              <h3 align="center"><?= $profil->nama_admin; ?></h3>
+              <h3 align="center"><?= $profil->nama_admin2; ?></h3>
 
-              <a href="<?= base_url('admin/editprofil') ?>"><button type="button" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> Edit Profil</button></a>
+              <a href="<?= base_url('admin2/editprofil') ?>"><button type="button" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> Edit Profil</button></a>
               <br />
             </div>
             <div class="col-md-9 col-sm-9 col-xs-12">
@@ -47,15 +47,15 @@ $this->load->view('templates/sidebar2');
                 <tbody>
                   <tr>
                     <td>ID</td>
-                    <td><?= $profil->id_admin; ?></td>
+                    <td><?= $profil->id_admin2; ?></td>
                   </tr>
                   <tr>
                     <td>Nama Admin</td>
-                    <td><?= $profil->nama_admin; ?></td>
+                    <td><?= $profil->nama_admin2; ?></td>
                   </tr>
                   <tr>
                     <td>Username Admin</td>
-                    <td><?= $profil->username_admin; ?></td>
+                    <td><?= $profil->username_admin2; ?></td>
                   </tr>
                 </tbody>
               </table>
