@@ -74,9 +74,19 @@ class M_kepala extends CI_Model {
 		return $this->db->get('tb_suratmasuk');
 	}
 
+	function tampil_suratregistrasi(){
+		return $this->db->get('tb_suratregistrasi');
+	}
+
 	function nomorSM() {
 	
 		$query=$this->db->query('SELECT * FROM tb_suratmasuk ORDER BY nomorurut_suratmasuk DESC LIMIT 1');
+		return $query;
+	}
+
+	function nomorSR() {
+	
+		$query=$this->db->query('SELECT * FROM tb_suratregistrasi ORDER BY nomor_suratregistrasi DESC LIMIT 1');
 		return $query;
 	}
 
@@ -97,6 +107,20 @@ class M_kepala extends CI_Model {
 	{
 		$this->db->delete('tb_suratmasuk', array('id_suratmasuk' => $id_suratmasuk));
 		return $this->db->affected_rows();
+	}
+
+	function SR_hapus($id_suratregistrasi)
+	{
+		$this->db->delete('tb_suratregistrasi', array('id_suratregistrasi' => $id_suratregistrasi));
+		return $this->db->affected_rows();
+	}
+
+	function SR_by_id($id) {
+		$this->db->from('tb_suratregistrasi');
+		$this->db->where('id_suratregistrasi',$id);
+		$query = $this->db->get();
+
+		return $query->row();
 	}
 
 	function SM_by_id($id) {

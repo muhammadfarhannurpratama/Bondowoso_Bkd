@@ -2,7 +2,7 @@
 
     $this->load->view('templates/header', $title);
 		$this->load->view('templates/navbar');
-    $this->load->view('templates/sidebar');
+    $this->load->view('templates/sidebar_kepala');
 
 ?>
         <!-- page content -->
@@ -58,8 +58,8 @@
                           </select>
                         </div>
                    <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> Unduh Laporan Surat Masuk</button></a> 
-                  <a href="<?= base_url('kepala/tambahSM')?>"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Surat Masuk</button></a>
-                  </form>
+                 <!-- <a href="<?= base_url('kepala/tambahSM')?>"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Surat Masuk</button></a>
+                  --></form>
                   <div class="x_content">
                   <div class="x_content">
                     <table id="datatable" class="table table-striped table-bordered">

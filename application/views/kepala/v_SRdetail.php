@@ -2,7 +2,7 @@
 
 $this->load->view('templates/header', $title);
 $this->load->view('templates/navbar');
-$this->load->view('templates/sidebar');
+$this->load->view('templates/sidebar_kepala');
 
 ?>
 <div class="right_col" role="main">
@@ -77,7 +77,7 @@ $this->load->view('templates/sidebar');
                 </tbody>
               </table>
               <div class="text-right">
-                <a href="<?= base_url('admin/surat_registrasi') ?>" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Kembali</a>
+                <a href="<?= base_url('kepala/surat_registrasi') ?>" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Kembali</a>
               </div>
 
             </div>
