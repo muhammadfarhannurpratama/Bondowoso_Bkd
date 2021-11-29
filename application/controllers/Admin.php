@@ -253,7 +253,8 @@ class Admin extends Auth_Controller {
 		}
 	}
 
-	public function hapusSR($id)
+				
+		public function hapusSR($id)
 	{
 		$SRlist = $this->admin->SR_by_id($id);
 		var_dump($SRlist);
@@ -261,15 +262,16 @@ class Admin extends Auth_Controller {
 		$data = array('id_suratregistrasi' => $SRlist->id_suratregistrasi
 						 );
 		unlink('assets/backend/surat_registrasi/'.$SRlist->file_suratregistrasi);
-		$hapusSR2 = $this->admin->SR_hapus($data['id_suratregistrasi']);
-			
-	
-			
+		$hapusSR = $this->admin->SR_hapus($data['id_suratregistrasi']);
+				
+
+
+
 
 		if ($hapusSR > 0) {
 
 			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
-					Data Surat Keluar berhasil dihapus.
+					Data Surat Registrasi berhasil dihapus.
 					<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
 				</button></div>');
 				redirect("admin/surat_registrasi");
