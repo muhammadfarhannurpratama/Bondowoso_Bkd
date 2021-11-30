@@ -91,8 +91,8 @@ class Admin2 extends Auth_Controller
 						'perihal_suratregistrasi' => $this->input->post('perihal_suratregistrasi'),
 						'operatorregistrasi' => $this->input->post('operatorregistrasi'),
 						'file_suratregistrasi' => $namaSR_baru,
-						'tanggal_entry' => $tanggal_entry
-						
+						'tanggal_entry' => $tanggal_entry,
+						'status' => "belumd"
 					];
 
 					$result = $this->admin2->SR_tambah($SR_baru);

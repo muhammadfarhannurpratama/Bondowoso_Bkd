@@ -254,6 +254,34 @@ class Admin extends Auth_Controller {
 	}
 
 				
+	public function status($id) {
+		$data['ubah_status'] = $this->admin->SR_by_id($id);
+		$data['title'] = 'Ubah Status Surat Registrasi';
+
+		$this->load->view('admin/v_SRstatus', $data);
+	}
+
+	public function edit_prosesSRstatus() {
+		$id_surat = $this->input->post('id_suratregistrasi');
+		$status = $this->input->post('status');
+
+		$UbahstatusSR = $this->admin->SR_statusProses($id_surat, $status);
+		if ($UbahstatusSR > 0) {
+
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
+					Data Status Surat Registrasi Sudah Diubah .
+					<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
+				</button></div>');
+				redirect("admin/surat_registrasi");
+			
+		} else {
+			$this->session->set_flashdata(
+				'message',
+				'<div class="alert alert-danger" role="alert">Data Gagal Diubah!</div>'
+				);
+		}
+	}
+
 		public function hapusSR($id)
 	{
 		$SRlist = $this->admin->SR_by_id($id);

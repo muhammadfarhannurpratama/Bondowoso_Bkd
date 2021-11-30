@@ -84,6 +84,11 @@ class M_admin extends CI_Model {
 		return $query;
 	}
 
+	function SR_statusProses($id, $status) {
+		$query=$this->db->query("UPDATE tb_suratregistrasi SET status = '".$status."' WHERE id_suratregistrasi =".$id."");
+		return $query;
+	}
+
 	function nomorSR() {
 	
 		$query=$this->db->query('SELECT * FROM tb_suratregistrasi ORDER BY nomor_suratregistrasi DESC LIMIT 1');

@@ -68,6 +68,7 @@ $this->load->view('templates/sidebar2');
                     <th width="10%">Tanggal Registrasi</th>
                     <th width="3%">Kode Surat</th>
                     <th width="10%">Tanggal Surat</th>
+                    <th width="10%">Status Surat</th>
                     <th width="14%">Bagian</th>
                     <th width="10%">Kepada</th>
                     <th width="25%">Perihal</th>
@@ -81,6 +82,7 @@ $this->load->view('templates/sidebar2');
                       <td><?= $registrasi->tanggalmasuk_suratregistrasi ?></td>
                       <td><?= $registrasi->kode_suratregistrasi ?></td>
                       <td><?= $registrasi->tanggalsurat_suratregistrasi ?></td>
+                      <td><?= $registrasi->status ?></td>
                       <td><?= $registrasi->nama_bagian ?></td>
                       <td><?= $registrasi->kepada_suratregistrasi ?></td>
                       <td><?= $registrasi->perihal_suratregistrasi ?></td>
@@ -88,6 +90,7 @@ $this->load->view('templates/sidebar2');
                         <a href="<?= base_url('assets/backend/surat_registrasi/' . $registrasi->file_suratregistrasi) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
                         <!--     <a href="<?= base_url('admin/unduhDisposisiSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Unduh Disposisi" class="btn btn-info btn-xs"><i class="fa fa-download"></i></button></a> -->
                         <a href="<?= base_url('admin2/detailSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Detail Surat Registrasi" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
+                       
                         <a href="<?= base_url('admin2/editSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button></a>
                         <a onclick="return konfirmasi()" href="<?= base_url('admin2/hapusSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
                       </td>
