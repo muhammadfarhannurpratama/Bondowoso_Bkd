@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2021 at 01:19 AM
+-- Generation Time: Nov 30, 2021 at 01:52 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.1.32
 
@@ -162,8 +162,6 @@ INSERT INTO `tb_suratkeluar` (`id_suratkeluar`, `tanggalkeluar_suratkeluar`, `ko
 (90, '2017-11-18 08:30:00', '376', '3458/ASSIII/2017', 'ASS.III', '2017-11-18', 'Kontraktor Bangunan', 'Penindakan Bangunan tanpa surat izin mendirikan bangunan', '2017-3458.pdf', 'admin', '2017-11-18 03:19:54'),
 (91, '2017-11-30 01:00:00', '454', '3457/ORTAL/2017', 'ORTAL', '2017-11-30', 'Lurah SE-KOTA SAMARINDA', 'Pelatihan Kelembagaan Desa', '2017-3457.pdf', 'admin', '2017-11-30 00:01:06'),
 (92, '2017-12-06 08:17:00', '342', '3459/TU/2017', 'TU', '2017-12-06', 'CAMAT SE-KOTA SAMARINDA', 'pilgub', '2017-3459.pdf', 'admin', '2017-12-06 07:19:29'),
-(95, '2021-11-01 08:17:00', '7237', '3460', 'evos', '2021-11-01', 'Kepala Bagian Lingkup Evos', 'sjdbsdbjsdb', '2021-3460.pdf', 'admin', '2021-11-01 08:17:42'),
-(96, '2021-11-01 08:47:00', '8232', '3461', 'HUKUM', '2021-11-01', 'Kepala Bagian Lingkup Evos', 'jsbcj', '2021-3461.pdf', 'admin', '2021-11-01 08:48:12'),
 (97, '2021-11-01 00:00:00', '8437', '3462', 'evos', '2021-11-01', 'BTR ONIC', 'BTR ONIC', '2021-3462.pdf', 'admin', '2021-11-01 10:31:43'),
 (98, '2021-11-01 00:00:00', '1211', '3463', 'evos', '2021-11-01', 'GPX jgasg', 'GPX asgasg', '2021-3463.pdf', 'admin', '2021-11-01 11:17:01'),
 (99, '2021-11-02 09:20:00', '8232', '3464', 'rrq', '2021-11-02', 'rrq', 'rrq', '2021-3464.pdf', 'admin', '2021-11-02 09:20:39'),
@@ -202,14 +200,10 @@ CREATE TABLE `tb_suratmasuk` (
 --
 
 INSERT INTO `tb_suratmasuk` (`id_suratmasuk`, `tanggalmasuk_suratmasuk`, `kode_suratmasuk`, `nomorurut_suratmasuk`, `nomor_suratmasuk`, `tanggalsurat_suratmasuk`, `pengirim`, `kepada_suratmasuk`, `perihal_suratmasuk`, `file_suratmasuk`, `operator`, `tanggal_entry`, `disposisi1`, `tanggal_disposisi1`, `disposisi2`, `tanggal_disposisi2`, `disposisi3`, `tanggal_disposisi3`, `status`) VALUES
-(3, '2017-09-20 14:00:00', '011', '4519', '036/B/HMJELEKTRO/IX/2017', '2017-09-18', 'FORUM KOMUNIKASI HIMPUNAN MAHASISWA ELEKTRO INDONESIA WILAYAH XIII KALIMANTAN', 'UMUM', 'Permohonan\r\n', '2017-4519.pdf', 'admin2', '2017-11-14 23:43:44', 'UMUM', '2017-09-22 11:00:00', '', '1970-01-01 07:00:00', 'UMUM', '2017-09-22 11:05:00', 'belumd'),
 (6, '2017-09-26 10:00:00', '061', '4521', '061/4382/SJ', '2017-09-20', 'MENDAGRI RI', 'Organisasi', 'Surat Edaran Tentang Mekanisme Layanan Administrasi Kemendagri\r\n', '2017-4521.pdf', 'admin', '2017-12-02 21:44:11', 'ASS.III', '2017-09-26 15:00:00', '', '1970-01-01 07:00:00', 'ORTAL', '2017-09-27 11:30:00', 'belumd'),
-(7, '2017-09-25 14:00:00', '503', '4522', '503/744/100.26', '2017-09-25', 'DINAS PENANAMAN MODAL DAN PELAYANAN TERPADU SATU PINTU KOTA SAMARINDA', 'PLH SEKDA', 'Tindak Lanjut Permohonan Penghapusan Denda Retribusi IMB PT.Borneo Inti Graha\r\n', '2017-4522.pdf', 'admin', '2021-10-29 09:04:45', 'PLH.SEKDA', '2017-09-26 10:00:00', 'evos', '1970-01-01 07:00:00', 'HUKUM', '2017-09-27 15:00:00', 'belumd'),
+(7, '2017-09-25 14:00:00', '503', '4522', '503/744/100.26', '2017-09-25', 'DINAS PENANAMAN MODAL DAN PELAYANAN TERPADU SATU PINTU KOTA SAMARINDA', 'PLH SEKDA', 'Tindak Lanjut Permohonan Penghapusan Denda Retribusi IMB PT.Borneo Inti Graha\r\n', '2017-4522.pdf', 'admin', '2021-10-29 09:04:45', 'PLH.SEKDA', '2017-09-26 10:00:00', 'evos', '1970-01-01 07:00:00', 'HUKUM', '2017-09-27 15:00:00', 'sudah'),
 (55, '2021-11-18 08:58:00', '9273', '4523', 'sdknsdhishd', '2021-11-18', 'sifishfish', 'isfhishfih', 'hifhisfhishi', '2021-4523.pdf', 'admin', '2021-11-18 08:59:22', 'WALIKOTA', '2021-11-18 08:59:00', 'WAKIL WALIKOTA', '2021-11-18 08:59:00', 'SEKDA', '2021-11-18 09:00:00', 'belum'),
-(56, '2021-11-18 09:41:00', '9372', '4524', 'sodsdjoj', '2021-11-18', 'osdjosjdohiefkdcohefidnkc', 'jsdosdowjdsnkc', 'sodjosjdojsodjs', '2021-4524.pdf', 'admin', '2021-11-18 09:43:16', 'SEKDA', '2021-11-18 09:45:00', 'UMUM', '2021-11-18 09:43:00', 'evos', '2021-11-18 09:45:00', 'belumd'),
-(57, '2021-11-18 10:58:00', '9232', '4525', 'TESTTTT', '2021-11-18', 'TESTTTT', 'TESTTTT', 'TESTTTT', '2021-4525.pdf', 'admin', '2021-11-18 10:59:14', 'WALIKOTA', '2021-11-18 10:58:00', 'WAKIL WALIKOTA', '2021-11-18 10:59:00', 'SEKDA', '2021-11-18 11:00:00', 'belumd'),
-(58, '2021-11-18 11:03:00', '6153', '4526', 'eror', '2021-11-18', 'eror', 'eror', 'eror', '2021-4526.pdf', 'admin', '2021-11-18 11:03:44', 'WALIKOTA', '2021-11-18 11:03:00', 'WAKIL WALIKOTA', '2021-11-18 11:03:00', 'SEKDA', '2021-11-18 11:04:00', 'sudah'),
-(59, '2021-11-26 07:57:00', '29371', '4527', 'sdohsdo', '2021-11-26', 'hsdih', 'wosdoh', 'sodhosh', '2021-4527.pdf', 'admin', '2021-11-26 07:58:00', 'rrq', '2021-11-26 07:57:00', 'evos', '2021-11-26 07:57:00', 'WALIKOTA', '2021-11-26 07:58:00', 'sudah');
+(56, '2021-11-18 09:41:00', '9372', '4524', 'sodsdjoj', '2021-11-18', 'osdjosjdohiefkdcohefidnkc', 'jsdosdowjdsnkc', 'sodjosjdojsodjs', '2021-4524.pdf', 'admin', '2021-11-18 09:43:16', 'SEKDA', '2021-11-18 09:45:00', 'UMUM', '2021-11-18 09:43:00', 'evos', '2021-11-18 09:45:00', 'belum');
 
 -- --------------------------------------------------------
 
@@ -228,16 +222,17 @@ CREATE TABLE `tb_suratregistrasi` (
   `perihal_suratregistrasi` text NOT NULL,
   `file_suratregistrasi` varchar(255) NOT NULL,
   `operatorregistrasi` varchar(50) NOT NULL,
-  `tanggal_entry` datetime NOT NULL DEFAULT current_timestamp()
+  `tanggal_entry` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_suratregistrasi`
 --
 
-INSERT INTO `tb_suratregistrasi` (`id_suratregistrasi`, `tanggalmasuk_suratregistrasi`, `kode_suratregistrasi`, `nomor_suratregistrasi`, `nama_bagian`, `tanggalsurat_suratregistrasi`, `kepada_suratregistrasi`, `perihal_suratregistrasi`, `file_suratregistrasi`, `operatorregistrasi`, `tanggal_entry`) VALUES
-(1, '2021-11-19 06:03:00', '123', '1', '', '0000-00-00', 'kepala bkd skdh', 'rapat skdsd', '', 'amin2', '0000-00-00 00:00:00'),
-(4, '2021-11-28 20:21:00', '8219', 'mabuk cong', 'coba kadek maleh tak plengen', '2021-11-28', 'mabuk cong', 'alhamdulilllah gk errroorr', '2021-test.pdf', 'admin2', '2021-11-28 20:31:34');
+INSERT INTO `tb_suratregistrasi` (`id_suratregistrasi`, `tanggalmasuk_suratregistrasi`, `kode_suratregistrasi`, `nomor_suratregistrasi`, `nama_bagian`, `tanggalsurat_suratregistrasi`, `kepada_suratregistrasi`, `perihal_suratregistrasi`, `file_suratregistrasi`, `operatorregistrasi`, `tanggal_entry`, `status`) VALUES
+(8, '2021-11-29 10:33:00', '23972', 'ppkpkpk', 'lklmllm', '2021-11-29', 'lmlmpk', 'pkkpp', '2021-ppkp.pdf', 'admin2', '2021-11-29 10:34:11', 'sudah'),
+(10, '2021-11-30 07:44:00', '2990', 'test', 'coba', '2021-11-30', 'bismillah', 'semoga gk eror', '2021-test.pdf', 'admin2', '2021-11-30 07:45:07', 'belum');
 
 --
 -- Indexes for dumped tables
@@ -334,7 +329,7 @@ ALTER TABLE `tb_suratmasuk`
 -- AUTO_INCREMENT for table `tb_suratregistrasi`
 --
 ALTER TABLE `tb_suratregistrasi`
-  MODIFY `id_suratregistrasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_suratregistrasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
