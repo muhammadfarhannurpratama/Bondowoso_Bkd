@@ -57,7 +57,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Foto Sebelumnya <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <img src="<?= base_url('assets/backend/images/kepala')?>images/<?= $this->userdata['jenis']; ?>/<?= $profil->gambar; ?>" class="img-circle" height="80" width="80" style="border: 2px solid #666666;" /> 
+                          <img src="<?= base_url('assets/backend/')?>images/<?= $this->userdata['jenis']; ?>/<?= $profil->gambar; ?>" class="img-circle" height="80" width="80" style="border: 2px solid #666666;" /> 
                         </div>
                       </div>
                       <div class="ln_solid"></div>

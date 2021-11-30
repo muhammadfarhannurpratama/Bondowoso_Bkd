@@ -9,8 +9,8 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-              <?php if ( $this->userdata['jenis'] === 'admin') :?>
-                <img src="<?= base_url('assets/backend/')?>images/admin/<?= $this->userdata['gambar']; ?>" height="55" width="55" alt="" class="img-circle profile_img">
+              <?php if ( $this->userdata['jenis'] === 'bagian') :?>
+                <img src="<?= base_url('assets/backend/')?>images/bagian/<?= $this->userdata['gambar']; ?>" height="55" width="55" alt="" class="img-circle profile_img">
               <?php elseif ($this->userdata['jenis'] === 'bagian') :?>
                 <img src="<?= base_url('assets/backend/bagian/'.$this->userdata['gambar'])?>" height="55" width="55" alt="" class="img-circle profile_img">
               <?php endif;?>
@@ -47,9 +47,9 @@
                   </li>
                   
                   <?php } else {?>
-                    <li><a><i class="fa fa-search"></i> Cek Nomor <span class="fa fa-chevron-down"></span></a>
+
                     <ul class="nav child_menu">
-                      <li><a href="<?= base_url('bagian/nomor') ?>"><i class="fa  fa-laptop"></i>Nomor Surat Keluar</a></li>
+                      
                     </ul>
                   </li>
                   <?php } ?>
