@@ -64,14 +64,14 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th width="3%">No Urut</th>
-                          <th width="15%">Tanggal Masuk</th>
-                          <th width="3%">Status</th>
+                          <th width="5%">No Urut</th>
+                          <th width="10%">Tanggal Masuk</th>
+                          <th width="5%">Status</th>
                           <th width="10%">Tanggal Surat</th>
-                          <th width="14%">Pengirim</th>
+                          <th width="15%">Pengirim</th>
                           <th width="15%">Nomor Surat</th>
                           <th width="10%">Kepada</th>
-                          <th width="10%">Aksi</th>
+                          <th width="15%">Aksi</th>
                         </tr>
                       </thead>
                       <tbody>

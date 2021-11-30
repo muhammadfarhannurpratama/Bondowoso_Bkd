@@ -65,19 +65,21 @@ $this->load->view('templates/sidebar_kepala');
                 <thead>
                   <tr>
                     <th width="13%">No Surat</th>
+                    <th width="10%">Status</th>
                     <th width="10%">Tanggal Registrasi</th>
-                    <th width="3%">Kode Surat</th>
+                    <th width="5%">Kode Surat</th>
                     <th width="10%">Tanggal Surat</th>
                     <th width="14%">Bagian</th>
                     <th width="10%">Kepada</th>
-                    <th width="25%">Perihal</th>
-                    <th width="15%">Aksi</th>
+                    <th width="15%">Perihal</th>
+                    <th width="20%">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php foreach ($surat_registrasi as $registrasi) : ?>
                     <tr>
                       <td><?= $registrasi->nomor_suratregistrasi ?></td>
+                      <td><?= $registrasi->status ?></td>
                       <td><?= $registrasi->tanggalmasuk_suratregistrasi ?></td>
                       <td><?= $registrasi->kode_suratregistrasi ?></td>
                       <td><?= $registrasi->tanggalsurat_suratregistrasi ?></td>

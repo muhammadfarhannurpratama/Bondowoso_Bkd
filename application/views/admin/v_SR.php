@@ -64,15 +64,15 @@ $this->load->view('templates/sidebar');
               <table id="datatable" class="table table-striped table-bordered">
                 <thead>
                   <tr>
-                    <th width="13%">No Surat</th>
-                    <th width="13%">Status</th>
+                    <th width="10%">No Surat</th>
+                    <th width="10%">Status</th>
                     <th width="10%">Tanggal Registrasi</th>
-                    <th width="3%">Kode Surat</th>
+                    <th width="5%">Kode Surat</th>
                     <th width="10%">Tanggal Surat</th>
-                    <th width="14%">Bagian</th>
+                    <th width="15%">Bagian</th>
                     <th width="10%">Kepada</th>
-                    <th width="25%">Perihal</th>
-                    <th width="15%">Aksi</th>
+                    <th width="15%">Perihal</th>
+                    <th width="20%">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>

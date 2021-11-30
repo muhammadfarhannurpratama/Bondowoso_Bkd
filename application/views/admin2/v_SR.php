@@ -71,8 +71,8 @@ $this->load->view('templates/sidebar2');
                     <th width="10%">Tanggal Surat</th>
                     <th width="14%">Bagian</th>
                     <th width="10%">Kepada</th>
-                    <th width="25%">Perihal</th>
-                    <th width="15%">Aksi</th>
+                    <th width="15%">Perihal</th>
+                    <th width="20%">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>

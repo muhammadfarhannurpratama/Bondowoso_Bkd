@@ -65,14 +65,14 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th width="15%">Nomor Surat</th>
+                          <th width="10%">Nomor Surat</th>
                           <th width="10%">Tanggal Keluar</th>
                           <th width="5%">Kode Surat</th>
                           <th width="10%">Tanggal Surat</th>
                           <th width="10%">Bagian</th>
                           <th width="15%">Kepada</th>
-                          <th width="21%">Perihal</th>
-                          <th width="14%">Aksi</th>
+                          <th width="15%">Perihal</th>
+                          <th width="20%">Aksi</th>
                         </tr>
                       </thead>
                       <tbody>
