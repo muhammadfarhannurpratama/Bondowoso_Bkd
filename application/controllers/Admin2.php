@@ -66,6 +66,7 @@ class Admin2 extends Auth_Controller
 			date_default_timezone_set('Asia/Jakarta'); 
 					$thnNow = date("Y");
 
+			if(!empty($_FILES['file_suratregistrasi']['name'])){		
 			$nama_file_lengkap 		= $_FILES['file_suratregistrasi']['name'];
 			$nama_file 		= substr($nama_file_lengkap, 0, strripos($nama_file_lengkap, '.'));
 			$ext_file		= substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
@@ -75,7 +76,11 @@ class Admin2 extends Auth_Controller
 			if($ukuran_file > 10340000){
 				$data['error'] = 'file dokumen terlalu besar';
 			}
-			$namaSR_baru = $thnNow.'-'.$ambilnomor . $ext_file;
+			$namaSR_baru = $thnNow.'-'.$nomo_suratregistrasi . $ext_file;
+			}else{
+				$namaSR_baru = " ";
+		}
+			
 			$path = $_SERVER['DOCUMENT_ROOT'].'/Bondowoso_Bkd/assets/backend/surat_registrasi/'.$namaSR_baru;
 			move_uploaded_file($tmp_file, $path);
 
