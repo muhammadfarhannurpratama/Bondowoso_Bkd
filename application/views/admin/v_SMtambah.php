@@ -5,6 +5,7 @@
     $this->load->view('templates/sidebar');
 
 ?>
+<?php error_reporting(0);?>
  <!-- page content -->
  <div class="right_col" role="main">
           <div class="">
@@ -119,7 +120,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">File <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input name="file_suratmasuk" accept="application/pdf" type="file" id="file_suratmasuk" class="form-control" autocomplete="off"/> *max 10mb 
+                         <input name="file_suratmasuk"  accept="application/pdf" type="file" id="file_suratmasuk" class="form-control" autocomplete="off"/> *max 10mb 
                         </div>
                         <?php if (isset($error)) : ?>
                           <div class="invalid-feedback"><?= $error ?></div>

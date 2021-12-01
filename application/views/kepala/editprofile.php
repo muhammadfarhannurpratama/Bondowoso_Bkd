@@ -36,7 +36,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Username Kepala <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input value="<?= $profil->username_admin_kepala;?>" type="text" id="username_kepala" name="username_admin_kepala" required="required" maxlength="50" placeholder="Masukkan Username kepala" class="form-control col-md-7 col-xs-12">
+                          <input value="<?= $profil->username_admin_kepala;?>" type="text" id="username_admin_kepala" name="username_admin_kepala" required="required" maxlength="50" placeholder="Masukkan Username kepala" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">

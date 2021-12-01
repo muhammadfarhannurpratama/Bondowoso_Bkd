@@ -87,17 +87,21 @@ class Admin extends Auth_Controller {
 
 			date_default_timezone_set('Asia/Jakarta'); 
 					$thnNow = date("Y");
-
-			$nama_file_lengkap 		= $_FILES['file_suratmasuk']['name'];
-			$nama_file 		= substr($nama_file_lengkap, 0, strripos($nama_file_lengkap, '.'));
-			$ext_file		= substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
-			$tipe_file 		= $_FILES['file_suratmasuk']['type'];
-			$ukuran_file 	= $_FILES['file_suratmasuk']['size'];
-			$tmp_file 		= $_FILES['file_suratmasuk']['tmp_name'];
-			if($ukuran_file > 10340000){
-				$data['error'] = 'file gambar terlalu besar';
+			if(!empty($_FILES['file_suratmasuk']['name'])){
+				$nama_file_lengkap 		= $_FILES['file_suratmasuk']['name'];
+				$nama_file 		= substr($nama_file_lengkap, 0, strripos($nama_file_lengkap, '.'));
+				$ext_file		= substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
+				$tipe_file 		= $_FILES['file_suratmasuk']['type'];
+				$ukuran_file 	= $_FILES['file_suratmasuk']['size'];
+				$tmp_file 		= $_FILES['file_suratmasuk']['tmp_name'];
+				if($ukuran_file > 10340000){
+					$data['error'] = 'file gambar terlalu besar';
+				}
+				$nama_baru = $thnNow.'-'.$nomorurut_suratmasuk . $ext_file;
+			}else{
+				$nama_baru = " ";
 			}
-			$nama_baru = $thnNow.'-'.$nomorurut_suratmasuk . $ext_file;
+
 			$path = $_SERVER['DOCUMENT_ROOT'].'/Bondowoso_Bkd/assets/backend/surat_masuk/'.$nama_baru;
 			move_uploaded_file($tmp_file, $path);
 
@@ -353,17 +357,22 @@ class Admin extends Auth_Controller {
 	{
 		$data1 = $this->admin->nomorSM()->result();
 		$jumlah = $this->admin->nomorSM()->num_rows();
-		$nomor = $data1[0]->nomorurut_suratmasuk;
+		
 
-		if ($jumlah =0){
+		if ($jumlah === 0){
 			$nomorbaru = "0001";
+			return $nomorbaru;
+			exit();
 		} else {
+			$nomor = $data1[0]->nomorurut_suratmasuk;
 			$nomormax = substr($nomor,0,4);
 			$nomorbaru = intval($nomormax)+1;
+			return $nomorbaru;
+			exit();
 		}
 
 		
-		return $nomorbaru;
+		
 	}
 
 	public function detailSM($id) {
@@ -841,18 +850,24 @@ class Admin extends Auth_Controller {
 	{
 		$data1 = $this->admin->nomorSK()->result();
 		$jumlah = $this->admin->nomorSK()->num_rows();
-		$nomor = $data1[0]->nomor_suratkeluar;
+		
 
-		if ($jumlah =0){
+		if ($jumlah === 0){
 			$nomorbaru = "0001";
+			return $nomorbaru;
+			exit();
 		} else {
+			$nomor = $data1[0]->nomor_suratkeluar;
 			$nomormax = substr($nomor,0,4);
 			$nomorbaru = intval($nomormax)+1;
+			return $nomorbaru;
+			exit();
 		}
 
 		
-		return $nomorbaru;
+		
 	}
+
 
 	public function editSK($id)
 	{
