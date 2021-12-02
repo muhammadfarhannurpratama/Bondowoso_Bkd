@@ -50,7 +50,7 @@ $this->load->view('templates/sidebar2');
               <select name="tahun" class="select2_single form-control" tabindex="-1">
                 <option>Pilih Tahun</option>
                 <?php
-                for ($tahun = 2017; $tahun <= 2022; $tahun++) {
+                for ($tahun = 2021; $tahun <= 2030; $tahun++) {
                   echo  '<option value="' . $tahun . '">' . $tahun . '</option>';
                 }
                 ?>
@@ -88,12 +88,12 @@ $this->load->view('templates/sidebar2');
                       <td><?= $registrasi->perihal_suratregistrasi ?></td>
                       <td style="text-align:center;">
                         <?php if ($registrasi->file_suratregistrasi != ' ') : ?>
-                                <a href="<?= base_url('assets/backend/surat_registrasi/'.$registrasi->file_suratregistrasi) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
-                                <?php endif;?>
-                       
+                          <a href="<?= base_url('assets/backend/surat_registrasi/' . $registrasi->file_suratregistrasi) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
+                        <?php endif; ?>
+
                         <!--     <a href="<?= base_url('admin/unduhDisposisiSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Unduh Disposisi" class="btn btn-info btn-xs"><i class="fa fa-download"></i></button></a> -->
                         <a href="<?= base_url('admin2/detailSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Detail Surat Registrasi" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
-                       
+
                         <a href="<?= base_url('admin2/editSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button></a>
                         <a onclick="return konfirmasi()" href="<?= base_url('admin2/hapusSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
                       </td>
