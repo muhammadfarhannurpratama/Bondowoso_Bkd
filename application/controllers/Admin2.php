@@ -119,17 +119,20 @@ class Admin2 extends Auth_Controller
 	{
 		$data1 = $this->admin2->nomorSR()->result();
 		$jumlah = $this->admin2->nomorSR()->num_rows();
-		$nomor = $data1[0]->nomor_suratregistrasi;
+		
 
-		if ($jumlah =0){
+		if ($jumlah === 0){
 			$nomorbaru = "0001";
+			return $nomorbaru;
+			exit();
 		} else {
+			$nomor = $data1[0]->nomor_suratregistrasi;
 			$nomormax = substr($nomor,0,4);
 			$nomorbaru = intval($nomormax)+1;
 		}
 
 		
-		return $nomorbaru;
+		
 	}
 
 	public function editSR($id)
