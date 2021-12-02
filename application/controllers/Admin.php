@@ -803,7 +803,7 @@ class Admin extends Auth_Controller {
 			date_default_timezone_set('Asia/Jakarta'); 
 					$thnNow = date("Y");
 
-		    if(!empty($_FILES['file_suratmasuk']['name'])){		
+		    if(!empty($_FILES['file_suratkeluar']['name'])){		
 			$nama_file_lengkap 		= $_FILES['file_suratkeluar']['name'];
 			$nama_file 		= substr($nama_file_lengkap, 0, strripos($nama_file_lengkap, '.'));
 			$ext_file		= substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
