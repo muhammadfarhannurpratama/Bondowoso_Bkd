@@ -34,12 +34,13 @@
                       <li><a href="<?= base_url($this->userdata['jenis'].'/surat_keluar') ?>"><i class="fa fa-send"></i>Surat Keluar</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-file-text"></i> Surat Registrasi <span class="fa fa-chevron-down"></span></a>
+                 
+                  <?php if( $this->userdata['nama'] === "admin") { ?>
+                    <li><a><i class="fa fa-file-text"></i> Surat Registrasi <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="<?= base_url('admin/surat_registrasi') ?>"><i class="fa  fa-inbox"></i>Data Surat Registrasi</a></li>
                     </ul>
                   </li>
-                  <?php if( $this->userdata['nama'] === "admin") { ?>
                   <li><a><i class="fa fa-users"></i> Bagian <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="<?= base_url('admin/bagian') ?>"><i class="fa  fa-inbox"></i>Data Bagian</a></li>
