@@ -61,10 +61,7 @@ $this->load->view('templates/sidebar');
                     <td>Perihal</td>
                     <td><?= $detail_SK->perihal_suratkeluar ?></td>
                   </tr>
-                  <tr>
-                    <td>File</td>
-                    <td><a href="<?= base_url('assets/backend/surat_keluar/' . $detail_SK->file_suratkeluar) ?>"><b>Unduh File</b></a></td>
-                  </tr>
+                 
                   <tr>
                     <td>Operator</td>
                     <td><?= $detail_SK->operator ?></td>
@@ -76,7 +73,7 @@ $this->load->view('templates/sidebar');
                 </tbody>
               </table>
               <div class="text-right">
-                <a href="<?= base_url('admin/surat_keluar') ?>" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Kembali</a>
+                <a href="<?= base_url('bagian/surat_keluar') ?>" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Kembali</a>
               </div>
 
             </div>

@@ -86,7 +86,10 @@
                             <td><?= $keluar->kepada_suratkeluar ?></td>
                             <td><?= $keluar->perihal_suratkeluar ?></td>
                             <td style="text-align:center;">
-                              <a href="<?= base_url('assets/backend/surat_keluar/'.$keluar->file_suratkeluar) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
+
+                            <?php if ($keluar->file_suratkeluar != ' ') : ?>
+                                <a href="<?= base_url('assets/backend/surat_keluar/'.$keluar->file_suratkeluar) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
+                              <?php endif;?>  
                               <a href="<?= base_url('bagian/detailSK/'.$keluar->id_suratkeluar) ?>"><button type="button" title="Detail Surat Keluar" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
                              </td>
                         </tr>

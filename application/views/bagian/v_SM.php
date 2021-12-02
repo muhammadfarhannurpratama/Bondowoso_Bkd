@@ -95,7 +95,10 @@
                             <td><?= $masuk->nomor_suratmasuk ?></td>
                             <td><?= $masuk->kepada_suratmasuk ?></td>
                             <td style="text-align:center;">
-                              <a href="<?= base_url('assets/backend/surat_masuk/'.$masuk->file_suratmasuk) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
+                            
+                            <?php if ($masuk->file_suratmasuk != ' ') : ?>
+                                <a href="<?= base_url('assets/backend/surat_masuk/'.$masuk->file_suratmasuk) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
+                              <?php endif;?>                              
                               <a href="<?= base_url('bagian/detailSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Detail Surat Masuk" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
                               <a href="<?= base_url('bagian/status/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Ubah Status Surat Masuk" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></button></a>
                               </td>
