@@ -62,10 +62,6 @@ $this->load->view('templates/sidebar_kepala');
                           <td><?= $detail_SK->perihal_suratkeluar ?></td>
                         </tr>
                         <tr>
-                          <td>File</td>
-                          <td><a href= "<?= base_url('assets/backend/surat_keluar/'.$detail_SK->file_suratkeluar) ?>"><b>Unduh File</b></a></td>
-                        </tr>
-                        <tr>
                           <td>Operator</td>
                           <td><?= $detail_SK->operator ?></td>
                         </tr>

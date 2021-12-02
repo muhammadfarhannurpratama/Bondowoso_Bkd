@@ -66,10 +66,6 @@
                           <td><?= $detail_SM->perihal_suratmasuk ?></td>
                         </tr>
                         <tr>
-                          <td>File</td>
-                          <td><a href= "<?= base_url('assets/backend/surat_masuk/'.$detail_SM->file_suratmasuk) ?>"><b>Unduh File</b></a></td>
-                        </tr>
-                        <tr>
                           <td>Operator</td>
                           <td><?= $detail_SM->operator ?></td>
                         </tr>

@@ -88,7 +88,10 @@
                             <td><?= $masuk->kepada_suratmasuk ?></td>
                             <td><?= $masuk->perihal_suratmasuk ?></td>
                             <td style="text-align:center;">
-                              <a href="<?= base_url('assets/backend/surat_masuk/'.$masuk->file_suratmasuk) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
+                              
+                            <?php if ($masuk->file_suratmasuk != ' ') : ?>
+                                <a href="<?= base_url('assets/backend/surat_masuk/'.$masuk->file_suratmasuk) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
+                              <?php endif;?>
                      <!--     <a href="<?= base_url('kepala/unduhDisposisiSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Unduh Disposisi" class="btn btn-info btn-xs"><i class="fa fa-download"></i></button></a> -->
                               <a href="<?= base_url('kepala/detailSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Detail Surat Masuk" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
                      <!--         <a href="<?= base_url('kepala/editSM/'.$masuk->id_suratmasuk) ?>"><button type="button" title="Edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button></a> -->

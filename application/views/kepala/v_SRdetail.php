@@ -62,10 +62,6 @@ $this->load->view('templates/sidebar_kepala');
                     <td><?= $detail_SR->perihal_suratregistrasi ?></td>
                   </tr>
                   <tr>
-                    <td>File</td>
-                    <td><a href="<?= base_url('assets/backend/surat_registrasi/' . $detail_SR->file_suratregistrasi) ?>"><b>Unduh File</b></a></td>
-                  </tr>
-                  <tr>
                     <td>Operator</td>
                     <td><?= $detail_SR->operatorregistrasi ?></td>
                   </tr>

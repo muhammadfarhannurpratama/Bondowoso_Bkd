@@ -87,7 +87,9 @@
                             <td><?= $keluar->kepada_suratkeluar ?></td>
                             <td><?= $keluar->perihal_suratkeluar ?></td>
                             <td style="text-align:center;">
-                              <a href="<?= base_url('assets/backend/surat_keluar/'.$keluar->file_suratkeluar) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
+                            <?php if ($keluar->file_suratkeluar != ' ') : ?>
+                                <a href="<?= base_url('assets/backend/surat_keluar/'.$keluar->file_suratkeluar) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
+                                <?php endif;?>
                     <!--      <a href="<?= base_url('kepala/unduhDisposisiSK/'.$keluar->id_suratkeluar) ?>"><button type="button" title="Unduh Disposisi" class="btn btn-info btn-xs"><i class="fa fa-download"></i></button></a> -->
                               <a href="<?= base_url('kepala/detailSK/'.$keluar->id_suratkeluar) ?>"><button type="button" title="Detail Surat Keluar" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
                      <!--         <a href="<?= base_url('kepala/editSK/'.$keluar->id_suratkeluar) ?>"><button type="button" title="Edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button></a> -->

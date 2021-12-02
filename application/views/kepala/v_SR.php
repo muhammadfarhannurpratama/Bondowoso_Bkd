@@ -87,7 +87,9 @@ $this->load->view('templates/sidebar_kepala');
                       <td><?= $registrasi->kepada_suratregistrasi ?></td>
                       <td><?= $registrasi->perihal_suratregistrasi ?></td>
                       <td style="text-align:center;">
-                        <a href="<?= base_url('assets/backend/surat_registrasi/' . $registrasi->file_suratregistrasi) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
+                      <?php if ($registrasi->file_suratregistrasi != ' ') : ?>
+                                <a href="<?= base_url('assets/backend/surat_registrasi/'.$registrasi->file_suratregistrasi) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
+                                <?php endif;?>
                         <!--     <a href="<?= base_url('kepala/unduhDisposisiSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Unduh Disposisi" class="btn btn-info btn-xs"><i class="fa fa-download"></i></button></a> -->
                         <a href="<?= base_url('kepala/detailSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Detail Surat Registrasi" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
                         <a onclick="return konfirmasi()" href="<?= base_url('kepala/hapusSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
