@@ -68,10 +68,11 @@ $this->load->view('templates/sidebar');
                     <th width="10%">Tanggal Masuk</th>
                     <th width="3%">Kode Surat</th>
                     <th width="10%">Tanggal Surat</th>
-                    <th width="14%">Pengirim</th>
+                    <th width="10%">Pengirim</th>
                     <th width="15%">Nomor Surat</th>
                     <th width="10%">Kepada</th>
-                    <th width="25%">Perihal</th>
+                    <th width="15%">Perihal</th>
+                    <th width="15%">Status</th>
                     <th width="15%">Aksi</th>
                   </tr>
                 </thead>
@@ -86,6 +87,7 @@ $this->load->view('templates/sidebar');
                       <td><?= $masuk->nomor_suratmasuk ?></td>
                       <td><?= $masuk->kepada_suratmasuk ?></td>
                       <td><?= $masuk->perihal_suratmasuk ?></td>
+                      <td><?= $masuk->status ?></td>
                       <td style="text-align:center;">
                         <?php if ($masuk->file_suratmasuk != ' ') : ?>
                           <a href="<?= base_url('assets/backend/surat_masuk/' . $masuk->file_suratmasuk) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>

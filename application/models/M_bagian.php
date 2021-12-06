@@ -39,32 +39,20 @@ class M_bagian extends CI_Model {
 			],
 			[
 				'field' => 'tanggal_disposisi1', 'label' => 'Tanggal Disposisi 1', 'rules' => 'required'
-			],
-			[
-				'field' => 'disposisi2', 'label' => 'Disposisi 2', 'rules' => 'required'
-			],
-			[
-				'field' => 'tanggal_disposisi2', 'label' => 'Tanggal Disposisi 2', 'rules' => 'required'
-			],
-			[
-				'field' => 'disposisi3', 'label' => 'Disposisi 3', 'rules' => 'required'
-			],
-			[
-				'field' => 'tanggal_disposisi3', 'label' => 'Tanggal Disposisi 3', 'rules' => 'required'
 			]
 		];
 	}
 
 	public function jumlah($table) {
 		$user = $this->userdata['nama'];
-		$sql="select * from ".$table." where disposisi1 = '".$user."' OR disposisi2 = '".$user."' OR disposisi3 = '".$user."'";
+		$sql="select * from ".$table." where disposisi1 = '".$user."' ";
 		return $this->db->query($sql)->num_rows();
 	}
 
 	function tampil_suratmasuk() {
         $tanggal = date('y-m-d');
         $user = $this->userdata['nama'];
-        $query = $this->db->query("SELECT * FROM tb_suratmasuk WHERE (disposisi1 = '".$user."' AND tanggal_disposisi1 <= '".$tanggal."') OR (disposisi2 = '".$user."' AND tanggal_disposisi2 <= '".$tanggal."') OR (disposisi3 = '".$user."' AND tanggal_disposisi3 <= '".$tanggal."')");
+        $query = $this->db->query("SELECT * FROM tb_suratmasuk WHERE (disposisi1 = '".$user."' AND tanggal_disposisi1 <= '".$tanggal."')");
         return $query;
     }
 	function nomorSM() {

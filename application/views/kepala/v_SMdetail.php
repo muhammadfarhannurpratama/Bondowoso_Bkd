@@ -74,28 +74,12 @@
                           <td><?= $detail_SM->tanggal_entry ?></td>
                         </tr>
                         <tr>
-                          <td>Disposisi 1</td>
+                          <td>Disposisi </td>
                           <td><?= $detail_SM->disposisi1 ?></td>
                         </tr>
                         <tr>
-                          <td>Tanggal Disposisi 1</td>
+                          <td>Tanggal Disposisi </td>
                           <td><?= $detail_SM->tanggal_disposisi1 ?></td>
-                        </tr>
-                        <tr>
-                          <td>Disposisi 2</td>
-                          <td><?= $detail_SM->disposisi2 ?></td>
-                        </tr>
-                        <tr>
-                          <td>Tanggal Disposisi 2</td>
-                          <td><?= $detail_SM->tanggal_disposisi2 ?></td>
-                        </tr>
-                         <tr>
-                          <td>Disposisi 3</td>
-                          <td><?= $detail_SM->disposisi3 ?></td>
-                        </tr>
-                        <tr>
-                          <td>Tanggal Disposisi 3</td>
-                          <td><?= $detail_SM->tanggal_disposisi3 ?></td>
                         </tr>
                         <tr>
                           <td>Status</td>

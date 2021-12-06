@@ -135,7 +135,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Disposisi 1 </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Disposisi  </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <select name="disposisi1" class="select2_single form-control" tabindex="-1">
                             <option></option>
@@ -149,7 +149,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Disposisi 1 </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Disposisi  </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                         <div class='input-group date' id='myDatepicker'>
                             <input type='text' id="tanggal_disposisi1" name="tanggal_disposisi1" class="form-control"/>
@@ -162,62 +162,6 @@
                         </div>
                         </div>
                       </div> 
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Disposisi 2 </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <select name="disposisi2" class="select2_single form-control" tabindex="-1">
-                            <option></option>
-                            <?php foreach($disposisi as $dis) : ?>
-                            <option value="<?= $dis->nama_bagian?>"><?= $dis->nama_bagian?></option>
-                            <?php endforeach; ?>
-                          </select>
-                          <small class="text-danger">
-                            <?= form_error('disposisi2') ?>
-                          </small>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Disposisi 2</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                        <div class='input-group date' id='datetimepicker6'>
-                            <input type='text' id="tanggal_disposisi2" name="tanggal_disposisi2" class="form-control"/>
-                            <span class="input-group-addon">
-                               <span class="glyphicon glyphicon-calendar"></span>
-                            </span><br>
-                          <small class="text-danger">
-                            <?= form_error('tanggal_disposisi2') ?>
-                          </small>
-                        </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Disposisi 3 </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <select name="disposisi3" class="select2_single form-control" tabindex="-1">
-                            <option></option>
-                            <?php foreach($disposisi as $dis) : ?>
-                            <option value="<?= $dis->nama_bagian?>"><?= $dis->nama_bagian?></option>
-                            <?php endforeach; ?>
-                          </select>
-                          <small class="text-danger">
-                            <?= form_error('disposisi3') ?>
-                          </small>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Disposisi 3 </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                        <div class='input-group date' id='datetimepicker7'>
-                            <input type='text' id="tanggal_disposisi3" name="tanggal_disposisi3" class="form-control"/>
-                            <span class="input-group-addon">
-                               <span class="glyphicon glyphicon-calendar"></span>
-                            </span><br>
-                            <small class="text-danger">
-                            <?= form_error('tanggal_disposisi3') ?>
-                          </small>
-                        </div>
-                        </div>
-                      </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

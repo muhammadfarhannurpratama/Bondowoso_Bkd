@@ -64,15 +64,11 @@ class Bagian extends Auth_Controller {
 			$tanggalmasuk_suratmasuk = $this->input->post('tanggalmasuk_suratmasuk');
 			$tanggalsurat_suratmasuk = $this->input->post('tanggalsurat_suratmasuk');
 			$tanggal_disposisi1 = $this->input->post('tanggal_disposisi1');
-			$tanggal_disposisi2 = $this->input->post('tanggal_disposisi2');
-			$tanggal_disposisi3 = $this->input->post('tanggal_disposisi3');
 			$nomorurut_suratmasuk = $this->input->post('nomorurut_suratmasuk');
 
 			$tgl_masuk                  = date('Y-m-d H:i:s', strtotime($tanggalmasuk_suratmasuk));
 			$tgl_surat                  = date('Y-m-d', strtotime($tanggalsurat_suratmasuk));
 			$tgl_disp1                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi1));
-			$tgl_disp2                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi2));
-			$tgl_disp3                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi3));
 
 			date_default_timezone_set('Asia/Jakarta'); 
 					$thnNow = date("Y");
@@ -105,11 +101,7 @@ class Bagian extends Auth_Controller {
 						'operator' => $this->input->post('operator'),
 						'tanggal_entry' => $tanggal_entry,
 						'disposisi1' => $this->input->post('disposisi1'),
-						'tanggal_disposisi1' => $tgl_disp1,
-						'disposisi2' => $this->input->post('disposisi2'),
-						'tanggal_disposisi2' => $tgl_disp2,
-						'disposisi3' => $this->input->post('disposisi3'),
-						'tanggal_disposisi3' => $tgl_disp3
+						'tanggal_disposisi1' => $tgl_disp1
 					];
 
 					$result = $this->bagian->SM_tambah($SM_baru);
@@ -189,16 +181,10 @@ class Bagian extends Auth_Controller {
 			$tanggalmasuk_suratmasuk = $this->input->post('tanggalmasuk_suratmasuk');
 			$tanggalsurat_suratmasuk = $this->input->post('tanggalsurat_suratmasuk');
 			$tanggal_disposisi1 = $this->input->post('tanggal_disposisi1');
-			$tanggal_disposisi2 = $this->input->post('tanggal_disposisi2');
-			$tanggal_disposisi3 = $this->input->post('tanggal_disposisi3');
-			
 
 			$tgl_masuk                  = date('Y-m-d H:i:s', strtotime($tanggalmasuk_suratmasuk));
 			$tgl_surat                  = date('Y-m-d', strtotime($tanggalsurat_suratmasuk));
 			$tgl_disp1                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi1));
-			$tgl_disp2                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi2));
-			$tgl_disp3                  = date('Y-m-d H:i:s', strtotime($tanggal_disposisi3));
-
 			
 
 			$tanggal_entry  = date("Y-m-d H:i:s");
@@ -215,11 +201,7 @@ class Bagian extends Auth_Controller {
 				'operator' => $this->input->post('operator'),
 				'tanggal_entry' => $tanggal_entry,
 				'disposisi1' => $this->input->post('disposisi1'),
-				'tanggal_disposisi1' => $tgl_disp1,
-				'disposisi2' => $this->input->post('disposisi2'),
-				'tanggal_disposisi2' => $tgl_disp2,
-				'disposisi3' => $this->input->post('disposisi3'),
-				'tanggal_disposisi3' => $tgl_disp3
+				'tanggal_disposisi1' => $tgl_disp1
 			];
 
 			$id_suratmasuk  =  $this->input->post('id_suratmasuk');
@@ -628,10 +610,6 @@ class Bagian extends Auth_Controller {
 		$SI->setCellValue("H".$baris,$SM->kode_suratmasuk); 
 		$SI->setCellValue("I".$baris,$SM->disposisi1); 
 		$SI->setCellValue("J".$baris,$SM->tanggal_disposisi1); 
-		$SI->setCellValue("K".$baris,$SM->disposisi2); 
-		$SI->setCellValue("L".$baris,$SM->tanggal_disposisi2); 
-		$SI->setCellValue("M".$baris,$SM->disposisi3); 
-		$SI->setCellValue("N".$baris,$SM->tanggal_disposisi3); 
 		$baris++; //looping untuk barisnya
 		
 		// Set lebar kolom
