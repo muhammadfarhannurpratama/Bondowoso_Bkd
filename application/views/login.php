@@ -13,8 +13,11 @@
   <!-- Bootstrap -->
   <link href="<?= base_url('assets/backend/vendors/bootstrap/dist/css/bootstrap.min.css')?>" rel="stylesheet">
   <!-- Font Awesome -->
-  <!-- NProgress -->
+  <link href="<?= base_url('assets/backend/vendors/font-awesome/css/font-awesome.min.css')?>" rel="stylesheet">
+   <!-- NProgress -->
+   <link href="<?= base_url('assets/backend/vendors/nprogress/nprogress.css')?>" rel="stylesheet">
   <!-- Animate.css -->
+  <link href="<?= base_url('assets/backend/vendors/animate.css/animate.min.css')?>" rel="stylesheet">
   <!-- Custom Theme Style -->
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/frontend/css/custom.css')?>">
 </head>

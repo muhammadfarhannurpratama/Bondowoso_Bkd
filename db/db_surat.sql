@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2021 at 03:06 AM
+-- Generation Time: Dec 06, 2021 at 05:43 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.1.32
 
@@ -183,10 +183,6 @@ CREATE TABLE `tb_suratmasuk` (
   `tanggal_entry` datetime NOT NULL DEFAULT current_timestamp(),
   `disposisi1` varchar(50) NOT NULL,
   `tanggal_disposisi1` varchar(25) NOT NULL DEFAULT current_timestamp(),
-  `disposisi2` varchar(50) NOT NULL,
-  `tanggal_disposisi2` varchar(25) NOT NULL,
-  `disposisi3` varchar(50) NOT NULL,
-  `tanggal_disposisi3` varchar(25) NOT NULL DEFAULT current_timestamp(),
   `status` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -194,12 +190,9 @@ CREATE TABLE `tb_suratmasuk` (
 -- Dumping data for table `tb_suratmasuk`
 --
 
-INSERT INTO `tb_suratmasuk` (`id_suratmasuk`, `tanggalmasuk_suratmasuk`, `kode_suratmasuk`, `nomorurut_suratmasuk`, `nomor_suratmasuk`, `tanggalsurat_suratmasuk`, `pengirim`, `kepada_suratmasuk`, `perihal_suratmasuk`, `file_suratmasuk`, `operator`, `tanggal_entry`, `disposisi1`, `tanggal_disposisi1`, `disposisi2`, `tanggal_disposisi2`, `disposisi3`, `tanggal_disposisi3`, `status`) VALUES
-(70, '2021-12-01 10:37:00', '2937', '0001', 'iewieu', '2021-12-01', 'sjsodj', 'osjdoj', 'sojdoj', '2021-0001.pdf', 'admin', '2021-12-01 10:38:27', 'evos', '2021-12-01 10:38:00', 'rrq', '2021-12-01 10:38:00', 'UMUM', '2021-12-01 10:39:00', 'belumd'),
-(71, '2021-12-01 10:38:00', '29370', '2', 'qwerty', '2021-12-01', 'qwert', 'qwerty', 'qwerty', ' ', 'admin', '2021-12-01 10:39:18', 'evos', '2021-12-01 10:39:00', 'rrq', '2021-12-01 10:39:00', 'WALIKOTA', '2021-12-02 10:40:00', 'belumd'),
-(72, '2021-12-02 08:06:00', '92398', '3', '9weuwue', '2021-12-02', '9sud9su', 's9du9su', '9sdus9ud', '2021-3.pdf', 'admin', '2021-12-02 08:07:21', 'evos', '2021-12-02 08:07:00', 'rrq', '2021-12-02 08:07:00', 'TU', '2021-12-02 08:08:00', 'belumd'),
-(73, '2021-12-02 08:25:00', '28327', '4', 'popo', '2021-12-02', 'popo', 'popopo', 'popop', '2021-4.pdf', 'admin', '2021-12-02 08:26:20', 'WALIKOTA', '2021-12-02 08:26:00', 'evos', '2021-12-02 08:26:00', 'rrq', '2021-12-02 08:27:00', 'belumd'),
-(74, '2021-12-02 08:26:00', '038028', '5', 'oooo', '2021-12-02', 'oooo', 'ooo', 'ooo', ' ', 'admin', '2021-12-02 08:26:52', 'WALIKOTA', '2021-12-02 08:26:00', 'INFRASTRUKTUR', '2021-12-02 08:26:00', 'KESRA', '2021-12-02 08:27:00', 'belumd');
+INSERT INTO `tb_suratmasuk` (`id_suratmasuk`, `tanggalmasuk_suratmasuk`, `kode_suratmasuk`, `nomorurut_suratmasuk`, `nomor_suratmasuk`, `tanggalsurat_suratmasuk`, `pengirim`, `kepada_suratmasuk`, `perihal_suratmasuk`, `file_suratmasuk`, `operator`, `tanggal_entry`, `disposisi1`, `tanggal_disposisi1`, `status`) VALUES
+(75, '2021-12-06 11:35:00', '1201', '0001', 'test 123', '2021-12-06', 'bkd', 'bkd', 'bkd', ' ', 'admin', '2021-12-06 11:36:15', 'evos', '2021-12-06 11:36:00', 'sudah'),
+(76, '2021-12-06 11:36:00', '0182', '2', 'ajiejiej', '2021-12-06', 'wijeij', 'ijiwej', 'qijiqjw', '2021-2.pdf', 'admin', '2021-12-06 11:37:10', 'evos', '2021-12-06 11:37:00', 'belumd');
 
 -- --------------------------------------------------------
 
@@ -228,7 +221,8 @@ CREATE TABLE `tb_suratregistrasi` (
 
 INSERT INTO `tb_suratregistrasi` (`id_suratregistrasi`, `tanggalmasuk_suratregistrasi`, `kode_suratregistrasi`, `nomor_suratregistrasi`, `nama_bagian`, `tanggalsurat_suratregistrasi`, `kepada_suratregistrasi`, `perihal_suratregistrasi`, `file_suratregistrasi`, `operatorregistrasi`, `tanggal_entry`, `status`) VALUES
 (14, '2021-12-02 07:20:00', '99182', 'eiwhieh', 'ihsdihsd', '2021-12-02', 'wishish', 'ishidh', ' ', 'admin2', '2021-12-02 07:20:35', 'belumd'),
-(15, '2021-12-02 07:20:00', '29329', 'oewoeu', 'osudou', '2021-12-02', 'osudou', 'sodsodu', '2021-.pdf', 'admin2', '2021-12-02 07:20:58', 'sudah');
+(15, '2021-12-02 07:20:00', '29329', 'oewoeu', 'osudou', '2021-12-02', 'osudou', 'sodsodu', '2021-.pdf', 'admin2', '2021-12-02 07:20:58', 'sudah'),
+(16, '2021-12-02 09:15:00', '232787', '2739237', '2927327', '2021-12-02', 'wu9su9sud', 'ishshd', '2021-.pdf', 'admin2', '2021-12-02 09:15:41', 'belumd');
 
 --
 -- Indexes for dumped tables
@@ -319,13 +313,13 @@ ALTER TABLE `tb_suratkeluar`
 -- AUTO_INCREMENT for table `tb_suratmasuk`
 --
 ALTER TABLE `tb_suratmasuk`
-  MODIFY `id_suratmasuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id_suratmasuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `tb_suratregistrasi`
 --
 ALTER TABLE `tb_suratregistrasi`
-  MODIFY `id_suratregistrasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_suratregistrasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
