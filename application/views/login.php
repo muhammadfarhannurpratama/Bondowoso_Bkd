@@ -13,29 +13,22 @@
   <!-- Bootstrap -->
   <link href="<?= base_url('assets/backend/vendors/bootstrap/dist/css/bootstrap.min.css')?>" rel="stylesheet">
   <!-- Font Awesome -->
-  <link href="<?= base_url('assets/backend/vendors/font-awesome/css/font-awesome.min.css')?>" rel="stylesheet">
   <!-- NProgress -->
-  <link href="<?= base_url('assets/backend/vendors/nprogress/nprogress.css')?>" rel="stylesheet">
   <!-- Animate.css -->
-  <link href="<?= base_url('assets/backend/vendors/animate.css/animate.min.css')?>" rel="stylesheet">
-
   <!-- Custom Theme Style -->
-  <link href="<?= base_url('assets/backend/build/css/custom.min.css')?>" rel="stylesheet">
-  <link rel="shortcut icon" href="<?= base_url('assets/frontend/img/icon.ico')?>">
+  <link rel="stylesheet" type="text/css" href="<?= base_url('assets/frontend/css/custom.css')?>">
 </head>
-
 <body class="login">
-  <div>
-    <a class="hiddenanchor" id="signin"></a>
-
-    <div class="login_wrapper">
-      <div class="animate form login_form">
-        <section class="login_content">
+<div class="container">
+    <div class="row vertical-offset-100">
+    <div class="col-md-4 col-md-offset-4">
+    		<div class="panel panel-default">
+        <div class="panel-heading">
           <?php  if ($this->session->flashdata()) : ?>
             <?= $this->session->flashdata('message'); ?>
           <?php endif; ?>
           <form action="<?= base_url('frontend/login')?>" method="post">
-            <h1>Login</h1>
+            <center><h1>Login</h1></center> <br>
             <div class="form-group has-feedback">
               <input type="text" id="username" name="username" class="form-control" autocomplete="off" maxlength="50" placeholder="Username" required="username" autofocus/>
               <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -43,19 +36,19 @@
             <div class="form-group has-feedback">
               <input type="password" id="password" name="password" class="form-control" autocomplete="off" maxlength="50" placeholder="Password" required="password" />
               <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-            <div>
+            </div><br>
+            <div><center>
               <a href="<?= base_url();?>"><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Kembali</button></a>
               <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock"></span> Masuk</button>
-            </div>
+          </center> </div><br>
 
             <div class="clearfix"></div>
 
-            <div class="separator">
+            <div class="separator"><center>
               <div>
-                <h2><i class="fa fa-institution"></i> PEMKOT BONDOWOSO</h2>
-                <p>©2021 </p>
-              </div>
+                <h4> Badan Kepegawaian Daerah<br>Bondowoso</h4>
+                <p>©2021
+              </div></center>
             </div>
           </form>
         </section>
