@@ -6,7 +6,7 @@
 
 ?>
  <!-- page content -->
-        <div class="right_col" role="main">
+        <div class="right_col" role="main" style="background-color : navy">
           <div class="row">
               <div class="col-md-12">
                 <div class="">
