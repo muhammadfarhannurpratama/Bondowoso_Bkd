@@ -1335,7 +1335,7 @@ class Kepala extends Auth_Controller {
 
 	private function _do_uploadmin()
 	{
-		$username = $this->input->post('username_kepala');
+		$username = $this->input->post('username_admin_kepala');
 		$nama_file_lengkap 		= $_FILES['gambar']['name'];
 		$ext_file		= substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
 		$config['upload_path']          = 'assets/backend/images/kepala';
