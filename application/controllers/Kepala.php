@@ -1339,7 +1339,7 @@ class Kepala extends Auth_Controller {
 		$nama_file_lengkap 		= $_FILES['gambar']['name'];
 		$ext_file		= substr($nama_file_lengkap, strripos($nama_file_lengkap, '.'));
 		$config['upload_path']          = 'assets/backend/images/kepala';
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
         $config['max_size']             = 2048; //set max size allowed in Kilobyte
         $config['max_width']            = 10000; // set max width image allowed
         $config['max_height']           = 10000; // set max height allowed
