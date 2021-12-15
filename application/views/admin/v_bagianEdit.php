@@ -107,7 +107,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Foto <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input name="gambar" accept="image/png,image/jpeg,image/jpg" type="file" id="gambar" class="form-control" autocomplete="off"/> *max 2mb 
+                         <input name="gambar" accept="image/png,image/jpeg,image/jpg,images" type="file" id="gambar" class="form-control" autocomplete="off"/> *max 2mb 
                          <?php if (isset($error)) : ?>
                           <div class="invalid-feedback"><?= $error ?></div>
                         <?php endif; ?>
