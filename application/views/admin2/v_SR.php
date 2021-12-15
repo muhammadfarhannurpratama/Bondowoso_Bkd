@@ -61,18 +61,36 @@ $this->load->view('templates/sidebar2');
           </form>
           <div class="x_content">
             <div class="x_content">
-              <table id="datatable" class="table table-striped table-bordered">
+              <table id="datatable" class="table table-striped table-bordered" style="background-color: #26B99A;">
                 <thead>
                   <tr>
-                    <th width="13%">No Surat</th>
-                    <th width="10%">Status Surat</th>
-                    <th width="10%">Tanggal Registrasi</th>
-                    <th width="3%">Kode Surat</th>
-                    <th width="10%">Tanggal Surat</th>
-                    <th width="14%">Bagian</th>
-                    <th width="10%">Kepada</th>
-                    <th width="15%">Perihal</th>
-                    <th width="20%">Aksi</th>
+                    <th width="13%">
+                      <font color="white">No Surat
+                    </th>
+                    <th width="10%">
+                      <font color="white">Status Surat
+                    </th>
+                    <th width="10%">
+                      <font color="white">Tanggal Registrasi
+                    </th>
+                    <th width="3%">
+                      <font color="white">Kode Surat
+                    </th>
+                    <th width="10%">
+                      <font color="white">Tanggal Surat
+                    </th>
+                    <th width="14%">
+                      <font color="white">Bagian
+                    </th>
+                    <th width="10%">
+                      <font color="white">Kepada
+                    </th>
+                    <th width="15%">
+                      <font color="white">Perihal
+                    </th>
+                    <th width="20%">
+                      <font color="white">Aksi</font>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>

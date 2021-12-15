@@ -62,18 +62,36 @@ $this->load->view('templates/sidebar_kepala');
           </form>
           <div class="x_content">
             <div class="x_content">
-              <table id="datatable" class="table table-striped table-bordered">
+              <table id="datatable" class="table table-striped table-bordered" style="background-color: #26B99A;">
                 <thead>
                   <tr>
-                    <th width="5%">No Urut</th>
-                    <th width="10%">Tanggal Masuk</th>
-                    <th width="5%">Kode Surat</th>
-                    <th width="10%">Tanggal Surat</th>
-                    <th width="15%">Pengirim</th>
-                    <th width="15%">Nomor Surat</th>
-                    <th width="10%">Kepada</th>
-                    <th width="15%">Perihal</th>
-                    <th width="20%">Aksi</th>
+                    <th width="5%">
+                      <font color="white">No Urut
+                    </th>
+                    <th width="10%">
+                      <font color="white">Tanggal Masuk
+                    </th>
+                    <th width="5%">
+                      <font color="white">Kode Surat
+                    </th>
+                    <th width="10%">
+                      <font color="white">Tanggal Surat
+                    </th>
+                    <th width="15%">
+                      <font color="white">Pengirim
+                    </th>
+                    <th width="15%">
+                      <font color="white">Nomor Surat
+                    </th>
+                    <th width="10%">
+                      <font color="white">Kepada
+                    </th>
+                    <th width="15%">
+                      <font color="white">Perihal
+                    </th>
+                    <th width="20%">
+                      <font color="white">Aksi</font>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>

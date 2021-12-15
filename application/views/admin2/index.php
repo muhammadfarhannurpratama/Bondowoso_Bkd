@@ -23,15 +23,20 @@ $this->load->view('templates/sidebar2');
             </div>
 
             <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-inbox"></i>
+              <div class="tile-stats" style="background-color : #1cc88a">
+                <div class="icon"><i class="fa fa-inbox" style="color:white"></i>
                 </div>
-                <div class="count"><?= $surat_registrasi ?></div>
-                <h3><a href="<?= base_url('admin2/surat_registrasi') ?>" class="text-decoration-none">Surat Registrasi</a></h3>
+                <div class="count">
+                  <font color="white"><?= $surat_registrasi ?>
+                </div>
+                <h3><a href="<?= base_url('admin2/surat_registrasi') ?>" class="text-decoration-none">
+                    <font color="white">Surat Registrasi
+                  </a></h3>
                 <p>Telah diarsipkan</p>
+                </font>
               </div>
             </div>
-<!--
+            <!--
             <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
               <div class="tile-stats">
                 <div class="icon"><i class="fa fa-send"></i>
@@ -46,14 +51,14 @@ $this->load->view('templates/sidebar2');
                 <div class="icon"><i class="fa fa-group (alias)"></i>
                 </div>
                 -->
-                
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>
 <!-- /page content -->
 
