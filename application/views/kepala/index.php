@@ -16,9 +16,7 @@ $this->load->view('templates/sidebar_kepala');
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <br><br>
                 <center>
-                  <font color="#34495E">
-                    <h1><b>Selamat Datang, <?= $this->userdata['nama']; ?></b></h1>
-                  </font>
+                  <h1><b>Selamat Datang, <?= $this->userdata['nama']; ?></b></h1>
                 </center>
                 <br><br>
               </div>
@@ -54,7 +52,7 @@ $this->load->view('templates/sidebar_kepala');
               <div class="tile-stats" style="background-color : #f6c23e">
                 <div class="icon"><i class="fa fa-inbox" style="color:white"></i>
                 </div>
-                <div class="count"><?= $surat_registrasi ?></div>
+                <div class="count"><?= $surat_masuk ?></div>
                 <h3><a href="<?= base_url('kepala/surat_registrasi') ?>" class="text-decoration-none">
                     <font color="white">Surat Registrasi
                   </a></h3>

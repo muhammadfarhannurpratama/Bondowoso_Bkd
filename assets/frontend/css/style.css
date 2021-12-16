@@ -100,7 +100,9 @@ HEADER
     background-color: rgba(0, 0, 0, 0.5);
     min-height: 650px;
 }
-
+#main-header
+{
+}
 .navbar-default {
     background-color: transparent;
     border:0px;
