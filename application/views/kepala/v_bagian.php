@@ -11,11 +11,9 @@ $this->load->view('templates/sidebar_kepala');
   <div class="">
     <div class="page-title">
       <div class="title_right">
-        <h2>Kepala > <small>Data Pegawai</small></h2>
+        <h2>Kepala > <small>Data Bagian</small></h2>
       </div>
     </div>
-
-
     <div class="clearfix"></div>
     <div class="mb-2">
       <?php if ($this->session->flashdata('message')) :
@@ -26,7 +24,7 @@ $this->load->view('templates/sidebar_kepala');
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Data ><small> Pegawai</small> </h2>
+            <h2>Data ><small> Bagian</small> </h2>
             <div class="clearfix"></div>
           </div>
           <a href="<?= base_url('admin/bagian_tambah') ?>"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Bagian</button></a>
@@ -53,10 +51,8 @@ $this->load->view('templates/sidebar_kepala');
                     <th width="10%">
                       <font color="white">No HP</font>
                     </th>
-
                   </tr>
                 </thead>
-
                 <tbody>
                   <?php foreach ($data_bagian as $bagian) : ?>
                     <tr>
@@ -71,8 +67,6 @@ $this->load->view('templates/sidebar_kepala');
                       <!--   <a href="<?= base_url('admin/editBagian/' . $bagian->id_bagian) ?>"><button type="button" title="Edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button></a> -->
                       <!--   <a onclick="return konfirmasi()" href="<?= base_url('admin/hapusBagian/' . $bagian->id_bagian) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a> -->
                       </td>
-
-
                     </tr>
                   <?php endforeach; ?>
                 </tbody>
