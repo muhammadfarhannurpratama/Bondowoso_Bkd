@@ -152,7 +152,7 @@ class Frontend extends Ci_Controller
 				'message',
 				'<div class="alert alert-danger" role="alert">Akun anda tidak ditemukan!</div>'
 			);
-			redirect('home/login');
+			redirect('frontend/login');
 		}
 	}
 
