@@ -110,7 +110,7 @@ $this->load->view('templates/sidebar_kepala');
                         <?php endif; ?>
                         <!--     <a href="<?= base_url('kepala/unduhDisposisiSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Unduh Disposisi" class="btn btn-info btn-xs"><i class="fa fa-download"></i></button></a> -->
                         <a href="<?= base_url('kepala/detailSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Detail Surat Registrasi" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
-                        <a onclick="return konfirmasi()" href="<?= base_url('kepala/hapusSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
+                      <!--  <a onclick="return konfirmasi()" href="<?= base_url('kepala/hapusSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a> -->
                       </td>
                     </tr>
                   <?php endforeach; ?>

@@ -66,13 +66,13 @@ $this->load->view('templates/sidebar_kepala');
               <table id="datatable" class="table table-striped table-bordered" style="background-color: #26B99A;">
                 <thead>
                   <tr>
-                    <th width="15%">
+                    <th width="9%">
                       <font color="white">Nomor Surat
                     </th>
                     <th width="10%">
                       <font color="white">Tanggal Keluar
                     </th>
-                    <th width="5%">
+                    <th width="10%">
                       <font color="white">Kode Surat
                     </th>
                     <th width="10%">
@@ -84,10 +84,10 @@ $this->load->view('templates/sidebar_kepala');
                     <th width="15%">
                       <font color="white">Kepada
                     </th>
-                    <th width="21%">
+                    <th width="15%">
                       <font color="white">Perihal
                     </th>
-                    <th width="14%">
+                    <th width="15%">
                       <font color="white">Aksi</font>
                     </th>
                   </tr>
@@ -109,7 +109,7 @@ $this->load->view('templates/sidebar_kepala');
                         <!--      <a href="<?= base_url('kepala/unduhDisposisiSK/' . $keluar->id_suratkeluar) ?>"><button type="button" title="Unduh Disposisi" class="btn btn-info btn-xs"><i class="fa fa-download"></i></button></a> -->
                         <a href="<?= base_url('kepala/detailSK/' . $keluar->id_suratkeluar) ?>"><button type="button" title="Detail Surat Keluar" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
                         <!--         <a href="<?= base_url('kepala/editSK/' . $keluar->id_suratkeluar) ?>"><button type="button" title="Edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button></a> -->
-                        <a onclick="return konfirmasi()" href="<?= base_url('kepala/hapusSK/' . $keluar->id_suratkeluar) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
+                   <!--     <a onclick="return konfirmasi()" href="<?= base_url('kepala/hapusSK/' . $keluar->id_suratkeluar) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a> -->
                       </td>
                     </tr>
                   <?php endforeach; ?>

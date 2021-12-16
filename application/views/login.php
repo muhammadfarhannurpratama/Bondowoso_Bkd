@@ -34,7 +34,7 @@
             <form action="<?= base_url('frontend/login') ?>" method="post">
               <center>
                 <div class="logo">
-                  <img src="<?= base_url('assets/frontend/img/logo2.png') ?>">
+                  <img src="<?= base_url('assets/frontend/img/logo.png') ?>">
                 </div>
               </center>
               <div class="form-group has-feedback">

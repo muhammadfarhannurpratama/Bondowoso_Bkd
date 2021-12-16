@@ -1293,7 +1293,6 @@ class Admin extends Auth_Controller
 		$config['max_width']            = 10000; // set max width image allowed
 		$config['max_height']           = 10000; // set max height allowed
 		$config['file_name']            =  $username . $ext_file; //just milisecond timestamp fot unique session_name()
-
 		$this->load->library('upload', $config);
 
 		if (!$this->upload->do_upload('gambar')) //upload and validate
