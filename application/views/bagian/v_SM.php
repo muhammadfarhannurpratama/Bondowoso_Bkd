@@ -69,7 +69,7 @@ $this->load->view('templates/sidebar');
                     <th width="10%">
                       <font color="white">Tanggal Masuk
                     </th>
-                    <th width="5%">
+                    <th width="10%">
                       <font color="white">Status
                     </th>
                     <th width="10%">

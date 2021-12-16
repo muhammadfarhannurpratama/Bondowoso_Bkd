@@ -69,7 +69,7 @@ $this->load->view('templates/sidebar');
                       <td><?= $bagian->alamat ?></td>
                       <td><?= $bagian->no_hp_bagian ?></td>
                       <td style="text-align:center;">
-                        <a href="<?= base_url('admin/detailBagian/' . $bagian->id_bagian) ?>"><button type="button" title="Detail Bagian" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
+                       <!-- <a href="<?= base_url('admin/detailBagian/' . $bagian->id_bagian) ?>"><button type="button" title="Detail Bagian" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a> -->
                         <a href="<?= base_url('admin/editBagian/' . $bagian->id_bagian) ?>"><button type="button" title="Edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button></a>
                         <a onclick="return konfirmasi()" href="<?= base_url('admin/hapusBagian/' . $bagian->id_bagian) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
                       </td>

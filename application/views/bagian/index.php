@@ -31,7 +31,7 @@ $this->load->view('templates/sidebar');
                 <div class="count">
                   <font color="white"><?= $surat_masuk ?>
                 </div>
-                <h3><a href="<?= base_url('admin/surat_masuk') ?>" class="text-decoration-none">
+                <h3><a href="<?= base_url('bagian/surat_masuk') ?>" class="text-decoration-none">
                     <font color="white"> Surat Masuk
                   </a></h3>
                 <p>Telah diarsipkan</p>
@@ -44,7 +44,7 @@ $this->load->view('templates/sidebar');
                 <div class="icon"><i class="fa fa-send" style="color:white"></i>
                 </div>
                 <div class="count"><?= $surat_keluar ?></div>
-                <h3><a href="<?= base_url('admin/surat_keluar') ?>" class="text-decoration-none">
+                <h3><a href="<?= base_url('bagian/surat_keluar') ?>" class="text-decoration-none">
                     <font color="white">Surat Keluar
                   </a></h3>
                 <p>Telah Diarsipkan</p>

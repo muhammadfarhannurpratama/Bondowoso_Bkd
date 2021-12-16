@@ -49,7 +49,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Password Bagian <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="password" id="password_bagian" name="password_bagian" maxlength="50" placeholder="Masukkan Password Bagian" class="form-control col-md-7 col-xs-12">
+                          <input type="password" id="password_bagian" name="password_bagian" required="required" maxlength="50" placeholder="Masukkan Password Bagian" class="form-control col-md-7 col-xs-12">
                             <small class="text-danger">
                                 <?= form_error('password_bagian') ?>
                             </small>
@@ -107,7 +107,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Foto <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input name="gambar" accept="image/png,image/jpeg,image/jpg" type="file" id="gambar" class="form-control" autocomplete="off"/> *max 2mb 
+                         <input name="gambar" accept="image/png,image/jpeg,image/jpg,images" type="file" id="gambar" class="form-control" autocomplete="off"/> *max 2mb 
                          <?php if (isset($error)) : ?>
                           <div class="invalid-feedback"><?= $error ?></div>
                         <?php endif; ?>

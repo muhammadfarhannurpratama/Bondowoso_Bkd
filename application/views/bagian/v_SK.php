@@ -70,7 +70,7 @@ $this->load->view('templates/sidebar');
                     <th width="10%">
                       <font color="white">Tanggal Keluar
                     </th>
-                    <th width="5%">
+                    <th width="15%">
                       <font color="white">Kode Surat
                     </th>
                     <th width="10%">
@@ -85,7 +85,7 @@ $this->load->view('templates/sidebar');
                     <th width="15%">
                       <font color="white">Perihal
                     </th>
-                    <th width="20%">
+                    <th width="15%">
                       <font color="white">Aksi</font>
                     </th>
                   </tr>
