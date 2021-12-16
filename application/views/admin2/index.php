@@ -16,7 +16,9 @@ $this->load->view('templates/sidebar2');
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <br><br>
                 <center>
-                  <h1><b>Selamat Datang, <?= $this->userdata['nama']; ?></b></h1>
+                  <font color="#34495E">
+                    <h1><b>Selamat Datang, <?= $this->userdata['nama']; ?></b></h1>
+                  </font>
                 </center>
                 <br><br>
               </div>
