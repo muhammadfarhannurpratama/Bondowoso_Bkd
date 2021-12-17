@@ -8,6 +8,11 @@ class Frontend extends Ci_Controller
 	{
 		$this->load->view('index');
 	}
+	public function index2()
+	{
+		$this->load->view('index2');
+	}
+
 
 	public function login()
 	{
