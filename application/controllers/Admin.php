@@ -942,7 +942,7 @@ class Admin extends Auth_Controller
 				'perihal_suratkeluar' => $this->input->post('perihal_suratkeluar'),
 				'operator' => $this->input->post('operator'),
 				'tanggal_entry' => $tanggal_entry
-			];
+			]; 
 
 			$result = $this->admin->SK_edit($SK_edit, $id_surat);
 			if ($result > 0) {
