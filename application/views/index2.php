@@ -16,6 +16,8 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/frontend/css/style.css') ?>">
     <link rel="shortcut icon" href="<?= base_url('assets/frontend/img/icon.ico') ?>">
 
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/frontend/css/custom2.css') ?>">
+
 </head>
 
 <body>
@@ -47,8 +49,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h2 class="service-title pad-bt15">Tentang</h2>
-                    <p class="sub-title pad-bt15">Website ini berguna untuk pengarsipan Surat Masuk dan Surat Keluar di Pemerintah Kota Bondowoso</p>
+                    <h2 class="service-title pad-bt15">
+                        <font color="black">Tentang
+                    </h2>
+                    <p class="sub-title pad-bt15">
+                        <font color="black">Website ini berguna untuk pengarsipan Surat Masuk dan Surat Keluar di Pemerintah Kota Bondowoso
+                    </p>
                     <p>Surat diarsipkan dalam format PDF lalu disesuaikan nomor urutnya.</p>
                     <hr class="bottom-line">
                     <p class="sub-title pad-bt15">Pengarsipan Surat itu<strong> PENTING</strong></p>

@@ -28,7 +28,7 @@ $this->load->view('templates/sidebar');
               endif; ?>
             </div>
           </div>
-       <!--   <form action="<?= base_url('admin2/downloadlap_SR') ?>" name="download_suratregistrasi" method="post" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+          <!--   <form action="<?= base_url('admin2/downloadlap_SR') ?>" name="download_suratregistrasi" method="post" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
             <div class="col-md-2 col-sm-2 col-xs-6">
               <select name="bulan" class="select2_single form-control" tabindex="-1">
                 <option>Pilih Bulan</option>
@@ -61,18 +61,36 @@ $this->load->view('templates/sidebar');
           </form>-->
           <div class="x_content">
             <div class="x_content">
-              <table id="datatable" class="table table-striped table-bordered">
+              <table id="datatable" class="table table-striped table-bordered" style="background-color: #26B99A;">
                 <thead>
                   <tr>
-                    <th width="10%">No Surat</th>
-                    <th width="10%">Status</th>
-                    <th width="10%">Tanggal Registrasi</th>
-                    <th width="5%">Kode Surat</th>
-                    <th width="10%">Tanggal Surat</th>
-                    <th width="15%">Bagian</th>
-                    <th width="10%">Kepada</th>
-                    <th width="15%">Perihal</th>
-                    <th width="20%">Aksi</th>
+                    <th width="10%">
+                      <font color="white">No Surat
+                    </th>
+                    <th width="10%">
+                      <font color="white">Status
+                    </th>
+                    <th width="10%">
+                      <font color="white">Tanggal Registrasi
+                    </th>
+                    <th width="5%">
+                      <font color="white">Kode Surat
+                    </th>
+                    <th width="10%">
+                      <font color="white">Tanggal Surat
+                    </th>
+                    <th width="15%">
+                      <font color="white">Bagian
+                    </th>
+                    <th width="10%">
+                      <font color="white">Kepada
+                    </th>
+                    <th width="15%">
+                      <font color="white">Perihal
+                    </th>
+                    <th width="20%">
+                      <font color="white">Aksi</font>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -87,13 +105,13 @@ $this->load->view('templates/sidebar');
                       <td><?= $registrasi->kepada_suratregistrasi ?></td>
                       <td><?= $registrasi->perihal_suratregistrasi ?></td>
                       <td style="text-align:center;">
-                       
+
                         <?php if ($registrasi->file_suratregistrasi != ' ') : ?>
-                                <a href="<?= base_url('assets/backend/surat_registrasi/'.$registrasi->file_suratregistrasi) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
-                              <?php endif;?>                       
+                          <a href="<?= base_url('assets/backend/surat_registrasi/' . $registrasi->file_suratregistrasi) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>
+                        <?php endif; ?>
                         <!--     <a href="<?= base_url('admin/unduhDisposisiSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Unduh Disposisi" class="btn btn-info btn-xs"><i class="fa fa-download"></i></button></a> -->
                         <a href="<?= base_url('admin/detailSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Detail Surat Registrasi" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
-                        <a href="<?= base_url('admin/status/'.$registrasi->id_suratregistrasi) ?>"><button type="button" title="Ubah Status Surat Registrasi" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></button></a>
+                        <a href="<?= base_url('admin/status/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Ubah Status Surat Registrasi" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></button></a>
                         <a onclick="return konfirmasi()" href="<?= base_url('admin/hapusSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
                       </td>
                     </tr>
