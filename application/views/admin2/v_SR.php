@@ -28,7 +28,7 @@ $this->load->view('templates/sidebar2');
               endif; ?>
             </div>
           </div>
-      <!--    <form action="<?= base_url('admin2/downloadlap_SR') ?>" name="download_suratregistrasi" method="post" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+          <!--    <form action="<?= base_url('admin2/downloadlap_SR') ?>" name="download_suratregistrasi" method="post" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
             <div class="col-md-2 col-sm-2 col-xs-6">
               <select name="bulan" class="select2_single form-control" tabindex="-1">
                 <option>Pilih Bulan</option>
@@ -57,8 +57,8 @@ $this->load->view('templates/sidebar2');
               </select>
             </div>
             <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> Unduh Laporan Surat Masuk</button></a> -->
-            <a href="<?= base_url('admin2/tambahSR') ?>"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Surat Masuk</button></a>
-          </form> 
+          <a href="<?= base_url('admin2/tambahSR') ?>"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Surat Masuk</button></a>
+          </form>
           <div class="x_content">
             <div class="x_content">
               <table id="datatable" class="table table-striped table-bordered" style="background-color: #26B99A;">
@@ -97,7 +97,19 @@ $this->load->view('templates/sidebar2');
                   <?php foreach ($surat_registrasi as $registrasi) : ?>
                     <tr>
                       <td><?= $registrasi->nomor_suratregistrasi ?></td>
-                      <td><?= $registrasi->status ?></td>
+                      <td><?php if ($registrasi->status === "belumd") {
+                            echo "Belum Dikonfirmasi";
+                          }
+                          if ($registrasi->status === "belum") {
+                            echo "Belum Dikerjakan";
+                          }
+                          if ($registrasi->status === "pending") {
+                            echo "Pending";
+                          }
+                          if ($registrasi->status === "sudah") {
+                            echo "Sudah Dikerjakan";
+                          } ?>
+                      </td>
                       <td><?= $registrasi->tanggalmasuk_suratregistrasi ?></td>
                       <td><?= $registrasi->kode_suratregistrasi ?></td>
                       <td><?= $registrasi->tanggalsurat_suratregistrasi ?></td>

@@ -194,9 +194,9 @@ class Admin extends Auth_Controller
 				$path = $_SERVER['DOCUMENT_ROOT'] . '/Bondowoso_Bkd/assets/backend/surat_masuk/' . $nama_baru;
 				move_uploaded_file($tmp_file, $path);
 
-				$SM_edit['file_suratmasuk'] = $nama_baru;
+				$nama = $nama_baru;
 			} else {
-				$SM_edit['file_suratmasuk'] = $this->input->post('file_lama');
+				$nama = $this->input->post('file_lama');
 			}
 			$tanggalmasuk_suratmasuk = $this->input->post('tanggalmasuk_suratmasuk');
 			$tanggalsurat_suratmasuk = $this->input->post('tanggalsurat_suratmasuk');
@@ -217,6 +217,7 @@ class Admin extends Auth_Controller
 				'pengirim' => $this->input->post('pengirim'),
 				'kepada_suratmasuk' => $this->input->post('kepada_suratmasuk'),
 				'perihal_suratmasuk' => $this->input->post('perihal_suratmasuk'),
+				'file_suratmasuk' => $nama,
 				'operator' => $this->input->post('operator'),
 				'tanggal_entry' => $tanggal_entry,
 				'disposisi1' => $this->input->post('disposisi1'),
@@ -916,9 +917,9 @@ class Admin extends Auth_Controller
 				$pathSK = $_SERVER['DOCUMENT_ROOT'] . '/Bondowoso_Bkd/assets/backend/surat_keluar/' . $nama;
 				move_uploaded_file($tmp_fileSK, $pathSK);
 
-				$SK_edit['file_suratkeluar'] = $nama;
+				$namakel = $nama;
 			} else {
-				$SK_edit['file_suratkeluar'] = $this->input->post('file_lama');
+				$namakel = $this->input->post('file_lama');
 			}
 
 			$tanggalkeluar_suratkeluar = $this->input->post('tanggalkeluar_suratkeluar');
@@ -940,16 +941,17 @@ class Admin extends Auth_Controller
 				'tanggalsurat_suratkeluar' => $tgl_surat,
 				'kepada_suratkeluar' => $this->input->post('kepada_suratkeluar'),
 				'perihal_suratkeluar' => $this->input->post('perihal_suratkeluar'),
+				'file_suratkeluar'	=> $namakel,
 				'operator' => $this->input->post('operator'),
 				'tanggal_entry' => $tanggal_entry
-			]; 
+			];
 
 			$result = $this->admin->SK_edit($SK_edit, $id_surat);
 			if ($result > 0) {
 				$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
 							Data Surat Keluar berhasil diubah.
 							<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
-						</button></div>' . $pathSK);
+						</button></div>');
 				redirect("admin/surat_keluar");
 			} else {
 				$data['error'] = 'Data Surat Keluar Gagal diubah';

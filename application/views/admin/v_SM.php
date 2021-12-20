@@ -107,7 +107,19 @@ $this->load->view('templates/sidebar');
                       <td><?= $masuk->nomor_suratmasuk ?></td>
                       <td><?= $masuk->kepada_suratmasuk ?></td>
                       <td><?= $masuk->perihal_suratmasuk ?></td>
-                      <td><?= $masuk->status ?></td>
+                      <td><?php if ($masuk->status === "belumd") {
+                            echo "Belum Dikonfirmasi";
+                          }
+                          if ($masuk->status === "belum") {
+                            echo "Belum Dikerjakan";
+                          }
+                          if ($masuk->status === "pending") {
+                            echo "Pending";
+                          }
+                          if ($masuk->status === "sudah") {
+                            echo "Sudah Dikerjakan";
+                          } ?>
+                      </td>
                       <td style="text-align:center;">
                         <?php if ($masuk->file_suratmasuk != ' ') : ?>
                           <a href="<?= base_url('assets/backend/surat_masuk/' . $masuk->file_suratmasuk) ?>"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="fa fa-download"></i></button></a>

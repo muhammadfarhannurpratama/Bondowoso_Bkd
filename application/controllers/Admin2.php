@@ -185,9 +185,9 @@ class Admin2 extends Auth_Controller
 				$pathSR = $_SERVER['DOCUMENT_ROOT'] . '/Bondowoso_Bkd/assets/backend/surat_registrasi/' . $nama;
 				move_uploaded_file($tmp_fileSR, $pathSR);
 
-				$SR_edit['file_suratregistrasi'] = $nama;
+				$namaReg = $nama;
 			} else {
-				$SR_edit['file_suratregistrasi'] = $this->input->post('file_lama');
+				$namaReg = $this->input->post('file_lama');
 			}
 
 			$tanggalmasuk_suratregistrasi = $this->input->post('tanggalmasuk_suratregistrasi');
@@ -210,6 +210,7 @@ class Admin2 extends Auth_Controller
 				'tanggalsurat_suratregistrasi' => $tgl_surat,
 				'kepada_suratregistrasi' => $this->input->post('kepada_suratregistrasi'),
 				'perihal_suratregistrasi' => $this->input->post('perihal_suratregistrasi'),
+				'file_suratregistrasi' => $namaReg,
 				'operatorregistrasi' => $this->input->post('operatorregistrasi'),
 				'tanggal_entry' => $tanggal_entry
 
@@ -220,7 +221,7 @@ class Admin2 extends Auth_Controller
 				$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show" role="alert">
 							Data Surat Registrasi berhasil diubah.
 							<a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
-						</button></div>' . $pathSR);
+						</button></div>');
 				redirect("admin2/surat_registrasi");
 			} else {
 				$data['error'] = 'Data Surat Registrasi Gagal diubah';

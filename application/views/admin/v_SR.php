@@ -97,7 +97,19 @@ $this->load->view('templates/sidebar');
                   <?php foreach ($surat_registrasi as $registrasi) : ?>
                     <tr>
                       <td><?= $registrasi->nomor_suratregistrasi ?></td>
-                      <td><?= $registrasi->status ?></td>
+                      <td><?php if ($registrasi->status === "belumd") {
+                            echo "Belum Dikonfirmasi";
+                          }
+                          if ($registrasi->status === "belum") {
+                            echo "Belum Dikerjakan";
+                          }
+                          if ($registrasi->status === "pending") {
+                            echo "Pending";
+                          }
+                          if ($registrasi->status === "sudah") {
+                            echo "Sudah Dikerjakan";
+                          } ?>
+                      </td>
                       <td><?= $registrasi->tanggalmasuk_suratregistrasi ?></td>
                       <td><?= $registrasi->kode_suratregistrasi ?></td>
                       <td><?= $registrasi->tanggalsurat_suratregistrasi ?></td>
