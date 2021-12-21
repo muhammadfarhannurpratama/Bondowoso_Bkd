@@ -29,7 +29,6 @@ $this->load->view('templates/sidebar_kepala');
             <h2>Data ><small> Pegawai</small> </h2>
             <div class="clearfix"></div>
           </div>
-          <a href="<?= base_url('admin/bagian_tambah') ?>"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Bagian</button></a>
           <div class="x_content">
             <div class="x_content">
               <table id="datatable" class="table table-striped table-bordered" style="background-color: #26B99A;">
