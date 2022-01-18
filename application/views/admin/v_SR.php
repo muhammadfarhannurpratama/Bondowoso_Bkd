@@ -124,7 +124,7 @@ $this->load->view('templates/sidebar');
                         <!--     <a href="<?= base_url('admin/unduhDisposisiSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Unduh Disposisi" class="btn btn-info btn-xs"><i class="fa fa-download"></i></button></a> -->
                         <a href="<?= base_url('admin/detailSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Detail Surat Registrasi" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></button></a>
                         <a href="<?= base_url('admin/status/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Ubah Status Surat Registrasi" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></button></a>
-                        <a onclick="return konfirmasi()" href="<?= base_url('admin/hapusSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
+                        <!-- <a onclick="return konfirmasi()" href="<?= base_url('admin/hapusSR/' . $registrasi->id_suratregistrasi) ?>"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a> -->
                       </td>
                     </tr>
                   <?php endforeach; ?>
