@@ -82,7 +82,7 @@ $this->load->view('templates/sidebar2');
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Bagian <span class="required">*</span>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Pengirim <span class="required">*</span>
                 </label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
                   <input value="<?= $surat_registrasi->nama_bagian ?>" type="text" id="nama_bagian" name="nama_bagian" required="required" placeholder="Masukkan Asal/Pengirim Surat" class="form-control col-md-7 col-xs-12">

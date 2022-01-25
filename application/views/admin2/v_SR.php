@@ -57,7 +57,7 @@ $this->load->view('templates/sidebar2');
               </select>
             </div>
             <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> Unduh Laporan Surat Masuk</button></a> -->
-          <a href="<?= base_url('admin2/tambahSR') ?>"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Surat Masuk</button></a>
+          <a href="<?= base_url('admin2/tambahSR') ?>"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Surat Registrasi</button></a>
           </form>
           <div class="x_content">
             <div class="x_content">
@@ -80,7 +80,7 @@ $this->load->view('templates/sidebar2');
                       <font color="white">Tanggal Surat
                     </th>
                     <th width="14%">
-                      <font color="white">Bagian
+                      <font color="white">Pengirim
                     </th>
                     <th width="10%">
                       <font color="white">Kepada

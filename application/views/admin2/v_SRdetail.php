@@ -50,7 +50,7 @@ $this->load->view('templates/sidebar2');
                     <td><?= $detail_SR->tanggalsurat_suratregistrasi ?></td>
                   </tr>
                   <tr>
-                    <td>Nama Bagian</td>
+                    <td>Nama Pengirim</td>
                     <td><?= $detail_SR->nama_bagian ?></td>
                   </tr>
                   <tr>

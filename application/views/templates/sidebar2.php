@@ -30,7 +30,7 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-book" aria-hidden="true"></i> Data Registrasi <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?= base_url($this->userdata['jenis'].'/surat_registrasi') ?>"><i class="fa  fa-laptop"></i>Data Surat Masuk</a></li>
+                      <li><a href="<?= base_url($this->userdata['jenis'].'/surat_registrasi') ?>"><i class="fa  fa-laptop"></i>Data Surat Registrasi</a></li>
                       </ul>
                   </li>
                 </ul>
