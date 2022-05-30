@@ -55,7 +55,7 @@
                   <img src="<?= base_url('assets/frontend/img/logobondowoso.png') ?>" width="172" height="186" alt="" />
                 </div>
                 <h3 class="bnr-sub-title">SISTEM INFORMASI PENGARSIPAN SURAT</h3>
-                <h3 class="bnr-sub-title"><span class="logo-dec">BADAN KEPEGAWAIAN DAERAH BONDOWOSO</span></h3>
+                <h3 class="bnr-sub-title"><span class="logo-dec">BADAN KEPEGAWAIAN DAERAH BONDOWOSO (BKD)</span></h3>
               </div>
             </div>
           </div>
